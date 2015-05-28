@@ -36,3 +36,6 @@ build/
 
 # no logs
 /log/*
+
+# Ignore application configuration
+/config/application.yml

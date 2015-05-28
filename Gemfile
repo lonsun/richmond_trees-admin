@@ -35,6 +35,9 @@ end
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.3.4'
 
+# Use Figaro to make using environment variables easier
+gem 'figaro'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
