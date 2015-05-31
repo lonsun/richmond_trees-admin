@@ -1,0 +1,24 @@
+/! page header start
+nav class="navbar navbar-default"
+  div class="container-fluid"
+    div class="navbar-header"
+      button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navlinks"
+        span class="sr-only" Toggle navigation
+        span class="icon-bar"
+        span class="icon-bar"
+        span class="icon-bar"
+      = link_to image_tag("rt_logo_web_header.png", :alt => "Richmond Trees Logo", height: "50px"), root_path, class: "navbar-brand" 
+    div class="collapse navbar-collapse" id="navlinks"
+      ul class="nav navbar-nav navbar-right"
+        li
+          = link_to "Home", root_path
+        li
+          a href="#" Plantings
+        li
+          a href="#" Trees
+        li
+          a href="#" Users
+        li
+          a href="#" 
+            span class="glyphicon glyphicon-log-out logout-icon" aria-hidden="true"
+/! page header end

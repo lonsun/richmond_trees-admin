@@ -9,5 +9,37 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  */
- @import "bootstrap-sprockets";
- @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "homepage.css.scss";
+
+/* colors for navbar */
+$navbar-primary: #5f7341;
+$navbar-secondary: #ffffff;
+
+/* override bootstrap navigation styles */
+.navbar {
+	min-height: 86px;
+}
+
+.navbar-default {
+	background-color: #5f7341;
+
+	.navbar-nav > li > a {
+		padding-top: 34px;
+		padding-bottom: 32px;
+		font-size: 22px;
+		background-color: $navbar-primary;
+		color: $navbar-secondary;
+	}
+
+	.navbar-nav > .active > a, 
+	.navbar-nav > .active > a:hover, 
+	.navbar-nav > .active {
+		color: $navbar-primary;
+	}
+
+	.logout-icon {
+		top: -2px;
+	}
+}
