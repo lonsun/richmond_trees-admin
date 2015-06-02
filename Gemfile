@@ -41,6 +41,12 @@ gem 'figaro'
 # Use Slim templating engine
 gem "slim-rails"
 
+# User authlogic for authentication system
+gem 'authlogic'
+
+# Use rails-bootstrap-forms to integrate rails form builder with bootstrap
+gem 'bootstrap_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

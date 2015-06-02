@@ -26,12 +26,18 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    authlogic (3.4.5)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      request_store (~> 1.0)
+      scrypt (~> 1.2)
     autoprefixer-rails (5.1.11)
       execjs
       json
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    bootstrap_form (2.3.0)
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -42,6 +48,10 @@ GEM
     coffee-script-source (1.9.1.1)
     erubis (2.7.0)
     execjs (2.5.2)
+    ffi (1.9.8)
+    ffi-compiler (0.1.3)
+      ffi (>= 1.0.0)
+      rake
     figaro (1.0.0)
       thor (~> 0.14)
     hike (1.2.3)
@@ -80,12 +90,16 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    request_store (1.1.0)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.2)
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
+    scrypt (1.2.1)
+      ffi-compiler (>= 0.0.2)
+      rake
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -125,7 +139,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic
   bootstrap-sass (~> 3.3.4)
+  bootstrap_form
   coffee-rails (~> 4.0.0)
   figaro
   jbuilder (~> 1.2)
