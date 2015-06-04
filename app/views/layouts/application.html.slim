@@ -7,4 +7,6 @@ html
     = csrf_meta_tags
   body
     = render 'shared/page_header' unless (params[:controller] == 'user_sessions')
+    - flash.each do |name, msg|
+      = content_tag :div, msg, class: name
     = yield
