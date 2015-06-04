@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class HomepageControllerTest < ActionController::TestCase
+	# authenticate
 	setup :activate_authlogic
 
   test "should get index" do

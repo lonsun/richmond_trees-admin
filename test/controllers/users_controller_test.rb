@@ -2,6 +2,10 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
+    # authenticate
+    activate_authlogic
+    UserSession.create(users(:testuser1))
+
     @user = users(:testuser1)
   end
 
