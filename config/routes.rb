@@ -7,6 +7,10 @@ RichmondTreesAdmin::Application.routes.draw do
   resources :user_sessions
   get 'login', :controller => 'user_sessions', :action => 'new'
   get 'logout', :controller => 'user_sessions', :action => 'destroy'
+
+  # home page when logged in
+  get 'home', :controller => 'homepage', :action => 'index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
