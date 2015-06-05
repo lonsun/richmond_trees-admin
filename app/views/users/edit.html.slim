@@ -1,8 +1,11 @@
-h1 Editing user
-
-== render 'form'
-
-= link_to 'Show', @user
-'|
-= link_to 'Back', users_path
-
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-12"
+      h2 class="header-inline"
+        | Edit User
+  br
+  == render 'form'
+  br
+  = link_to 'Show', @user
+  | &nbsp;|&nbsp;
+  = link_to 'Back', users_path

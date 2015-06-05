@@ -26,6 +26,7 @@ $state-danger-text: $danger-text-color;
 
 @import "homepage.css.scss";
 @import "user_session.css.scss";
+@import "user.css.scss";
 
 /*** manual bootstrap overrides ***/
 
@@ -67,4 +68,8 @@ $state-danger-text: $danger-text-color;
 .centered-col {
 	float: none;
 	margin: 0 auto;
+}
+
+.header-inline {
+	display: inline;
 }
