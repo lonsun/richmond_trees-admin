@@ -1,0 +1,16 @@
+/* styles for login page */
+
+.login-header {
+	background-color: $navbar-primary;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	margin-top: 15px;
+	border-radius: 5px;
+}
+
+#error-explanation {
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	h3 { font-size: 21px;}
+}

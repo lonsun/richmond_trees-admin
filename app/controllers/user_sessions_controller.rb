@@ -6,6 +6,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new
   end
   
+  # log in the user or send them back to login page.
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save

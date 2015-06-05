@@ -10,15 +10,26 @@
  *
  *= require rails_bootstrap_forms
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "homepage.css.scss";
 
-/* colors for navbar */
+/* color palette */
 $navbar-primary: #5f7341;
 $navbar-secondary: #ffffff;
+$danger-text-color: #af1212;
 
-/* override bootstrap navigation styles */
+/*** built-in bootstrap overrides ***/
+$font-family-sans-serif: Tahoma, Geneva, sans-serif;
+$input-border-focus: $navbar-primary;
+$state-danger-text: $danger-text-color;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "homepage.css.scss";
+@import "user_session.css.scss";
+
+/*** manual bootstrap overrides ***/
+
+/* navbar */
 .navbar {
 	min-height: 86px;
 }
@@ -29,7 +40,7 @@ $navbar-secondary: #ffffff;
 	.navbar-nav > li > a {
 		padding-top: 34px;
 		padding-bottom: 32px;
-		font-size: 22px;
+		font-size: 18px;
 		background-color: $navbar-primary;
 		color: $navbar-secondary;
 	}
@@ -43,4 +54,17 @@ $navbar-secondary: #ffffff;
 	.logout-icon {
 		top: -2px;
 	}
+}
+
+/* change border color on buttons when clicked */
+.btn-default:focus {
+   outline: 2px auto $navbar-primary !important;
+}
+
+/*** system-wide styles (non-bootstrap) ***/
+
+/* centered column (assumes we're using bootstrap 3.0) */
+.centered-col {
+	float: none;
+	margin: 0 auto;
 }
