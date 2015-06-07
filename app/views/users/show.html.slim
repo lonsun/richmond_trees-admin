@@ -6,6 +6,16 @@ div class="container-fluid"
   br
   div class="row"
     div class="col-xs-4 col-md-2 text-right" 
+      strong First Name
+    div class="col-xs-8 col-md-4" 
+      = @user.first_name
+  div class="row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Last Name
+    div class="col-xs-8 col-md-4" 
+      = @user.last_name
+  div class="row"
+    div class="col-xs-4 col-md-2 text-right" 
       strong Username
     div class="col-xs-8 col-md-4" 
       = @user.username
@@ -14,6 +24,11 @@ div class="container-fluid"
       strong Email
     div class="col-xs-8 col-md-4" 
       = @user.email
+  div class="row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Phone
+    div class="col-xs-8 col-md-4" 
+      = @user.phone
   div class="row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Created On

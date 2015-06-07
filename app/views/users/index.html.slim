@@ -19,6 +19,7 @@ div class="container-fluid"
         table class="table table-hover"
           thead
             tr
+              th Full Name
               th Username
               th Created On
               th Last Login
@@ -27,12 +28,13 @@ div class="container-fluid"
           tbody
             - @users.each do |user|
               tr
+                td = user.get_full_name
                 td = user.username
                 td = user.created_at
                 td = user.last_login_at
                 td
                   = link_to 'Details', user
-                  | &nbsp;
+                  | &nbsp;|&nbsp;
                   = link_to 'Edit', edit_user_path(user)
-                  | &nbsp;
+                  | &nbsp;|&nbsp;
                   = link_to 'Delete', user, data: {:confirm => 'Are you sure?'}, :method => :delete

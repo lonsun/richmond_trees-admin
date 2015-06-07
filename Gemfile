@@ -47,6 +47,11 @@ gem 'authlogic'
 # Use rails-bootstrap-forms to integrate rails form builder with bootstrap
 gem 'bootstrap_form'
 
+group :test do
+  # use MiniTest::Spec::DSL
+  gem 'minitest-spec-rails', '~> 4.7'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

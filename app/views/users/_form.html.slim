@@ -7,8 +7,11 @@ div class="row"
 		      ul
 		        - @user.errors.full_messages.each do |message|
 		          li = message
+		  = f.text_field :first_name
+		  = f.text_field :last_name
 		  = f.text_field :username
 		  = f.email_field :email
+		  = f.phone_field :phone
 		  = f.password_field :password
 		  = f.password_field :password_confirmation
 		  = f.submit
