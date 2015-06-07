@@ -4,52 +4,52 @@ div class="container-fluid"
       h2 class="header-inline" 
         | User Details
   br
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong First Name
     div class="col-xs-8 col-md-4" 
       = @user.first_name
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Last Name
     div class="col-xs-8 col-md-4" 
       = @user.last_name
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Username
     div class="col-xs-8 col-md-4" 
       = @user.username
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Email
     div class="col-xs-8 col-md-4" 
       = @user.email
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Phone
     div class="col-xs-8 col-md-4" 
       = @user.phone
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Created On
     div class="col-xs-8 col-md-4" 
       = @user.created_at
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Login Count
     div class="col-xs-8 col-md-4" 
       = @user.login_count
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Last Login
     div class="col-xs-8 col-md-4" 
       = @user.last_login_at
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Last Login IP
     div class="col-xs-8 col-md-4" 
       = @user.last_login_ip  
-  div class="row"
+  div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right"      
       = link_to 'Edit', edit_user_path(@user)
       | &nbsp;|&nbsp;
