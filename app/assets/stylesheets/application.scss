@@ -73,3 +73,8 @@ $state-danger-text: $danger-text-color;
 .header-inline {
 	display: inline;
 }
+
+/* Add an asterisk to required fields */
+label.required:after {
+	  content:" *";
+}
