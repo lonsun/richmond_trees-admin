@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
@@ -51,6 +53,9 @@ group :test do
   # use MiniTest::Spec::DSL
   gem 'minitest-spec-rails', '~> 4.7'
 end
+
+# help configure the app for Heroku
+gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
