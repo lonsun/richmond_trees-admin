@@ -1,0 +1,39 @@
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-10" 
+      h2 class="header-inline"
+        | Trees
+      medium
+        | (&nbsp;
+        = @trees.count
+        | &nbsp;total&nbsp;)
+    div class="col-xs-4 col-md-2"
+      div class="text-right"
+        | (&nbsp;
+        = link_to 'Add New Tree', new_tree_path, class: "text-right"
+        | &nbsp;)
+  br
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Common name
+              th Scientific name
+              th Family name
+              th Actions
+
+
+          tbody
+            - @trees.each do |tree|
+              tr
+                td = tree.common_name
+                td = tree.scientific_name
+                td = tree.family_name
+                td 
+                  = link_to 'Show', tree
+                  | &nbsp;|&nbsp;
+                  = link_to 'Edit', edit_tree_path(tree)
+                  | &nbsp;|&nbsp;
+                  = link_to 'Destroy', tree, data: {:confirm => 'Are you sure?'}, :method => :delete

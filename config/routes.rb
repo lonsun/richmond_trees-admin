@@ -1,4 +1,6 @@
 RichmondTreesAdmin::Application.routes.draw do
+  resources :trees
+
   # login page
   root :controller => "user_sessions", :action => "new"
 

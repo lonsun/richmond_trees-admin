@@ -1,0 +1,26 @@
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-10" 
+      h2 class="header-inline" 
+        | Tree Details
+  br
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Common Name
+    div class="col-xs-8 col-md-4" 
+      = @tree.common_name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Scientific Name
+    div class="col-xs-8 col-md-4" 
+      = @tree.scientific_name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Family Name
+    div class="col-xs-8 col-md-4" 
+      = @tree.family_name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"      
+      = link_to 'Edit', edit_tree_path(@tree)
+      | &nbsp;|&nbsp;
+      = link_to 'Back', trees_path
