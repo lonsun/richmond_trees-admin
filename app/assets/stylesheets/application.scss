@@ -31,8 +31,12 @@ $state-danger-text: $danger-text-color;
 /*** manual bootstrap overrides ***/
 
 /* navbar */
-.navbar {
+/*.navbar {
 	min-height: 86px;
+}*/
+
+.navbar-header {
+	height: 86px;
 }
 
 .navbar-default {
@@ -42,6 +46,7 @@ $state-danger-text: $danger-text-color;
 		padding-top: 34px;
 		padding-bottom: 32px;
 		font-size: 18px;
+		margin-top: 1px;
 		background-color: $navbar-primary;
 		color: $navbar-secondary;
 	}
@@ -53,7 +58,7 @@ $state-danger-text: $danger-text-color;
 	}
 
 	.logout-icon {
-		top: -2px;
+		top: 1px;
 	}
 }
 

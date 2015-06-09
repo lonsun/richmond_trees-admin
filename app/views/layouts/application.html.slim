@@ -6,7 +6,7 @@ html
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body
-    = render 'shared/page_header' unless (params[:controller] == 'user_sessions')
+    = render 'shared/page_header', controller: params[:controller] unless (params[:controller] == 'user_sessions')
     - if flash.any?
       div class="container"
         div class="row"

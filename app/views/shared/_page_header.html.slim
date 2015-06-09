@@ -10,13 +10,13 @@ nav class="navbar navbar-default"
       = link_to image_tag("rt_logo_web_header.png", :alt => "Richmond Trees Logo", height: "50px"), home_path, class: "navbar-brand" 
     div class="collapse navbar-collapse" id="navlinks"
       ul class="nav navbar-nav navbar-right"
-        li
+        li class=(controller == 'homepage' ? 'active' : '')
           = link_to "Home", home_path
-        li
+        li class=(controller == 'plantings' ? 'active' : '')
           a href="#" Plantings
-        li
+        li class=(controller == 'trees' ? 'active' : '')
           = link_to "Trees", trees_path
-        li
+        li class=(controller == 'users' ? 'active' : '')
           = link_to "Users", users_path
         li
           = link_to(logout_path) do 
