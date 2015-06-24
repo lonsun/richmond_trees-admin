@@ -1,0 +1,19 @@
+h1 Listing plantings
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @plantings.each do |planting|
+      tr
+        td = link_to 'Show', planting
+        td = link_to 'Edit', edit_planting_path(planting)
+        td = link_to 'Destroy', planting, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Planting', new_planting_path

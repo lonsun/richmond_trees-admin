@@ -11,10 +11,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608222125) do
+ActiveRecord::Schema.define(version: 20150622013755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.integer  "adoption_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["adoption_request_id"], name: "index_addresses_on_adoption_request_id", using: :btree
+
+  create_table "adoption_requests", force: true do |t|
+    t.integer  "tree_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "maintenance_records", force: true do |t|
+    t.string   "status_code"
+    t.string   "reason_code"
+    t.string   "diameter_breast_height"
+    t.integer  "planting_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "maintenance_records", ["planting_id"], name: "index_maintenance_records_on_planting_id", using: :btree
+
+  create_table "notes", force: true do |t|
+    t.string   "note"
+    t.integer  "user_id"
+    t.integer  "planting_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["planting_id"], name: "index_notes_on_planting_id", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
+
+  create_table "people", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "adoption_request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "people", ["adoption_request_id"], name: "index_people_on_adoption_request_id", using: :btree
+
+  create_table "plantings", force: true do |t|
+    t.integer  "adoption_request_id"
+    t.integer  "tree_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "plantings", ["adoption_request_id"], name: "index_plantings_on_adoption_request_id", using: :btree
+  add_index "plantings", ["tree_id"], name: "index_plantings_on_tree_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -32,7 +94,11 @@ ActiveRecord::Schema.define(version: 20150608222125) do
     t.string   "family_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tree_able_id"
+    t.string   "tree_able_type"
   end
+
+  add_index "trees", ["tree_able_id", "tree_able_type"], name: "index_trees_on_tree_able_id_and_tree_able_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",                        null: false

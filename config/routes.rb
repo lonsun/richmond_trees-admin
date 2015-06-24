@@ -1,4 +1,8 @@
 RichmondTreesAdmin::Application.routes.draw do
+  resources :adoption_requests
+
+  resources :plantings
+
   resources :trees
 
   # login page

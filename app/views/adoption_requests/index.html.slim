@@ -1,0 +1,19 @@
+h1 Listing adoption_requests
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @adoption_requests.each do |adoption_request|
+      tr
+        td = link_to 'Show', adoption_request
+        td = link_to 'Edit', edit_adoption_request_path(adoption_request)
+        td = link_to 'Destroy', adoption_request, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Adoption request', new_adoption_request_path

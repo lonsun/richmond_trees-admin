@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :notes
+  
   # add authlogic
   acts_as_authentic
 

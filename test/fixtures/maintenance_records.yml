@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status_code: MyString
+  reason_code: MyString
+  diameter_breast_height: MyString
+
+two:
+  status_code: MyString
+  reason_code: MyString
+  diameter_breast_height: MyString
