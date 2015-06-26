@@ -2,6 +2,10 @@ require 'test_helper'
 
 class AdoptionRequestsControllerTest < ActionController::TestCase
   setup do
+    # authenticate
+    activate_authlogic
+    UserSession.create(users(:testuser1))
+    
     @adoption_request = adoption_requests(:one)
   end
 
@@ -18,7 +22,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
 
   test "should create adoption_request" do
     assert_difference('AdoptionRequest.count') do
-      post :create, adoption_request: {  }
+      post :create, adoption_request: { "person" => { "first_name"=>"John" }, "address" => { "street_address" => "123 Happy St" } }
     end
 
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
@@ -35,7 +39,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
   end
 
   test "should update adoption_request" do
-    patch :update, id: @adoption_request, adoption_request: {  }
+    patch :update, id: @adoption_request, adoption_request: { "person" => { "first_name"=>"John" } }
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
   end
 

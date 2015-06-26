@@ -1,6 +1,31 @@
-p#notice = notice
-
-
-= link_to 'Edit', edit_adoption_request_path(@adoption_request)
-'|
-= link_to 'Back', adoption_requests_path
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-10" 
+      h2 class="header-inline" 
+        | Adoption Request Details
+  br
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Owner Name
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.person.full_name unless @adoption_request.person.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Owner Email
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.person.email unless @adoption_request.person.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Owner Phone
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.person.phone unless @adoption_request.person.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Address
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.address.full_address unless @adoption_request.address.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"      
+      = link_to 'Edit', edit_adoption_request_path(@adoption_request)
+      | &nbsp;|&nbsp;
+      = link_to 'Back', adoption_requests_path

@@ -1,19 +1,35 @@
-h1 Listing adoption_requests
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-9" 
+      h2 class="header-inline"
+        | Adoption Requests
+      medium
+        | (&nbsp;
+        = @adoption_requests.count
+        | &nbsp;total&nbsp;)
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        | (&nbsp;
+        = link_to 'Add New Adoption Request', new_adoption_request_path, class: "text-right"
+        | &nbsp;)
+  br
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Owner
+              th Address
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @adoption_requests.each do |adoption_request|
-      tr
-        td = link_to 'Show', adoption_request
-        td = link_to 'Edit', edit_adoption_request_path(adoption_request)
-        td = link_to 'Destroy', adoption_request, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Adoption request', new_adoption_request_path
+          tbody
+            - @adoption_requests.each do |adoption_request|
+              tr
+                td = adoption_request.person.full_name unless adoption_request.person.nil?
+                td = adoption_request.address.full_address unless adoption_request.address.nil?
+                td 
+                  = link_to 'Show', adoption_request
+                  | &nbsp;|&nbsp;
+                  = link_to 'Edit', edit_adoption_request_path(adoption_request)
+                  | &nbsp;|&nbsp;
+                  = link_to 'Destroy', adoption_request, data: {:confirm => 'Are you sure?'}, :method => :delete

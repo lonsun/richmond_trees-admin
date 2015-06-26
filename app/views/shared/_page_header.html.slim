@@ -12,8 +12,10 @@ nav class="navbar navbar-default"
       ul class="nav navbar-nav navbar-right"
         li class=(controller == 'homepage' ? 'active' : '')
           = link_to "Home", home_path
+        li class=(controller == 'adoption_requests' ? 'active' : '')
+          = link_to "Adoption Requests", adoption_requests_path
         li class=(controller == 'plantings' ? 'active' : '')
-          a href="#" Plantings
+          = link_to "Plantings", plantings_path
         li class=(controller == 'trees' ? 'active' : '')
           = link_to "Trees", trees_path
         li class=(controller == 'users' ? 'active' : '')

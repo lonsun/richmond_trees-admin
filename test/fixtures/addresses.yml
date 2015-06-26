@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  street_address: MyString
-  city: MyString
-  state: MyString
-  zip_code: MyString
+  street_address: "123 Happy St."
+  city: "Richmond"
+  state: "CA"
+  zip_code: "94804"
 
 two:
   street_address: MyString

@@ -1,8 +1,11 @@
-h1 Editing adoption_request
-
-== render 'form'
-
-= link_to 'Show', @adoption_request
-'|
-= link_to 'Back', adoption_requests_path
-
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-12"
+      h2 class="header-inline"
+        | Edit Adoption Request
+  br
+  == render 'form'
+  br
+  = link_to 'Show', @adoption_request
+  | &nbsp;|&nbsp;
+  = link_to 'Back', adoption_requests_path

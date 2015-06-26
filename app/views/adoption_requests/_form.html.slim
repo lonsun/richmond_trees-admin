@@ -1,9 +1,20 @@
-= form_for @adoption_request do |f|
-  - if @adoption_request.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@adoption_request.errors.count, "error")} prohibited this adoption_request from being saved:"
-      ul
-        - @adoption_request.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit
+div class="row"
+  div class="col-xs-12 col-md-6"
+    = bootstrap_form_for @adoption_request do |f|
+      - if @adoption_request.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@adoption_request.errors.count, "error")} prohibited this adoption_request from being saved:"
+          ul
+            - @adoption_request.errors.full_messages.each do |message|
+              li = message
+      = f.fields_for :person do |owner_fields|
+        = owner_fields.text_field :first_name
+        = owner_fields.text_field :last_name
+        = owner_fields.email_field :email
+        = owner_fields.phone_field :phone
+      = f.fields_for :address do |address_fields|
+        = address_fields.text_field :street_address
+        = address_fields.text_field :city
+        = address_fields.text_field :state
+        = address_fields.text_field :zip_code
+      = f.submit
