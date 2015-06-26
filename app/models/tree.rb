@@ -4,4 +4,8 @@ class Tree < ActiveRecord::Base
 
   validates :common_name, presence: true
 
+  # Use to display the text in select options when choosing a tree
+  def text_for_html_select_option
+    self.common_name ||= ""
+  end
 end

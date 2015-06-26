@@ -6,7 +6,6 @@
 #
 one:
   id: 1
-# column: value
-#
+  
 two: {}
 #  column: value

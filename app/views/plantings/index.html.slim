@@ -1,19 +1,46 @@
-h1 Listing plantings
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-9" 
+      h2 class="header-inline"
+        | Plantings
+      medium
+        | (&nbsp;
+        = @plantings.count
+        | &nbsp;total&nbsp;)
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        | (&nbsp;
+        = link_to 'Add New Planting', new_planting_path, class: "text-right"
+        | &nbsp;)
+  br
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Planted On
+              th Event
+              th Address
+              th Placement
+              th Plant Space Width
+              th Tree
+              th Stakes Removed
+              th Actions
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @plantings.each do |planting|
-      tr
-        td = link_to 'Show', planting
-        td = link_to 'Edit', edit_planting_path(planting)
-        td = link_to 'Destroy', planting, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Planting', new_planting_path
+          tbody
+            - @plantings.each do |planting|
+              tr
+                td = planting.planted_on
+                td = planting.event
+                td = planting.parent_adoption_request.address.full_address unless planting.parent_adoption_request.address.nil?
+                td = planting.placement
+                td = planting.plant_space_width
+                td = planting.tree_species.common_name unless planting.tree_species.nil?
+                td = planting.stakes_removed
+                td
+                  = link_to 'Show', planting
+                  | &nbsp;|&nbsp;
+                  = link_to 'Edit', edit_planting_path(planting)
+                  | &nbsp;|&nbsp;
+                  = link_to 'Destroy', planting, data: {:confirm => 'Are you sure?'}, :method => :delete

@@ -1,6 +1,46 @@
-p#notice = notice
-
-
-= link_to 'Edit', edit_planting_path(@planting)
-'|
-= link_to 'Back', plantings_path
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-10" 
+      h2 class="header-inline" 
+        | Planting Details
+  br
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Planted On
+    div class="col-xs-8 col-md-4" 
+      = @planting.planted_on
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Event
+    div class="col-xs-8 col-md-4" 
+      = @planting.event
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Address
+    div class="col-xs-8 col-md-4" 
+      = @planting.parent_adoption_request.address.full_address unless @planting.parent_adoption_request.address.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Placement
+    div class="col-xs-8 col-md-4" 
+      = @planting.placement
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Plant Space Width
+    div class="col-xs-8 col-md-4" 
+      = @planting.plant_space_width
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Tree
+    div class="col-xs-8 col-md-4" 
+      = @planting.tree_species.common_name unless @planting.tree_species.common_name.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Stakes Removed
+    div class="col-xs-8 col-md-4" 
+      = @planting.stakes_removed
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"      
+      = link_to 'Edit', edit_planting_path(@planting)
+      | &nbsp;|&nbsp;
+      = link_to 'Back', plantings_path

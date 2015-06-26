@@ -1,9 +1,17 @@
-= form_for @planting do |f|
-  - if @planting.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@planting.errors.count, "error")} prohibited this planting from being saved:"
-      ul
-        - @planting.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit
+div class="row"
+  div class="col-xs-12 col-md-6"
+    = bootstrap_form_for @planting do |f|
+      - if @planting.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@planting.errors.count, "error")} prohibited this planting from being saved:"
+          ul
+            - @planting.errors.full_messages.each do |message|
+              li = message
+      = f.collection_select :adoption_request_id, AdoptionRequest.all, :id, :text_for_html_select_option, prompt: true
+      = f.date_field :planted_on
+      = f.text_field :event
+      = f.collection_select :tree_id, Tree.all, :id, :text_for_html_select_option, prompt: true
+      = f.text_field :placement
+      = f.text_field :plant_space_width
+      = f.check_box :stakes_removed
+      = f.submit
