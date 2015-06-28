@@ -1,8 +1,11 @@
-h1 Editing planting
-
-== render 'form'
-
-= link_to 'Show', @planting
-'|
-= link_to 'Back', plantings_path
-
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-12"
+      h2 class="header-inline"
+        | Edit Planting
+  br
+  == render 'form'
+  br
+  = link_to 'Show', @planting
+  | &nbsp;|&nbsp;
+  = link_to 'Back', plantings_path
