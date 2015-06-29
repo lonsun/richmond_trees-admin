@@ -44,3 +44,40 @@ div class="container-fluid"
       = link_to 'Edit', edit_planting_path(@planting)
       | &nbsp;|&nbsp;
       = link_to 'Back', plantings_path
+  /! Start maintenance records section
+  hr
+  div class="row"
+    div class="col-xs-8 col-md-9" 
+      h4 class="header-inline" Maintenance Records
+      medium
+        | (&nbsp;
+        = @maintenance_records.count
+        | &nbsp;total&nbsp;)
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        | (&nbsp;
+        = link_to 'Add New Maintenance Record', new_maintenance_record_path(:planting_id => @planting.id), class: "text-right"
+        | &nbsp;)
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Maintained On
+              th Status Code
+              th Reason Code(s)
+              th Diameter Breast Height
+              th Actions
+          tbody
+            - @maintenance_records.each do |mr|
+              tr
+                td = mr.maintenance_date
+                td = mr.status_code
+                td = mr.reason_codes
+                td = mr.diameter_breast_height
+                td
+                  = link_to 'Edit', edit_maintenance_record_path(mr)
+                  | &nbsp;|&nbsp;
+                  = link_to 'Destroy', mr, data: {:confirm => 'Are you sure?'}, :method => :delete 
+

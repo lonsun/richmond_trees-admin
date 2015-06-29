@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+  id: 1
   adoption_request_id: 1
   tree_id: 1
   plant_space_width: "2x4"

@@ -1,0 +1,19 @@
+h1 Listing maintenance_records
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @maintenance_records.each do |maintenance_record|
+      tr
+        td = link_to 'Show', maintenance_record
+        td = link_to 'Edit', edit_maintenance_record_path(maintenance_record)
+        td = link_to 'Destroy', maintenance_record, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Maintenance record', new_maintenance_record_path

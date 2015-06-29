@@ -10,6 +10,12 @@ class PlantingsController < ApplicationController
   # GET /plantings/1
   # GET /plantings/1.json
   def show
+    @maintenance_records = []
+
+    # get associated maintenance records
+    MaintenanceRecord.where(planting_id: @planting.id).find_each do |r|
+      @maintenance_records.push( r )
+    end
   end
 
   # GET /plantings/new
