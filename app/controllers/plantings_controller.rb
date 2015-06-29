@@ -13,10 +13,16 @@ class PlantingsController < ApplicationController
   # GET /plantings/1.json
   def show
     @maintenance_records = []
+    @notes = []
 
     # get associated maintenance records
     MaintenanceRecord.where(planting_id: @planting.id).find_each do |r|
       @maintenance_records.push( r )
+    end
+
+    # get associated notes
+    Note.where(planting_id: @planting.id).find_each do |n|
+      @notes.push( n )
     end
   end
 

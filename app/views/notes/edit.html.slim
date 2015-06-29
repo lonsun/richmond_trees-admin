@@ -1,0 +1,9 @@
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-12"
+      h2 class="header-inline"
+        | Edit Note
+  br
+  == render 'form'
+  br
+  = link_to 'Back', :controller => "plantings", :action => "show", :id => @note.planting_id

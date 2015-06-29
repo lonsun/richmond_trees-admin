@@ -79,5 +79,39 @@ div class="container-fluid"
                 td
                   = link_to 'Edit', edit_maintenance_record_path(mr)
                   | &nbsp;|&nbsp;
-                  = link_to 'Destroy', mr, data: {:confirm => 'Are you sure?'}, :method => :delete 
+                  = link_to 'Destroy', mr, data: {:confirm => 'Are you sure?'}, :method => :delete
+  /! Start notes section
+  hr
+  div class="row"
+    div class="col-xs-8 col-md-9" 
+      h4 class="header-inline" Notes
+      medium
+        | (&nbsp;
+        = @notes.count
+        | &nbsp;total&nbsp;)
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        | (&nbsp;
+        = link_to 'Add New Note', new_note_path(:planting_id => @planting.id), class: "text-right"
+        | &nbsp;)
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Entered By
+              th Entered On
+              th Note
+              th Actions
+          tbody
+            - @notes.each do |note|
+              tr
+                td = note.created_by_name
+                td = note.created_at
+                td = note.note
+                td
+                  = link_to 'Edit', edit_note_path(note)
+                  | &nbsp;|&nbsp;
+                  = link_to 'Destroy', note, data: {:confirm => 'Are you sure?'}, :method => :delete
 

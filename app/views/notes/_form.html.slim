@@ -1,0 +1,17 @@
+div class="row"
+  div class="col-xs-12 col-md-6"
+    = bootstrap_form_for @note do |f|
+      - if @note.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@note.errors.count, "error")} prohibited this from being saved:"
+          ul
+            - @note.errors.full_messages.each do |message|
+              li = message
+      - if @planting_id
+        = f.hidden_field :planting_id, :value => @planting_id
+      - else  
+        = f.hidden_field :planting_id
+      = f.hidden_field :user_id, :value => current_user.id
+      = f.text_area :note
+      = f.submit
+      

@@ -1,4 +1,6 @@
 RichmondTreesAdmin::Application.routes.draw do
+  resources :notes
+
   resources :maintenance_records
 
   resources :adoption_requests

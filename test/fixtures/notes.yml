@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  note: MyString
+  planting_id: 1
+  user_id: 1
+  note: This is a test note.
 
-two:
-  note: MyString
+two: {}

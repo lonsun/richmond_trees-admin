@@ -17,7 +17,7 @@ class MaintenanceRecordsController < ApplicationController
   # GET /maintenance_records/new
   def new
     @maintenance_record = MaintenanceRecord.new
-    @planting_id = params[:planting_id]
+    @planting_id = params[:planting_id] || ""
   end
 
   # GET /maintenance_records/1/edit
@@ -75,10 +75,5 @@ class MaintenanceRecordsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_record_params
       params.require(:maintenance_record).permit(:maintenance_date, :status_code, :reason_codes, {:reason_codes => []}, :diameter_breast_height, :planting_id)
-    end
-
-    def validate_id?(id)
-      true if id =~ /[0-9]{1,10}/
-      false
     end
 end

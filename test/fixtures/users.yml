@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 testuser1:
+  id: 1
   first_name: "test"
   last_name: "user1"
   username: "testuser1"
