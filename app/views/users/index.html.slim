@@ -28,7 +28,7 @@ div class="container-fluid"
           tbody
             - @users.each do |user|
               tr
-                td = user.get_full_name
+                td = user.full_name
                 td = user.username
                 td = user.created_at
                 td = user.last_login_at

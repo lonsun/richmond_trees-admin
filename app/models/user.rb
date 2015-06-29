@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: :create
   validates :password_confirmation, presence: true, on: :create
 
-  def get_full_name
+  def full_name
     "#{self.first_name} #{self.last_name}".strip
   end
 end
