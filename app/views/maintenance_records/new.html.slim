@@ -6,4 +6,4 @@ div class="container-fluid"
   br
   == render 'form'
   br
-  = link_to 'Back', maintenance_records_path
+  = link_to 'Back', :controller => "plantings", :action => "show", :id => @planting_id
