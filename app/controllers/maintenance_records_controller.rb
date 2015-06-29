@@ -1,4 +1,6 @@
 class MaintenanceRecordsController < ApplicationController
+  before_filter :require_user
+  
   before_action :set_maintenance_record, only: [:show, :edit, :update, :destroy]
 
   # GET /maintenance_records

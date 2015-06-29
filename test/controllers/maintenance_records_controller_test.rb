@@ -2,6 +2,10 @@ require 'test_helper'
 
 class MaintenanceRecordsControllerTest < ActionController::TestCase
   setup do
+    # authenticate
+    activate_authlogic
+    UserSession.create(users(:testuser1))
+    
     @maintenance_record = maintenance_records(:one)
   end
 

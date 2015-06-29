@@ -2,6 +2,10 @@ require 'test_helper'
 
 class PlantingsControllerTest < ActionController::TestCase
   setup do
+    # authenticate
+    activate_authlogic
+    UserSession.create(users(:testuser1))
+
     @planting = plantings(:one)
   end
 
