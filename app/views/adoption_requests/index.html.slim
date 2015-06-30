@@ -32,4 +32,4 @@ div class="container-fluid"
                   | &nbsp;|&nbsp;
                   = link_to 'Edit', edit_adoption_request_path(adoption_request)
                   | &nbsp;|&nbsp;
-                  = link_to 'Destroy', adoption_request, data: {:confirm => 'Are you sure?'}, :method => :delete
+                  = link_to 'Delete', adoption_request, data: {:confirm => 'Deleting this record will delete all associated plantings.  Proceed to delete?'}, :method => :delete
