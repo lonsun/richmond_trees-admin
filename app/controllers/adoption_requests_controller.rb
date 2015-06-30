@@ -76,7 +76,7 @@ class AdoptionRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def adoption_request_params
-      params.require(:adoption_request).permit(person_attributes: [:id, :first_name, :last_name, :email, :phone], 
+      params.require(:adoption_request).permit(:user_id, person_attributes: [:id, :first_name, :last_name, :email, :phone], 
         address_attributes: [:id, :street_address, :city, :state, :zip_code])
     end
 end

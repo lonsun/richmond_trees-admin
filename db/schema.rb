@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630055551) do
+ActiveRecord::Schema.define(version: 20150630223730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(version: 20150630055551) do
     t.integer  "tree_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree
 
   create_table "maintenance_records", force: true do |t|
     t.string   "status_code"
@@ -42,9 +45,11 @@ ActiveRecord::Schema.define(version: 20150630055551) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "maintenance_date"
+    t.integer  "user_id"
   end
 
   add_index "maintenance_records", ["planting_id"], name: "index_maintenance_records_on_planting_id", using: :btree
+  add_index "maintenance_records", ["user_id"], name: "index_maintenance_records_on_user_id", using: :btree
 
   create_table "notes", force: true do |t|
     t.text     "note"
@@ -79,10 +84,12 @@ ActiveRecord::Schema.define(version: 20150630055551) do
     t.string   "placement"
     t.string   "plant_space_width"
     t.boolean  "stakes_removed"
+    t.integer  "user_id"
   end
 
   add_index "plantings", ["adoption_request_id"], name: "index_plantings_on_adoption_request_id", using: :btree
   add_index "plantings", ["tree_id"], name: "index_plantings_on_tree_id", using: :btree
+  add_index "plantings", ["user_id"], name: "index_plantings_on_user_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -100,7 +107,10 @@ ActiveRecord::Schema.define(version: 20150630055551) do
     t.string   "family_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "trees", ["user_id"], name: "index_trees_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",                        null: false
@@ -130,8 +140,10 @@ ActiveRecord::Schema.define(version: 20150630055551) do
   add_foreign_key "addresses", "adoption_requests", name: "addresses_adoption_request_id_fk", dependent: :delete
 
   add_foreign_key "adoption_requests", "trees", name: "adoption_requests_tree_id_fk"
+  add_foreign_key "adoption_requests", "users", name: "adoption_requests_user_id_fk"
 
   add_foreign_key "maintenance_records", "plantings", name: "maintenance_records_planting_id_fk", dependent: :delete
+  add_foreign_key "maintenance_records", "users", name: "maintenance_records_user_id_fk"
 
   add_foreign_key "notes", "plantings", name: "notes_planting_id_fk", dependent: :delete
   add_foreign_key "notes", "users", name: "notes_user_id_fk"
@@ -140,5 +152,8 @@ ActiveRecord::Schema.define(version: 20150630055551) do
 
   add_foreign_key "plantings", "adoption_requests", name: "plantings_adoption_request_id_fk", dependent: :delete
   add_foreign_key "plantings", "trees", name: "plantings_tree_id_fk"
+  add_foreign_key "plantings", "users", name: "plantings_user_id_fk"
+
+  add_foreign_key "trees", "users", name: "trees_user_id_fk"
 
 end

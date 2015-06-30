@@ -7,6 +7,7 @@ class PlantingsControllerTest < ActionController::TestCase
     UserSession.create(users(:testuser1))
 
     @planting = plantings(:one)
+    @user = users(:testuser1)
   end
 
   # TODO: Find a way to make this test work with parent associations...
@@ -25,7 +26,8 @@ class PlantingsControllerTest < ActionController::TestCase
     assert_difference('Planting.count') do
       post :create, planting: { adoption_request_id: @planting.adoption_request_id, 
         tree_id: @planting.tree_id, 
-        plant_space_width: @planting.plant_space_width }
+        plant_space_width: @planting.plant_space_width,
+        user_id: @user.id }
     end
 
     assert_redirected_to planting_path(assigns(:planting))
@@ -44,7 +46,8 @@ class PlantingsControllerTest < ActionController::TestCase
   test "should update planting" do
     patch :update, id: @planting, planting: { adoption_request_id: @planting.adoption_request_id, 
       tree_id: @planting.tree_id, 
-      plant_space_width: @planting.plant_space_width }
+      plant_space_width: @planting.plant_space_width,
+      user_id: @user.id }
     assert_redirected_to planting_path(assigns(:planting))
   end
 

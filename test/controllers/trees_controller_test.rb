@@ -7,6 +7,7 @@ class TreesControllerTest < ActionController::TestCase
     UserSession.create(users(:testuser1))
     
     @tree = trees(:one)
+    @user = users(:testuser1)
   end
 
   test "should get index" do
@@ -22,7 +23,10 @@ class TreesControllerTest < ActionController::TestCase
 
   test "should create tree" do
     assert_difference('Tree.count') do
-      post :create, tree: { common_name: @tree.common_name, family_name: @tree.family_name, scientific_name: @tree.scientific_name }
+      post :create, tree: { common_name: @tree.common_name, 
+        family_name: @tree.family_name, 
+        scientific_name: @tree.scientific_name,
+        user_id: @user.id }
     end
 
     assert_redirected_to tree_path(assigns(:tree))
@@ -39,7 +43,10 @@ class TreesControllerTest < ActionController::TestCase
   end
 
   test "should update tree" do
-    patch :update, id: @tree, tree: { common_name: @tree.common_name, family_name: @tree.family_name, scientific_name: @tree.scientific_name }
+    patch :update, id: @tree, tree: { common_name: @tree.common_name, 
+      family_name: @tree.family_name, 
+      scientific_name: @tree.scientific_name,
+      user_id: @user.id }
     assert_redirected_to tree_path(assigns(:tree))
   end
 

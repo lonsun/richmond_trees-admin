@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :adoption_requests
+  has_many :plantings
+  has_many :maintenance_records
   has_many :notes
   
   # add authlogic

@@ -7,6 +7,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
     UserSession.create(users(:testuser1))
     
     @adoption_request = adoption_requests(:one)
+    @user = users(:testuser1)
   end
 
   test "should get index" do
@@ -23,7 +24,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
   test "should create adoption_request" do
     assert_difference('AdoptionRequest.count') do
       post :create, adoption_request: { "person_attributes" => { "first_name"=>"John" }, 
-        "address_attributes" => { "street_address" => "123 Happy St" } }
+        "address_attributes" => { "street_address" => "123 Happy St" }, user_id: @user.id }
     end
 
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
@@ -41,7 +42,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
 
   test "should update adoption_request" do
     patch :update, id: @adoption_request, adoption_request: { "person_attributes" => { "first_name"=>"John" }, 
-      "address_attributes" => { "street_address" => "123 Happy St" } }
+      "address_attributes" => { "street_address" => "123 Happy St" }, :user_id => @user.id }
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
   end
 

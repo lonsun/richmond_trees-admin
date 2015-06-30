@@ -7,6 +7,7 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
     UserSession.create(users(:testuser1))
     
     @maintenance_record = maintenance_records(:one)
+    @user = users(:testuser1)
   end
 
   test "should get index" do
@@ -26,7 +27,8 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
         status_code: @maintenance_record.status_code,
         reason_codes: "a,b,c",
         diameter_breast_height: "2",
-        maintenance_date: @maintenance_record.maintenance_date }
+        maintenance_date: @maintenance_record.maintenance_date,
+        user_id: @user.id }
     end
 
     assert_response :redirect
@@ -46,7 +48,8 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
     patch :update, id: @maintenance_record, maintenance_record: { planting_id: @maintenance_record.planting_id,
         status_code: @maintenance_record.status_code,
         reason_codes: "a,b,c",
-        diameter_breast_height: "2" }
+        diameter_breast_height: "2",
+        user_id: @user.id }
     assert_response :redirect
   end
 

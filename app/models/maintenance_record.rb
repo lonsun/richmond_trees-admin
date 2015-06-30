@@ -1,9 +1,10 @@
 class MaintenanceRecord < ActiveRecord::Base
   belongs_to :planting
+  belongs_to :created_by, :class_name => "User", :foreign_key => "user_id"
 
   before_save :reason_codes_to_s!
 
-  validates :maintenance_date, :status_code, :diameter_breast_height, :presence => true
+  validates :maintenance_date, :status_code, :diameter_breast_height, :user_id, :presence => true
 
   # Tree status indicator.  A-F with A being the best (think school grades).
   STATUS_CODES = { :A => "VERY HEALTHY",

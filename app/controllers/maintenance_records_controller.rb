@@ -74,6 +74,6 @@ class MaintenanceRecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_record_params
-      params.require(:maintenance_record).permit(:maintenance_date, :status_code, :reason_codes, {:reason_codes => []}, :diameter_breast_height, :planting_id)
+      params.require(:maintenance_record).permit(:maintenance_date, :status_code, :reason_codes, {:reason_codes => []}, :diameter_breast_height, :planting_id, :user_id)
     end
 end
