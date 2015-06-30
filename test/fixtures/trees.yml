@@ -6,7 +6,8 @@ one:
   scientific_name: "Umbellularia californica"
   family_name: "Lauraceae"
 
-two:
+no_references:
+  id: 99
   common_name: MyString
   scientific_name: MyString
   family_name: MyString

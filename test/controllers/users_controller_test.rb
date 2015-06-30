@@ -51,9 +51,17 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to user_path(assigns(:user))
   end
 
-  test "should destroy user" do
-    assert_difference('User.count', -1) do
+  test "should not destroy user with foreign key references" do
+    assert_no_difference('User.count', -1) do
       delete :destroy, id: @user
+    end
+
+    assert_redirected_to users_path
+  end
+
+  test "should destroy user with no foreign key references" do
+    assert_difference('User.count', -1) do
+      delete :destroy, id: users(:no_references)
     end
 
     assert_redirected_to users_path

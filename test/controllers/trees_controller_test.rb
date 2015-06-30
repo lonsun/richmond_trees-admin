@@ -43,9 +43,17 @@ class TreesControllerTest < ActionController::TestCase
     assert_redirected_to tree_path(assigns(:tree))
   end
 
-  test "should destroy tree" do
-    assert_difference('Tree.count', -1) do
+  test "should not destroy tree with forein key references" do
+    assert_no_difference('Tree.count') do
       delete :destroy, id: @tree
+    end
+
+    assert_redirected_to trees_path
+  end
+
+  test "should destroy tree with no foreign key references" do
+    assert_difference('Tree.count', -1) do
+      delete :destroy, id: trees(:no_references)
     end
 
     assert_redirected_to trees_path
