@@ -60,6 +60,10 @@ class TreesController < ApplicationController
       format.html { redirect_to trees_url }
       format.json { head :no_content }
     end
+
+    rescue ActiveRecord::InvalidForeignKey
+      flash[:notice] = 'Tree cannot be deleted because it is assigned to at least one planting.'
+      redirect_to action: "index"
   end
 
   private

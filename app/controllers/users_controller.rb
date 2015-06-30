@@ -60,6 +60,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+
+    rescue ActiveRecord::InvalidForeignKey
+      flash[:notice] = 'User cannot because it is assigned to at least one note in the system.'
+      redirect_to action: "index"
   end
 
   private
