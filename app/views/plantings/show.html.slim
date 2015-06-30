@@ -107,7 +107,7 @@ div class="container-fluid"
           tbody
             - @notes.each do |note|
               tr
-                td = note.created_by_name
+                td = note.created_by.full_name
                 td = note.created_at
                 td = note.note
                 td
