@@ -57,6 +57,10 @@ end
 # help configure the app for Heroku
 gem 'rails_12factor', group: :production
 
+# ensure referential integrity in postgres
+gem 'foreigner'
+gem 'immigrant'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

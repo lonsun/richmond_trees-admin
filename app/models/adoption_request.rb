@@ -1,7 +1,7 @@
 class AdoptionRequest < ActiveRecord::Base
   has_one :person, dependent: :destroy
   has_one :address, dependent: :destroy
-  has_many :plantings
+  has_many :plantings, dependent: :destroy
 
   accepts_nested_attributes_for :person
   accepts_nested_attributes_for :address
