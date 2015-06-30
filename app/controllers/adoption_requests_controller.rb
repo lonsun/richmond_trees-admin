@@ -29,6 +29,7 @@ class AdoptionRequestsController < ApplicationController
   # POST /adoption_requests.json
   def create
     @adoption_request = AdoptionRequest.new(adoption_request_params)
+    @adoption_request.user_id = current_user.id #created by
 
     respond_to do |format|
       if @adoption_request.save

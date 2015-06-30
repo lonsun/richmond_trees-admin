@@ -39,6 +39,7 @@ class PlantingsController < ApplicationController
   # POST /plantings.json
   def create
     @planting = Planting.new(planting_params)
+    @planting.user_id = current_user.id #created by
 
     respond_to do |format|
       if @planting.save

@@ -26,6 +26,7 @@ class TreesController < ApplicationController
   # POST /trees.json
   def create
     @tree = Tree.new(tree_params)
+    @tree.user_id = current_user.id #created by
 
     respond_to do |format|
       if @tree.save

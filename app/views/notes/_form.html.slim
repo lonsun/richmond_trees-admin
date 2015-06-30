@@ -11,7 +11,6 @@ div class="row"
         = f.hidden_field :planting_id, :value => @planting_id
       - else  
         = f.hidden_field :planting_id
-      = f.hidden_field :user_id, :value => current_user.id
       = f.text_area :note
       = f.submit
       

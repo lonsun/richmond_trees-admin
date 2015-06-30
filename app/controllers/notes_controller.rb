@@ -28,6 +28,8 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
+    @note.user_id = current_user.id #created by
+
     # This is necessary to populate this field in the form when there is a validation error.
     @planting_id = @note.planting_id unless @note.nil?
 

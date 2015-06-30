@@ -28,6 +28,8 @@ class MaintenanceRecordsController < ApplicationController
   # POST /maintenance_records.json
   def create
     @maintenance_record = MaintenanceRecord.new(maintenance_record_params)
+    @maintenance_record.user_id = current_user.id #created by
+    
     # This is necessary to populate this field in the form when there is a validation error.
     @planting_id = @maintenance_record.planting_id unless @maintenance_record.nil?
 
