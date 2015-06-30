@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
   # add authlogic
   acts_as_authentic
 
-  validates :username, presence: true
-  validates :email, presence: true
+  validates :first_name, :last_name, :username, :email, presence: true
   validates :password, presence: true, on: :create
   validates :password_confirmation, presence: true, on: :create
 
