@@ -1,5 +1,5 @@
 RichmondTreesAdmin::Application.routes.draw do
-  resources :notes
+  resources :notes, except: :edit
 
   resources :maintenance_records
 

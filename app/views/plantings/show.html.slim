@@ -111,7 +111,5 @@ div class="container-fluid"
                 td = note.created_at
                 td = note.note
                 td
-                  = link_to 'Edit', edit_note_path(note)
-                  | &nbsp;|&nbsp;
-                  = link_to 'Destroy', note, data: {:confirm => 'Are you sure?'}, :method => :delete
+                  = link_to 'Delete', note, data: {:confirm => 'Are you sure?'}, :method => :delete
 

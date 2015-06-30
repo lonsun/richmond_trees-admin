@@ -21,8 +21,8 @@ class NotesController < ApplicationController
   end
 
   # GET /notes/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /notes
   # POST /notes.json
@@ -44,17 +44,17 @@ class NotesController < ApplicationController
 
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
-  def update
-    respond_to do |format|
-      if @note.update(note_params)
-        format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @note.planting_id, notice: 'Note was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @note.update(note_params)
+  #       format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @note.planting_id, notice: 'Note was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: 'edit' }
+  #       format.json { render json: @note.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /notes/1
   # DELETE /notes/1.json

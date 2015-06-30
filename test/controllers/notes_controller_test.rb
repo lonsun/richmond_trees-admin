@@ -35,17 +35,17 @@ class NotesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @note
-    assert_response :success
-  end
+  # test "should get edit" do
+  #   get :edit, id: @note
+  #   assert_response :success
+  # end
 
-  test "should update note" do
-    patch :update, id: @note, note: { planting_id: @note.planting_id, 
-        user_id: @note.user_id,
-        note: @note.note }
-    assert_response :redirect
-  end
+  # test "should update note" do
+  #   patch :update, id: @note, note: { planting_id: @note.planting_id, 
+  #       user_id: @note.user_id,
+  #       note: @note.note }
+  #   assert_response :redirect
+  # end
 
   test "should destroy note" do
     assert_difference('Note.count', -1) do
