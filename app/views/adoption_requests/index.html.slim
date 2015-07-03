@@ -25,8 +25,8 @@ div class="container-fluid"
           tbody
             - @adoption_requests.each do |adoption_request|
               tr
-                td = adoption_request.person.full_name unless adoption_request.person.nil?
-                td = adoption_request.address.full_address unless adoption_request.address.nil?
+                td = adoption_request.owner_full_name
+                td = adoption_request.full_address
                 td 
                   = link_to 'Show', adoption_request
                   | &nbsp;|&nbsp;

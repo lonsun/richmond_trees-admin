@@ -6,6 +6,23 @@
 #
 one:
   id: 1
+  street_address: "123 Happy St."
+  city: "Richmond"
+  state: "CA"
+  zip_code: "94804"
+  owner_first_name: "Bob"
+  owner_last_name: "Jones"
+  owner_email: "bob@jones.com"
+  owner_phone: "123-123-1234"
   
-two: {}
+empty:
+  id: 2
+  street_address: 
+  city: 
+  state:
+  zip_code:
+  owner_first_name:
+  owner_last_name:
+  owner_email:
+  owner_phone:
 #  column: value

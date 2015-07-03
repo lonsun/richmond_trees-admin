@@ -17,8 +17,6 @@ class AdoptionRequestsController < ApplicationController
   # GET /adoption_requests/new
   def new
     @adoption_request = AdoptionRequest.new
-    @adoption_request.build_person
-    @adoption_request.build_address
   end
 
   # GET /adoption_requests/1/edit
@@ -70,14 +68,11 @@ class AdoptionRequestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_adoption_request
       @adoption_request = AdoptionRequest.find(params[:id])
-
-      @adoption_request.build_person if @adoption_request.person.nil?
-      @adoption_request.build_address if @adoption_request.address.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def adoption_request_params
-      params.require(:adoption_request).permit(:user_id, person_attributes: [:id, :first_name, :last_name, :email, :phone], 
-        address_attributes: [:id, :street_address, :city, :state, :zip_code])
+      params.require(:adoption_request).permit( :user_id, :owner_first_name, :owner_last_name, :owner_email, :owner_phone, 
+        :street_address, :city, :state, :zip_code )
     end
 end

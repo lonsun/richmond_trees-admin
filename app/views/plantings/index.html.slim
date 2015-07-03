@@ -33,7 +33,7 @@ div class="container-fluid"
               tr
                 td = planting.planted_on
                 td = planting.event
-                td = planting.parent_adoption_request.address.full_address unless planting.parent_adoption_request.address.nil?
+                td = planting.parent_adoption_request.full_address
                 td = planting.placement
                 td = planting.plant_space_width
                 td = planting.tree_species.common_name unless planting.tree_species.nil?

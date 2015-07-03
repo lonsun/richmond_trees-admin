@@ -8,22 +8,22 @@ div class="container-fluid"
     div class="col-xs-4 col-md-2 text-right" 
       strong Owner Name
     div class="col-xs-8 col-md-4" 
-      = @adoption_request.person.full_name unless @adoption_request.person.nil?
+      = @adoption_request.owner_full_name
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Owner Email
     div class="col-xs-8 col-md-4" 
-      = @adoption_request.person.email unless @adoption_request.person.nil?
+      = @adoption_request.owner_email
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Owner Phone
     div class="col-xs-8 col-md-4" 
-      = @adoption_request.person.phone unless @adoption_request.person.nil?
+      = @adoption_request.owner_phone
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Address
     div class="col-xs-8 col-md-4" 
-      = @adoption_request.address.full_address unless @adoption_request.address.nil?
+      = @adoption_request.full_address
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right"      
       = link_to 'Edit', edit_adoption_request_path(@adoption_request)

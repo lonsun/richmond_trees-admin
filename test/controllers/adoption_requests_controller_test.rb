@@ -23,8 +23,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
 
   test "should create adoption_request" do
     assert_difference('AdoptionRequest.count') do
-      post :create, adoption_request: { "person_attributes" => { "first_name"=>"John" }, 
-        "address_attributes" => { "street_address" => "123 Happy St" }, user_id: @user.id }
+      post :create, adoption_request: { "owner_first_name"=>"John", "street_address" => "123 Happy St" , user_id: @user.id }
     end
 
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
@@ -41,8 +40,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
   end
 
   test "should update adoption_request" do
-    patch :update, id: @adoption_request, adoption_request: { "person_attributes" => { "first_name"=>"John" }, 
-      "address_attributes" => { "street_address" => "123 Happy St" }, :user_id => @user.id }
+    patch :update, id: @adoption_request, adoption_request: { "owner_first_name"=>"John", "street_address" => "123 Happy St", :user_id => @user.id }
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
   end
 

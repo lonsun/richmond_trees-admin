@@ -11,28 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630223730) do
+ActiveRecord::Schema.define(version: 20150702013444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "addresses", force: true do |t|
-    t.string   "street_address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip_code"
-    t.integer  "adoption_request_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "addresses", ["adoption_request_id"], name: "index_addresses_on_adoption_request_id", using: :btree
 
   create_table "adoption_requests", force: true do |t|
     t.integer  "tree_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "owner_first_name"
+    t.string   "owner_last_name"
+    t.string   "owner_email"
+    t.string   "owner_phone"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
   end
 
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree
@@ -61,18 +57,6 @@ ActiveRecord::Schema.define(version: 20150630223730) do
 
   add_index "notes", ["planting_id"], name: "index_notes_on_planting_id", using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
-
-  create_table "people", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "phone"
-    t.integer  "adoption_request_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "people", ["adoption_request_id"], name: "index_people_on_adoption_request_id", using: :btree
 
   create_table "plantings", force: true do |t|
     t.integer  "adoption_request_id"
@@ -137,8 +121,6 @@ ActiveRecord::Schema.define(version: 20150630223730) do
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
-  add_foreign_key "addresses", "adoption_requests", name: "addresses_adoption_request_id_fk", dependent: :delete
-
   add_foreign_key "adoption_requests", "trees", name: "adoption_requests_tree_id_fk"
   add_foreign_key "adoption_requests", "users", name: "adoption_requests_user_id_fk"
 
@@ -147,8 +129,6 @@ ActiveRecord::Schema.define(version: 20150630223730) do
 
   add_foreign_key "notes", "plantings", name: "notes_planting_id_fk", dependent: :delete
   add_foreign_key "notes", "users", name: "notes_user_id_fk"
-
-  add_foreign_key "people", "adoption_requests", name: "people_adoption_request_id_fk", dependent: :delete
 
   add_foreign_key "plantings", "adoption_requests", name: "plantings_adoption_request_id_fk", dependent: :delete
   add_foreign_key "plantings", "trees", name: "plantings_tree_id_fk"
