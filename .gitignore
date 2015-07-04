@@ -39,3 +39,7 @@ build/
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore vim backup/temp files
+*.swp
+*~
