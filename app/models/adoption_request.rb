@@ -2,7 +2,7 @@ class AdoptionRequest < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => "user_id"
   has_many :plantings, dependent: :destroy
 
-  validates :user_id, :presence => true
+  validates :street_address, :user_id, :presence => true
 
   # Use to display the text in select options when choosing an adoption request
   def text_for_html_select_option
