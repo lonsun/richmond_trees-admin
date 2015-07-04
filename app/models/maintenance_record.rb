@@ -11,7 +11,8 @@ class MaintenanceRecord < ActiveRecord::Base
     :B => "GOOD",
     :C => "STRUGGLING",
     :D => "ALMOST DEAD",
-    :F => "DEAD OR GONE" }
+    :F => "DEAD OR GONE",
+    :U => "UNKNOWN" }
 
   # Reasons for a given status (mainly applicable to negative statuses).
   REASON_CODES = { :a => "needs water", 
