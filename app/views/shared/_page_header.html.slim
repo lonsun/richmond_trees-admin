@@ -20,6 +20,13 @@ nav class="navbar navbar-default"
           = link_to "Trees", trees_path
         li class=(controller == 'users' ? 'active' : '')
           = link_to "Users", users_path
+        li class=(controller == 'reports' ? 'active dropdown reports-nav-link' : 'dropdown reports-nav-link')
+          a class="dropdown-toggle" data-toggle="dropdown"
+            | Reports 
+            span class="caret"
+          ul class="dropdown-menu"
+            li
+              = link_to "Plantings Report", reports_plantings_path
         li
           = link_to(logout_path) do 
             span class="glyphicon glyphicon-log-out logout-icon" aria-hidden="true"

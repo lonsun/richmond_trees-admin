@@ -21,6 +21,9 @@ RichmondTreesAdmin::Application.routes.draw do
   # home page when logged in
   get 'home', :controller => 'homepage', :action => 'index'
 
+  # reports
+  get 'reports/plantings', :controller => 'reports'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

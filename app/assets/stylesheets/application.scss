@@ -32,34 +32,45 @@ $state-danger-text: $danger-text-color;
 
 /* navbar */
 /*.navbar {
-	min-height: 86px;
+  min-height: 86px;
 }*/
 
 .navbar-header {
-	height: 86px;
+  height: 86px;
 }
 
 .navbar-default {
-	background-color: #5f7341;
+  background-color: #5f7341;
 
-	.navbar-nav > li > a {
-		padding-top: 34px;
-		padding-bottom: 32px;
-		font-size: 18px;
-		margin-top: 1px;
-		background-color: $navbar-primary;
-		color: $navbar-secondary;
-	}
+  .navbar-nav > li > a {
+    padding-top: 34px;
+    padding-bottom: 32px;
+    font-size: 18px;
+    margin-top: 1px;
+    background-color: $navbar-primary;
+    color: $navbar-secondary;
+  }
 
-	.navbar-nav > .active > a, 
-	.navbar-nav > .active > a:hover, 
-	.navbar-nav > .active {
-		color: $navbar-primary;
-	}
+  .navbar-nav > li > a:hover {
+    cursor: pointer;
+  }
 
-	.logout-icon {
-		top: 1px;
-	}
+  .navbar-nav > .active > a, 
+  .navbar-nav > .active > a:hover, 
+  .navbar-nav > .active {
+    background-color: $navbar-secondary;
+    color: $navbar-primary;
+  }
+
+  .logout-icon {
+    top: 1px;
+  }
+
+  .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+    background-color: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
 }
 
 /* change border color on buttons when clicked */
@@ -71,16 +82,16 @@ $state-danger-text: $danger-text-color;
 
 /* centered column (assumes we're using bootstrap 3.0) */
 .centered-col {
-	float: none;
-	margin: 0 auto;
+  float: none;
+  margin: 0 auto;
 }
 
 .header-inline {
-	display: inline;
-	padding-right: 10px;
+  display: inline;
+  padding-right: 10px;
 }
 
 /* Add an asterisk to required fields */
 label.required:after {
-	  content:" *";
+    content:" *";
 }
