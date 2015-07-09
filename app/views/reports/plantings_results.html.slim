@@ -1,0 +1,42 @@
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-9" 
+      h2 class="header-inline"
+        | Plantings
+      medium
+        | (&nbsp;
+        = @results.count.size
+        | &nbsp;total&nbsp;)
+  br
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover results-table"
+          thead
+            tr
+              th ID
+              th Planted On
+              th Street Address
+              th Placement
+              th Tree
+              th Last Maintenance Date
+              th Last Status Code
+              th class="note-column"
+                | Last Note
+              th Stakes Removed
+              th Actions
+
+          tbody
+            - @results.each do |planting|
+              tr
+                td = planting.id
+                td = planting.planted_on
+                td = planting.parent_adoption_request.street_address
+                td = planting.placement
+                td = planting.tree_species.common_name
+                td = planting.last_maintenance_date
+                td = planting.last_status_code
+                td = planting.notes.last.note
+                td = planting.stakes_removed
+                td = link_to 'Details', planting
+  

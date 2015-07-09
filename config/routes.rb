@@ -23,6 +23,7 @@ RichmondTreesAdmin::Application.routes.draw do
 
   # reports
   get 'reports/plantings', :controller => 'reports'
+  get 'reports/plantings_results', :controller => 'reports'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

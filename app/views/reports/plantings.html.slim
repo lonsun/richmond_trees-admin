@@ -3,4 +3,24 @@ div class="container-fluid"
     div class="col-xs-12"
       h2 class="header-inline"
         | Search for Plantings
-  
+  br
+  div class="row edit-row"
+    div class="col-xs-12 col-md-8"
+      = bootstrap_form_tag url: 'plantings_results', method: :get,  layout: :horizontal, label_col: 'col-md-4', control_col: 'col-md-8' do |f|
+        = f.date_field :planted_on_from
+        = f.date_field :planted_on_to
+        = f.text_field :owner_first_name
+        = f.text_field :owner_last_name
+        = f.text_field :street_address
+        = f.text_field :zip_code
+        = f.collection_select :tree_id, Tree.all.order( :common_name ), :id, :text_for_html_select_option, { prompt: false }, { multiple: true }
+        = f.date_field :last_maintenance_from
+        = f.date_field :last_maintenance_to
+        = f.select :include_nil_maintenance_records, options_for_select( [ [ "Yes", "yes" ], [ "No", "no" ] ] )
+        = f.collection_select :last_status_code, MaintenanceRecord::STATUS_CODES, :first, :last, { prompt: false }, { multiple: true }
+        = f.text_field :note
+        = f.select :stakes_removed, options_for_select( [ [ "Both", "ignore" ], [ "Yes", "yes" ], [ "No", "no" ] ] )
+        div class="form-group"
+          div class="col-md-4"
+          div class="col-md-8"
+            = f.submit "Search"
