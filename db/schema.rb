@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702013444) do
+ActiveRecord::Schema.define(version: 20150709031224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20150702013444) do
     t.string   "plant_space_width"
     t.boolean  "stakes_removed"
     t.integer  "user_id"
+    t.date     "last_maintenance_date"
+    t.string   "last_status_code"
   end
 
   add_index "plantings", ["adoption_request_id"], name: "index_plantings_on_adoption_request_id", using: :btree

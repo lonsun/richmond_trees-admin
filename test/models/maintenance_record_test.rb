@@ -34,4 +34,12 @@ class MaintenanceRecordTest < ActiveSupport::TestCase
       @maintenance_record.reason_codes_as_array.must_equal ["a", "b", "1"]
     end
   end
+
+  describe "update_most_recent_fields_in_planting method" do
+    it "updates the most recent maintenance date and status code in the associated planting" do
+      @maintenance_record.update_most_recent_fields_in_planting      
+      m2 = maintenance_records( :two )
+      @maintenance_record.planting.last_maintenance_date.must_equal m2.maintenance_date
+    end
+  end
 end

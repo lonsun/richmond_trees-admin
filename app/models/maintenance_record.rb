@@ -4,6 +4,8 @@ class MaintenanceRecord < ActiveRecord::Base
 
   before_save :reason_codes_to_s!
 
+  after_commit :update_most_recent_fields_in_planting
+
   validates :maintenance_date, :status_code, :diameter_breast_height, :user_id, :presence => true
 
   # Tree status indicator.  A-F with A being the best (think school grades).
@@ -49,5 +51,12 @@ class MaintenanceRecord < ActiveRecord::Base
       else
         []
       end
+    end
+
+    # change and save maintenance record state fields in plantings
+    def update_most_recent_fields_in_planting
+      p = self.planting
+      p.set_most_recent_maintenance_fields
+      p.save
     end
 end

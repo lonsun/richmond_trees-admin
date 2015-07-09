@@ -5,6 +5,13 @@ one:
   maintenance_date: 2015-01-01
   status_code: A
   reason_codes: 
-  diameter_breast_height: 
+  diameter_breast_height: "2"
+  user_id: 1
 
-two: {}
+two:
+  planting_id: 1
+  maintenance_date: 2015-12-01
+  status_code: U
+  reason_codes: 
+  diameter_breast_height: "4"
+  user_id: 1
