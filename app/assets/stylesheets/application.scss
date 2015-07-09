@@ -96,3 +96,9 @@ $state-danger-text: $danger-text-color;
 label.required:after {
     content:" *";
 }
+
+hr.section-separator {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: #C8D7FF;
+}

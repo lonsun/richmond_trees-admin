@@ -1,6 +1,45 @@
-p#notice = notice
-
-
-= link_to 'Edit', edit_maintenance_record_path(@maintenance_record)
-'|
-= link_to 'Back', maintenance_records_path
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-10" 
+      h2 class="header-inline" 
+        | Maintenance Record Details
+      medium
+        | ( 
+        = link_to "Back", :back  
+        |  )
+  br
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Maintenance Date
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.maintenance_date
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Status Code
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.status_code
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Reason Code(s)
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.reason_codes
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Diameter Breast Height
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.diameter_breast_height
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Entered By
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.created_by.full_name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Updated At
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.updated_at
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Created At
+    div class="col-xs-8 col-md-4" 
+      = @maintenance_record.created_at

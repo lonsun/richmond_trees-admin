@@ -3,7 +3,23 @@ div class="container-fluid"
     div class="col-xs-8 col-md-10" 
       h2 class="header-inline" 
         | Planting Details
-  br
+      medium
+        | ( 
+        = link_to "Back", :back  
+        |  )
+  hr class="section-separator"
+  div class="row"
+    div class="col-xs-8 col-md-9" 
+      h4 class="header-inline" Planting
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        medium
+          | ( 
+          = link_to "Edit", edit_planting_path(@planting)
+          | &nbsp;|&nbsp;
+          = link_to 'Delete', @planting, data: {:confirm => 'Are you sure?'}, :method => :delete
+          |  )
+  hr class="section-separator"
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Planted On
@@ -39,13 +55,9 @@ div class="container-fluid"
       strong Stakes Removed
     div class="col-xs-8 col-md-4" 
       = @planting.stakes_removed
-  div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right"      
-      = link_to 'Edit', edit_planting_path(@planting)
-      | &nbsp;|&nbsp;
-      = link_to 'Back', plantings_path
+  br
   /! Start maintenance records section
-  hr
+  hr class="section-separator"
   div class="row"
     div class="col-xs-8 col-md-9" 
       h4 class="header-inline" Maintenance Records
@@ -58,12 +70,14 @@ div class="container-fluid"
         | (&nbsp;
         = link_to 'Add New Maintenance Record', new_maintenance_record_path(:planting_id => @planting.id), class: "text-right"
         | &nbsp;)
+  hr class="section-separator"
   div class="row"
     div class="col-xs-12"
       div class="table-responsive"
         table class="table table-hover"
           thead
             tr
+              th Entered By
               th Maintained On
               th Status Code
               th Reason Code(s)
@@ -72,16 +86,20 @@ div class="container-fluid"
           tbody
             - @maintenance_records.each do |mr|
               tr
+                td = mr.created_by.full_name
                 td = mr.maintenance_date
                 td = mr.status_code
                 td = mr.reason_codes
                 td = mr.diameter_breast_height
                 td
+                  = link_to 'Details', maintenance_record_path(mr)
+                  | &nbsp;|&nbsp;
                   = link_to 'Edit', edit_maintenance_record_path(mr)
                   | &nbsp;|&nbsp;
-                  = link_to 'Destroy', mr, data: {:confirm => 'Are you sure?'}, :method => :delete
+                  = link_to 'Delete', mr, data: {:confirm => 'Are you sure?'}, :method => :delete
+  br
   /! Start notes section
-  hr
+  hr class="section-separator"
   div class="row"
     div class="col-xs-8 col-md-9" 
       h4 class="header-inline" Notes
@@ -94,6 +112,7 @@ div class="container-fluid"
         | (&nbsp;
         = link_to 'Add New Note', new_note_path(:planting_id => @planting.id), class: "text-right"
         | &nbsp;)
+  hr class="section-separator"
   div class="row"
     div class="col-xs-12"
       div class="table-responsive"

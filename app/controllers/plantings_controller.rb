@@ -16,12 +16,12 @@ class PlantingsController < ApplicationController
     @notes = []
 
     # get associated maintenance records
-    MaintenanceRecord.where(planting_id: @planting.id).find_each do |r|
+    MaintenanceRecord.where( planting_id: @planting.id ).order( :maintenance_date ).reverse_order.find_each do |r|
       @maintenance_records.push( r )
     end
 
     # get associated notes
-    Note.where(planting_id: @planting.id).find_each do |n|
+    Note.where(planting_id: @planting.id).order( :created_at ).reverse_order.find_each do |n|
       @notes.push( n )
     end
   end

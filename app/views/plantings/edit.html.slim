@@ -3,9 +3,9 @@ div class="container-fluid"
     div class="col-xs-12"
       h2 class="header-inline"
         | Edit Planting
+      medium
+        | ( 
+        = link_to "Back", :back  
+        |  )
   br
   == render 'form'
-  br
-  = link_to 'Show', @planting
-  | &nbsp;|&nbsp;
-  = link_to 'Back', plantings_path
