@@ -6,9 +6,29 @@ div class="container-fluid"
   br
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
+      strong ID
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.id
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Received On
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.received_on
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Address
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.full_address
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
       strong Owner Name
     div class="col-xs-8 col-md-4" 
       = @adoption_request.owner_full_name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Owner Phone
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.owner_phone
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Owner Email
@@ -21,9 +41,64 @@ div class="container-fluid"
       = @adoption_request.owner_phone
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
-      strong Address
+      strong Concrete Removal?
     div class="col-xs-8 col-md-4" 
-      = @adoption_request.full_address
+      = @adoption_request.concrete_removal
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Wires?
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.wires
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Spanish Speaker?
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.spanish_speaker
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Source
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.source
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Contacted On
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.contacted_on
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Sent to COR On
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.form_sent_to_cor_on
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Site Assessed On
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.site_assessed_on
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Tree Preference
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.tree_species.common_name unless @adoption_request.tree_species.nil?
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Number of Trees
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.number_of_trees
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Plant Space Width
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.plant_space_width
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Room for Tree?
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.room_for_tree
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Note
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.note
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right"      
       = link_to 'Edit', edit_adoption_request_path(@adoption_request)

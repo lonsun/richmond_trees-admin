@@ -19,16 +19,34 @@ div class="container-fluid"
         table class="table table-hover"
           thead
             tr
-              th Owner
+              th ID
+              th Received On
               th Address
+              th Owner
+              th Phone
+              th Email
+              th Spanish Speaker?
+              th Contacted On
+              th Sent to COR On
+              th Room for Tree?
+              th Note
 
           tbody
             - @adoption_requests.each do |adoption_request|
               tr
-                td = adoption_request.owner_full_name
+                td = adoption_request.id
+                td = adoption_request.received_on
                 td = adoption_request.full_address
+                td = adoption_request.owner_full_name
+                td = adoption_request.owner_phone
+                td = adoption_request.owner_email
+                td = adoption_request.spanish_speaker
+                td = adoption_request.contacted_on
+                td = adoption_request.form_sent_to_cor_on
+                td = adoption_request.room_for_tree
+                td = adoption_request.note
                 td 
-                  = link_to 'Show', adoption_request
+                  = link_to 'Details', adoption_request
                   | &nbsp;|&nbsp;
                   = link_to 'Edit', edit_adoption_request_path(adoption_request)
                   | &nbsp;|&nbsp;

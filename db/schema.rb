@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709031224) do
+ActiveRecord::Schema.define(version: 20150709234407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20150709031224) do
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
+    t.boolean  "spanish_speaker"
+    t.boolean  "room_for_tree"
+    t.boolean  "concrete_removal"
+    t.boolean  "wires"
+    t.string   "source"
+    t.date     "received_on"
+    t.date     "contacted_on"
+    t.date     "form_sent_to_cor_on"
+    t.date     "site_assessed_on"
+    t.integer  "number_of_trees"
+    t.string   "plant_space_width"
+    t.text     "note"
   end
 
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree

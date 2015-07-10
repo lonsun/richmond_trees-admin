@@ -3,7 +3,9 @@ div class="container-fluid"
     div class="col-xs-12"
       h2 class="header-inline"
         | Add an Adoption Request
+      medium
+        | ( 
+        = link_to "Back", adoption_requests_path 
+        |  )
   br
   == render 'form'
-  br
-  = link_to 'Back', adoption_requests_path
