@@ -1,31 +1,31 @@
 module ReportsHelper
 
   # Plantings report
-  def search_plantings( params )
+  def search_plantings( p )
     q = Planting.joins( :parent_adoption_request, :tree_species )
       .joins( 'LEFT JOIN "notes" ON "notes"."planting_id" = "plantings"."id"' )
-      .where( plantings: { planted_on: Date.parse( params['planted_on_from'] )..Date.parse( params['planted_on_to'] ) } )
-      .where( "adoption_requests.owner_first_name ILIKE ?", wildcard_if_empty( params['owner_first_name'] ) )
-      .where( "adoption_requests.owner_last_name ILIKE ?", wildcard_if_empty( params['owner_last_name'] ) )
-      .where( "adoption_requests.street_address ILIKE ?", wildcard_if_empty( params['street_address'] ) )
-      .where( "adoption_requests.zip_code ILIKE ?", wildcard_if_empty( params['zip_code'] ) )
-      .where( "notes.note ILIKE ?", wildcard_if_empty( params['note'] ) )
+      .where( plantings: { planted_on: Date.parse( p['planted_on_from'] )..Date.parse( p['planted_on_to'] ) } )
+      .where( "adoption_requests.owner_first_name ILIKE ?", wildcard_if_empty( p['owner_first_name'] ) )
+      .where( "adoption_requests.owner_last_name ILIKE ?", wildcard_if_empty( p['owner_last_name'] ) )
+      .where( "adoption_requests.street_address ILIKE ?", wildcard_if_empty( p['street_address'] ) )
+      .where( "adoption_requests.zip_code ILIKE ?", wildcard_if_empty( p['zip_code'] ) )
+      .where( "notes.note ILIKE ?", wildcard_if_empty( p['note'] ) )
 
-    last_maintenance_date_clause = '( ( "plantings"."last_maintenance_date" BETWEEN \'' + params['last_maintenance_from'] + '\' AND \'' + params['last_maintenance_to'] + '\' )'  
+    last_maintenance_date_clause = '( "plantings"."last_maintenance_date" BETWEEN \'' + p['last_maintenance_from'] + '\' AND \'' + p['last_maintenance_to'] + '\' )'  
     
-    if params['include_nil_maintenance_records'] == 'yes'
-      last_maintenance_date_clause = last_maintenance_date_clause + ' OR ( "plantings"."last_maintenance_date" is null ) )'
-    else
-      last_maintenance_date_clause = last_maintenance_date_clause + ' )'
+    if p['include_nil_maintenance_records'] == 'yes'
+      last_maintenance_date_clause = last_maintenance_date_clause + ' OR ( "plantings"."last_maintenance_date" is null )'
     end
-
+    
     q = q.where( last_maintenance_date_clause )
 
-    q = q.where( plantings: { stakes_removed: params['stakes_removed'] } ) unless params['stakes_removed'] == 'ignore'
-    q = q.where( plantings: { tree_id: params['tree_id'] } ) unless params['tree_id'].empty?
-    q = q.where( plantings: { last_status_code: params['last_status_code'] } ) unless params['last_status_code'].empty?
+    q = q.where( plantings: { stakes_removed: p['stakes_removed'] } ) unless p['stakes_removed'] == 'ignore'
+    q = q.where( plantings: { tree_id: p['tree_id'] } ) unless p['tree_id'].empty?
+    q = q.where( plantings: { last_status_code: p['last_status_code'] } ) unless p['last_status_code'].empty?
 
-    q = q.group( "plantings.id" )
+    q = q.group( "adoption_requests.street_address, plantings.id" )
+
+    q = q.order( "adoption_requests.street_address" )
 
     q
   end

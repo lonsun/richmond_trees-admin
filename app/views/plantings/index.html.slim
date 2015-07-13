@@ -20,24 +20,24 @@ div class="container-fluid"
           thead
             tr
               th Planted On
-              th Event
               th Address
               th Placement
-              th Plant Space Width
               th Tree
-              th Stakes Removed
+              th Last Maintenance Date
+              th Last Status Code
+              th Last Note
               th Actions
 
           tbody
             - @plantings.each do |planting|
               tr
                 td = planting.planted_on
-                td = planting.event
                 td = planting.parent_adoption_request.full_address
                 td = planting.placement
-                td = planting.plant_space_width
                 td = planting.tree_species.common_name unless planting.tree_species.nil?
-                td = planting.stakes_removed
+                td = planting.last_maintenance_date
+                td = planting.last_status_code
+                td = planting.notes.last.note
                 td
                   = link_to 'Details', planting
                   | &nbsp;|&nbsp;
