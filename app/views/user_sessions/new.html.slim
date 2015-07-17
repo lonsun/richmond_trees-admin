@@ -1,24 +1,24 @@
-div class="container-fluid"
-  div class="row"
-    div class="col-xs-12 col-md-3 centered-col"
-      div class="login-header text-center"
-        = image_tag "rt_logo_web_header.png", :alt => "Richmond Trees Logo", height: "75px"
-      #error-explanation class="text-danger"
-        - if @user_session.errors.any?
-          h3 = "Log in failed:"
-          ul
-            - @user_session.errors.full_messages.each do |message|
-              li = message
-      = form_for @user_session do |f|
-        div class="form-group"
-          = f.label :username
-          = f.text_field :username, class: "form-control"
-        div class="form-group"
-          = f.label :password
-          = f.password_field :password, class: "form-control"
-        / div class="checkbox"
-        /   label
-        /     = f.check_box :remember_me
-        /     b Remember me
-        div class="form-group"
-          = f.submit "Log In", class: "btn btn-default"
+div class="row"
+  div class="col-xs-12 col-md-3 centered-col"
+    h3 class="text-center" Login
+    #error-explanation class="text-danger"
+      - if @user_session.errors.any?
+        h3 = "Log in failed:"
+        ul
+          - @user_session.errors.full_messages.each do |message|
+            li = message
+    = form_for @user_session do |f|
+      div class="form-group"
+        = f.label :username
+        = f.text_field :username, class: "form-control"
+      div class="form-group"
+        = f.label :password
+        = f.password_field :password, class: "form-control"
+      / div class="checkbox"
+      /   label
+      /     = f.check_box :remember_me
+      /     b Remember me
+      div class="form-group"
+        = f.submit "Log In", class: "btn btn-default"
+      div class="form-group"
+        = link_to "Reset My Password", new_password_reset_path
