@@ -21,6 +21,8 @@ div class="container-fluid"
             tr
               th ID
               th Received On
+              th House Number
+              th Street Name
               th Address
               th Owner
               th Phone
@@ -36,7 +38,9 @@ div class="container-fluid"
               tr
                 td = adoption_request.id
                 td = adoption_request.received_on
-                td = adoption_request.full_address
+                td = adoption_request.house_number
+                td = adoption_request.street_name
+                td = adoption_request.street_address
                 td = adoption_request.owner_full_name
                 td = adoption_request.owner_phone
                 td = adoption_request.owner_email

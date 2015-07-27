@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709234407) do
+ActiveRecord::Schema.define(version: 20150724042831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20150709234407) do
     t.integer  "number_of_trees"
     t.string   "plant_space_width"
     t.text     "note"
+    t.integer  "house_number"
+    t.string   "street_name"
   end
 
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree

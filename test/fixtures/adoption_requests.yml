@@ -6,7 +6,8 @@
 #
 one:
   id: 1
-  street_address: "123 Happy St."
+  house_number: 123
+  street_name: "Happy St."
   city: "Richmond"
   state: "CA"
   zip_code: "94804"
@@ -17,7 +18,8 @@ one:
   
 empty:
   id: 2
-  street_address: 
+  house_number: 
+  street_name: 
   city: 
   state:
   zip_code:
