@@ -20,7 +20,8 @@ div class="container-fluid"
           thead
             tr
               th Planted On
-              th Address
+              th House Number
+              th Street Name
               th Placement
               th Tree
               th Last Maintenance Date
@@ -32,12 +33,13 @@ div class="container-fluid"
             - @plantings.each do |planting|
               tr
                 td = planting.planted_on
-                td = planting.parent_adoption_request.full_address
+                td = planting.parent_adoption_request.house_number
+                td = planting.parent_adoption_request.street_name
                 td = planting.placement
                 td = planting.tree_species.common_name unless planting.tree_species.nil?
                 td = planting.last_maintenance_date
                 td = planting.last_status_code
-                td = planting.notes.last.note
+                td = planting.notes.last.note unless planting.notes.last.nil?
                 td
                   = link_to 'Details', planting
                   | &nbsp;|&nbsp;

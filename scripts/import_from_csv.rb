@@ -7,7 +7,7 @@
 #
 # 0 -> planted_on -> plantings (YYYY-MM-DD)*
 # 1 -> event -> plantings (text)
-# 2 -> street_address -> addresses (street address)*
+# 2 -> street_address -> addresses (street address)* NOTE THAT THIS FIELD IS NOW OBSOLETE. IT HAS BEEN REPLACED WITH SEPARATE HOUSE_NUMBER AND STREET_NAME FIELDS.  YOU MUST FIX THIS BEFORE USING THIS SCRIPT.
 # 3 -> zip_code -> addresses (zip code)
 # 4 -> placement -> plantings (text)
 # 5 -> plant_space_width -> plantings (text)

@@ -27,8 +27,8 @@ class ReportsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def plantings_report_params
-      params.permit( :planted_on_from, :planted_on_to, :owner_first_name, :owner_last_name, :street_address, 
+      params.permit( :planted_on_from, :planted_on_to, :owner_first_name, :owner_last_name, :street_name, 
         :zip_code, { :tree_id => [] }, :last_maintenance_from, :last_maintenance_to, :include_nil_maintenance_records,
-        { :last_status_code => [] }, :note, :stakes_removed )
+        { :last_status_code => [] }, :note, :stakes_removed, :house_number_gt, :house_number_lt )
     end
 end

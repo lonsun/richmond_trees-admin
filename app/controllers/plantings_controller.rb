@@ -6,7 +6,7 @@ class PlantingsController < ApplicationController
   # GET /plantings
   # GET /plantings.json
   def index
-    @plantings = Planting.joins( :parent_adoption_request ).order( "adoption_requests.street_address" )
+    @plantings = Planting.joins( :parent_adoption_request ).order( "adoption_requests.house_number, adoption_requests.street_name" )
   end
 
   # GET /plantings/1
