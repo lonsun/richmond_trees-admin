@@ -27,7 +27,8 @@ class PlantingsControllerTest < ActionController::TestCase
       post :create, planting: { adoption_request_id: @planting.adoption_request_id, 
         tree_id: @planting.tree_id, 
         plant_space_width: @planting.plant_space_width,
-        user_id: @user.id }
+        user_id: @user.id,
+        planted_on: @planting.planted_on }
     end
 
     assert_redirected_to planting_path(assigns(:planting))
@@ -47,7 +48,8 @@ class PlantingsControllerTest < ActionController::TestCase
     patch :update, id: @planting, planting: { adoption_request_id: @planting.adoption_request_id, 
       tree_id: @planting.tree_id, 
       plant_space_width: @planting.plant_space_width,
-      user_id: @user.id }
+      user_id: @user.id,
+      planted_on: @planting.planted_on }
     assert_redirected_to planting_path(assigns(:planting))
   end
 

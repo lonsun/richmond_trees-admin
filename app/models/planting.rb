@@ -5,7 +5,7 @@ class Planting < ActiveRecord::Base
   has_many :maintenance_records, dependent: :destroy
   has_many :notes, dependent: :destroy
 
-  validates :adoption_request_id, :tree_id, :user_id, presence: true
+  validates :adoption_request_id, :tree_id, :user_id, :planted_on, presence: true
 
   # get the most recent maintenance record or nil if there are none
   def most_recent_maintenance_record
