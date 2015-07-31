@@ -22,6 +22,11 @@ class ReportsController < ApplicationController
     
     # do the search
     @results = search_plantings( search_params )
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @results.to_csv }
+    end
   end
 
   private

@@ -27,4 +27,36 @@ class Planting < ActiveRecord::Base
       self.last_status_code = mr.status_code
     end
   end
+
+  def house_number
+    self.parent_adoption_request.attributes.values_at( "house_number" )[0]
+  end
+
+  def street_name
+    self.parent_adoption_request.attributes.values_at( "street_name" )[0]
+  end
+
+  def tree_common_name
+    self.tree_species.attributes.values_at( "common_name" )[0]
+  end
+
+  def last_note
+    if self.notes.last.nil?
+      ""
+    else
+      self.notes.last.note
+    end
+  end
+
+  def self.to_csv
+    attributes = %w[ id planted_on house_number street_name placement tree_common_name last_maintenance_date last_status_code last_note ]
+    
+    CSV.generate( headers: true ) do |csv|
+      csv << attributes
+
+      all.each do |planting|
+        csv << attributes.map{ |attr| planting.send( attr ) }
+      end
+    end
+  end
 end

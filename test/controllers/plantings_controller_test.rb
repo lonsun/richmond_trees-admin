@@ -10,12 +10,17 @@ class PlantingsControllerTest < ActionController::TestCase
     @user = users(:testuser1)
   end
 
-  # TODO: Find a way to make this test work with parent associations...
-  # test "should get index" do
-  #   get :index
-  #   assert_response :success
-  #   assert_not_nil assigns(:plantings)
-  # end
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:plantings)
+  end
+
+  test "should respond to csv on index" do
+    get :index, { :format => :csv }
+    assert_response :success
+    assert_not_nil assigns(:plantings)
+  end
 
   test "should get new" do
     get :new

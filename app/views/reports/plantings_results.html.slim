@@ -2,12 +2,14 @@ div class="container-fluid"
   div class="row"
     div class="col-xs-8 col-md-9" 
       h2 class="header-inline"
-        | Plantings
+        | Plantings Report Results
       medium
         | (&nbsp;
         = @results.count.size
         | &nbsp;total&nbsp;)
-  br
+    div class="col-xs-12 text-right"
+      = link_to reports_plantings_results_path( format: :csv, params: request.query_parameters ) do
+          button class="btn btn-default" Export to CSV  
   div class="row"
     div class="col-xs-12"
       div class="table-responsive"

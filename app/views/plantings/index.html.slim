@@ -12,7 +12,9 @@ div class="container-fluid"
         | (&nbsp;
         = link_to 'Add New Planting', new_planting_path, class: "text-right"
         | &nbsp;)
-  br
+    div class="col-xs-12 text-right"
+      = link_to plantings_path( format: :csv ) do
+        button class="btn btn-default" Export to CSV  
   div class="row"
     div class="col-xs-12"
       div class="table-responsive"

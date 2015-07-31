@@ -7,6 +7,11 @@ class PlantingsController < ApplicationController
   # GET /plantings.json
   def index
     @plantings = Planting.joins( :parent_adoption_request ).order( "adoption_requests.house_number, adoption_requests.street_name" )
+  
+    respond_to do |format|
+      format.html
+      format.csv { send_data @plantings.to_csv }
+    end
   end
 
   # GET /plantings/1
