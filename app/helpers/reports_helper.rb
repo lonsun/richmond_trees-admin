@@ -31,7 +31,7 @@ module ReportsHelper
 
     q = q.group( "adoption_requests.house_number, adoption_requests.street_name, plantings.id" )
 
-    q = q.order( "adoption_requests.house_number, adoption_requests.street_name" )
+    q = q.order( "adoption_requests.street_name, adoption_requests.house_number" )
 
     q
   end
