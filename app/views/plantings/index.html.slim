@@ -43,8 +43,7 @@ div class="container-fluid"
                 td = planting.last_status_code
                 td = planting.notes.last.note unless planting.notes.last.nil?
                 td
-                  = link_to 'Details', planting
-                  | &nbsp;|&nbsp;
-                  = link_to 'Edit', edit_planting_path(planting)
-                  | &nbsp;|&nbsp;
-                  = link_to 'Delete', planting, data: {:confirm => 'Are you sure?'}, :method => :delete
+                  ul
+                    li = link_to 'Details', planting
+                    li = link_to 'Add Maintenance Record', new_maintenance_record_path( :planting_id => planting.id ), target: "_blank"
+                    li = link_to 'Add Note', new_note_path( :planting_id => planting.id ), target: "_blank"
