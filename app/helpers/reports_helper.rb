@@ -23,8 +23,8 @@ module ReportsHelper
     end
     q = q.where( last_maintenance_date_clause )
     
-    q = q.where( "adoption_requests.house_number > ?", p['house_number_gt'].to_i ) unless p['house_number_gt'].empty?
-    q = q.where( "adoption_requests.house_number < ?", p['house_number_lt'].to_i ) unless p['house_number_lt'].empty?
+    q = q.where( "adoption_requests.house_number >= ?", p['house_number_gt'].to_i ) unless p['house_number_gt'].empty?
+    q = q.where( "adoption_requests.house_number <= ?", p['house_number_lt'].to_i ) unless p['house_number_lt'].empty?
     q = q.where( plantings: { stakes_removed: p['stakes_removed'] } ) unless p['stakes_removed'] == 'ignore'
     q = q.where( plantings: { tree_id: p['tree_id'] } ) unless p['tree_id'].empty?
     q = q.where( plantings: { last_status_code: p['last_status_code'] } ) unless p['last_status_code'].empty?
