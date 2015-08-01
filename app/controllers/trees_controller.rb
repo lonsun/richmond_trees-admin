@@ -5,7 +5,7 @@ class TreesController < ApplicationController
   # GET /trees
   # GET /trees.json
   def index
-    @trees = Tree.all
+    @trees = Tree.all.order( "common_name" )
   end
 
   # GET /trees/1
