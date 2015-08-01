@@ -25,7 +25,6 @@ div class="container-fluid"
               th Last Status Code
               th class="note-column"
                 | Last Note
-              th Stakes Removed
               th Actions
 
           tbody
@@ -39,7 +38,6 @@ div class="container-fluid"
                 td = planting.last_maintenance_date
                 td = planting.last_status_code
                 td = planting.notes.last.note unless planting.notes.last.nil?
-                td = planting.stakes_removed
                 td
                   ul
                     li = link_to 'Details', planting
