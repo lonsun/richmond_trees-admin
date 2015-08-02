@@ -49,7 +49,3 @@ div class="container-fluid"
                 td = adoption_request.note
                 td 
                   = link_to 'Details', adoption_request
-                  | &nbsp;|&nbsp;
-                  = link_to 'Edit', edit_adoption_request_path(adoption_request)
-                  | &nbsp;|&nbsp;
-                  = link_to 'Delete', adoption_request, data: {:confirm => 'Deleting this record will delete all associated plantings.  Proceed to delete?'}, :method => :delete
