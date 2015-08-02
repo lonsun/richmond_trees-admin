@@ -111,3 +111,13 @@ div class="container-fluid"
       strong Note
     div class="col-xs-8 col-md-4" 
       = @adoption_request.note
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Created By
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.created_by.full_name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
+      strong Created On
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.created_at
