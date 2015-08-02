@@ -41,7 +41,8 @@ div class="container-fluid"
                 td = planting.tree_species.common_name unless planting.tree_species.nil?
                 td = planting.last_maintenance_date
                 td = planting.last_status_code
-                td = planting.notes.last.note unless planting.notes.last.nil?
+                td
+                  = render partial: "shared/note_content", locals: { planting: planting}
                 td
                   ul
                     li = link_to 'Details', planting

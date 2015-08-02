@@ -1,0 +1,8 @@
+-if ! planting.notes.last.nil?
+  i
+    = planting.notes.last.created_by.full_name
+    |&nbsp;--&nbsp;
+    = planting.notes.last.created_at
+  br
+  br
+  = planting.notes.last.note
