@@ -61,6 +61,9 @@ gem 'rails_12factor', group: :production
 gem 'foreigner'
 gem 'immigrant'
 
+# fix bound events problem caused by Turbolinks
+gem 'jquery-turbolinks'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

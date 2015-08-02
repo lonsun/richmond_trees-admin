@@ -113,6 +113,11 @@ div class="container-fluid"
       = @adoption_request.note
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
+      strong Completed?
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.completed
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
       strong Created By
     div class="col-xs-8 col-md-4" 
       = @adoption_request.created_by.full_name

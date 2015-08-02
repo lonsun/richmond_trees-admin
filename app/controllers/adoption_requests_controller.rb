@@ -6,7 +6,15 @@ class AdoptionRequestsController < ApplicationController
   # GET /adoption_requests
   # GET /adoption_requests.json
   def index
-    @adoption_requests = AdoptionRequest.all
+    include_completed = params[:adoption_request][:include_completed] unless params[:adoption_request].nil?
+
+    if include_completed == "1"
+      @adoption_requests = AdoptionRequest.all
+      @include_completed_checked = "checked"
+    else
+      @adoption_requests = AdoptionRequest.all.where( :completed => false )
+      @include_completed_checked = ""
+    end
   end
 
   # GET /adoption_requests/1
@@ -75,6 +83,7 @@ class AdoptionRequestsController < ApplicationController
       params.require(:adoption_request).permit( :user_id, :tree_id, :owner_first_name, :owner_last_name, 
         :owner_email, :owner_phone, :house_number, :street_name, :city, :state, :zip_code, :spanish_speaker,
         :room_for_tree, :concrete_removal, :wires, :source, :received_on, :contacted_on,
-        :form_sent_to_cor_on, :site_assessed_on, :number_of_trees, :plant_space_width, :note )
+        :form_sent_to_cor_on, :site_assessed_on, :number_of_trees, :plant_space_width, :note,
+        :completed, :include_completed )
     end
 end
