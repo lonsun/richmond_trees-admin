@@ -12,7 +12,7 @@ div class="row"
         - else  
           = f.hidden_field :planting_id
         = f.date_field :maintenance_date
-        = f.collection_select :status_code, MaintenanceRecord::STATUS_CODES, :first, :last, prompt: true
+        = f.select :status_code, MaintenanceRecord::STATUS_CODES.map { |s| [ s.first.to_s + " - " + s.last, s.first ] }
         = f.select :reason_codes, options_from_collection_for_select(MaintenanceRecord::REASON_CODES, :first, :last, @maintenance_record.reason_codes_as_array), {}, :multiple => true
         = f.text_field :diameter_breast_height
         = f.submit
