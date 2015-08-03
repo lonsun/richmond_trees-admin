@@ -3,6 +3,8 @@ class AdoptionRequestsController < ApplicationController
 
   before_action :set_adoption_request, only: [:show, :edit, :update, :destroy]
 
+  helper DateAndTimeHelper
+
   # GET /adoption_requests
   # GET /adoption_requests.json
   def index

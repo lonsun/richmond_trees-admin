@@ -33,7 +33,7 @@ div class="container-fluid"
     div class="col-xs-4 col-md-2 text-right" 
       strong Created On
     div class="col-xs-8 col-md-4" 
-      = @user.created_at
+      = format_time_in_time_zone( @user.created_at )
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Login Count
@@ -43,7 +43,7 @@ div class="container-fluid"
     div class="col-xs-4 col-md-2 text-right" 
       strong Last Login
     div class="col-xs-8 col-md-4" 
-      = @user.last_login_at
+      = format_time_in_time_zone( @user.last_login_at )
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Last Login IP

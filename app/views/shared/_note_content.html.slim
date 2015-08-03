@@ -2,7 +2,7 @@
   i
     = planting.notes.last.created_by.full_name
     |&nbsp;--&nbsp;
-    = planting.notes.last.created_at
+    = format_time_in_time_zone( planting.notes.last.created_at )
   br
   br
   = planting.notes.last.note

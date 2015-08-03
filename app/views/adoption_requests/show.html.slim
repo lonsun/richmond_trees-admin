@@ -125,4 +125,4 @@ div class="container-fluid"
     div class="col-xs-4 col-md-2 text-right" 
       strong Created On
     div class="col-xs-8 col-md-4" 
-      = @adoption_request.created_at
+      = format_time_in_time_zone( @adoption_request.created_at )

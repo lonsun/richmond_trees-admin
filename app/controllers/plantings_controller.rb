@@ -3,6 +3,8 @@ class PlantingsController < ApplicationController
   
   before_action :set_planting, only: [:show, :edit, :update, :destroy]
 
+  helper DateAndTimeHelper
+
   # GET /plantings
   # GET /plantings.json
   def index

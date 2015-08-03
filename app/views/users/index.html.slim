@@ -30,8 +30,8 @@ div class="container-fluid"
               tr
                 td = user.full_name
                 td = user.username
-                td = user.created_at
-                td = user.last_login_at
+                td = format_time_in_time_zone( user.created_at )
+                td = format_time_in_time_zone( user.last_login_at )
                 td
                   = link_to 'Details', user
                   | &nbsp;|&nbsp;

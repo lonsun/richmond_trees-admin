@@ -127,7 +127,7 @@ div class="container-fluid"
             - @notes.each do |note|
               tr
                 td = note.created_by.full_name
-                td = note.created_at
+                td = format_time_in_time_zone( note.created_at )
                 td = note.note
                 td
                   = link_to 'Delete', note, data: {:confirm => 'Are you sure?'}, :method => :delete

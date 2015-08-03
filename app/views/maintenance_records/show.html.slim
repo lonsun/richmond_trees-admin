@@ -37,9 +37,9 @@ div class="container-fluid"
     div class="col-xs-4 col-md-2 text-right" 
       strong Updated At
     div class="col-xs-8 col-md-4" 
-      = @maintenance_record.updated_at
+      = format_time_in_time_zone( @maintenance_record.updated_at )
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
       strong Created At
     div class="col-xs-8 col-md-4" 
-      = @maintenance_record.created_at
+      = format_time_in_time_zone( @maintenance_record.created_at )
