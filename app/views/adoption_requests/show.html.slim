@@ -33,6 +33,11 @@ div class="container-fluid"
       = @adoption_request.full_address
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
+      strong Zone
+    div class="col-xs-8 col-md-4" 
+      = @adoption_request.zone
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
       strong Owner Name
     div class="col-xs-8 col-md-4" 
       = @adoption_request.owner_full_name

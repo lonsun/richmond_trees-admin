@@ -86,6 +86,6 @@ class AdoptionRequestsController < ApplicationController
         :owner_email, :owner_phone, :house_number, :street_name, :city, :state, :zip_code, :spanish_speaker,
         :room_for_tree, :concrete_removal, :wires, :source, :received_on, :contacted_on,
         :form_sent_to_cor_on, :site_assessed_on, :number_of_trees, :plant_space_width, :note,
-        :completed, :include_completed )
+        :completed, :include_completed, :zone )
     end
 end
