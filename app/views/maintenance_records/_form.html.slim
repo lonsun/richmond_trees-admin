@@ -13,6 +13,10 @@ div class="row"
           = f.hidden_field :planting_id
         = f.date_field :maintenance_date
         = f.select :status_code, MaintenanceRecord::STATUS_CODES.map { |s| [ s.first.to_s + " - " + s.last, s.first ] }
-        = f.select :reason_codes, options_from_collection_for_select(MaintenanceRecord::REASON_CODES, :first, :last, @maintenance_record.reason_codes_as_array), {}, :multiple => true
+        - MaintenanceRecord::REASON_CODES.each do |r|
+          div class="checkbox"
+            label for="maintenance_record_reason_codes_#{ r.first }"
+              = check_box_tag 'maintenance_record[reason_codes][]', r.first.to_s, ( @maintenance_record.reason_codes.nil? ) ? false : @maintenance_record.reason_codes.include?( r.first.to_s ), { id: "maintenance_record_reason_codes_#{ r.first }" }
+              = " #{ r.first } - #{ r.last.capitalize }"
         = f.text_field :diameter_breast_height
         = f.submit

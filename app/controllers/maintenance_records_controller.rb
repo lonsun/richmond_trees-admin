@@ -47,6 +47,9 @@ class MaintenanceRecordsController < ApplicationController
   # PATCH/PUT /maintenance_records/1
   # PATCH/PUT /maintenance_records/1.json
   def update
+    # this is necessary to update reason codes correctly if none are checked on the frontend
+    params[:maintenance_record][:reason_codes] = [] if params[:maintenance_record][:reason_codes].nil?
+    
     respond_to do |format|
       if @maintenance_record.update(maintenance_record_params)
         format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @maintenance_record.planting_id, notice: 'Maintenance record was successfully updated.' }
@@ -76,6 +79,7 @@ class MaintenanceRecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_record_params
-      params.require(:maintenance_record).permit(:maintenance_date, :status_code, :reason_codes, {:reason_codes => []}, :diameter_breast_height, :planting_id, :user_id)
+      params.require(:maintenance_record).permit(:maintenance_date, :status_code, { :reason_codes => [] }, 
+        :diameter_breast_height, :planting_id, :user_id)
     end
 end
