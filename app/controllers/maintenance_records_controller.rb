@@ -3,6 +3,8 @@ class MaintenanceRecordsController < ApplicationController
   
   before_action :set_maintenance_record, only: [:show, :edit, :update, :destroy]
 
+  after_action :udpate_stakes_removed_on_planting, only: [ :update ]
+
   # GET /maintenance_records
   # GET /maintenance_records.json
   def index
@@ -80,6 +82,17 @@ class MaintenanceRecordsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_record_params
       params.require(:maintenance_record).permit(:maintenance_date, :status_code, { :reason_codes => [] }, 
-        :diameter_breast_height, :planting_id, :user_id)
+        :diameter_breast_height, :planting_id, :user_id, :mark_stakes_removed)
+    end
+
+    # update the stakes removed on associated planting
+    def udpate_stakes_removed_on_planting
+      if params[:mark_stakes_removed] == "1"
+        @maintenance_record.planting.stakes_removed = true
+      else
+        @maintenance_record.planting.stakes_removed = false
+      end
+
+      @maintenance_record.planting.save
     end
 end

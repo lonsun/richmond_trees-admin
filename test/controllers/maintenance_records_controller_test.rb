@@ -17,7 +17,8 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    # maintenance records are always associated with a planting
+    get :new, { :planting_id => 1 }
     assert_response :success
   end
 

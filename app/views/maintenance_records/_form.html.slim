@@ -19,4 +19,8 @@ div class="row"
               = check_box_tag 'maintenance_record[reason_codes][]', r.first.to_s, ( @maintenance_record.reason_codes.nil? ) ? false : @maintenance_record.reason_codes.include?( r.first.to_s ), { id: "maintenance_record_reason_codes_#{ r.first }" }
               = " #{ r.first } - #{ r.last.capitalize }"
         = f.text_field :diameter_breast_height
+        div class="checkbox"
+          label for="mark_stakes_removed"
+            = check_box_tag 'mark_stakes_removed', "1", ( @maintenance_record.planting.nil? ) ? Planting.find( @planting_id ).stakes_removed : @maintenance_record.planting.stakes_removed
+            | Stakes removed (on associated planting)
         = f.submit
