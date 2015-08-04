@@ -3,7 +3,7 @@ class MaintenanceRecordsController < ApplicationController
   
   before_action :set_maintenance_record, only: [:show, :edit, :update, :destroy]
 
-  after_action :udpate_stakes_removed_on_planting, only: [ :update ]
+  after_action :udpate_stakes_removed_on_planting, only: [ :create, :update ]
 
   # GET /maintenance_records
   # GET /maintenance_records.json
