@@ -3,7 +3,6 @@ div class="container-fluid"
     div class="col-xs-12"
       h2 class="header-inline"
         | Add a New Tree
+      = render partial: 'shared/back_to_listing'
   br
   == render 'form'
-  br
-  = link_to 'Back', trees_path

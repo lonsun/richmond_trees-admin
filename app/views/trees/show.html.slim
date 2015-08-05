@@ -1,8 +1,17 @@
 div class="container-fluid"
   div class="row"
-    div class="col-xs-8 col-md-10" 
+    div class="col-xs-8 col-md-9" 
       h2 class="header-inline" 
         | Tree Details
+      = render partial: 'shared/back_to_listing'
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        medium
+          | ( 
+          = link_to 'Edit', edit_tree_path(@tree)
+          | &nbsp;|&nbsp;
+          = link_to 'Delete', @tree, data: {:confirm => 'Are you sure?'}, :method => :delete
+          |  )
   br
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
@@ -19,8 +28,3 @@ div class="container-fluid"
       strong Family Name
     div class="col-xs-8 col-md-4" 
       = @tree.family_name
-  div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right"      
-      = link_to 'Edit', edit_tree_path(@tree)
-      | &nbsp;|&nbsp;
-      = link_to 'Back', trees_path

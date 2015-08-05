@@ -3,10 +3,7 @@ div class="container-fluid"
     div class="col-xs-8 col-md-10" 
       h2 class="header-inline" 
         | Planting Details
-      medium
-        | ( 
-        = link_to "Back", :back  
-        |  )
+      = render partial: 'shared/back_to_listing'
   hr class="section-separator"
   div class="row"
     div class="col-xs-8 col-md-9" 

@@ -3,9 +3,6 @@ div class="container-fluid"
     div class="col-xs-12"
       h2 class="header-inline"
         | Edit Tree
+      = render partial: 'shared/back_to_listing'
   br
   == render 'form'
-  br
-  = link_to 'Show', @tree
-  | &nbsp;|&nbsp;
-  = link_to 'Back', trees_path

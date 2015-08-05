@@ -8,6 +8,8 @@ class PlantingsController < ApplicationController
   # GET /plantings
   # GET /plantings.json
   def index
+    store_listing_referer
+
     @plantings = Planting.joins( :parent_adoption_request ).order( "adoption_requests.street_name, adoption_requests.house_number" )
   
     respond_to do |format|
@@ -78,7 +80,7 @@ class PlantingsController < ApplicationController
   def destroy
     @planting.destroy
     respond_to do |format|
-      format.html { redirect_to plantings_url }
+      format.html { redirect_to session[:listing_referer] || plantings_url }
       format.json { head :no_content }
     end
   end

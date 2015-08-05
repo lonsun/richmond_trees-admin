@@ -34,7 +34,3 @@ div class="container-fluid"
                 td = format_time_in_time_zone( user.last_login_at )
                 td
                   = link_to 'Details', user
-                  | &nbsp;|&nbsp;
-                  = link_to 'Edit', edit_user_path(user)
-                  | &nbsp;|&nbsp;
-                  = link_to 'Delete', user, data: {:confirm => 'Are you sure?'}, :method => :delete

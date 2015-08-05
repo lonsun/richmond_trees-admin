@@ -3,9 +3,6 @@ div class="container-fluid"
     div class="col-xs-12"
       h2 class="header-inline"
         | Edit Planting
-      medium
-        | ( 
-        = link_to "Back", :back  
-        |  )
+      = render partial: 'shared/back_to_listing'
   br
   == render 'form'

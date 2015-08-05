@@ -10,6 +10,8 @@ class ReportsController < ApplicationController
   end
 
   def plantings_results
+    store_listing_referer
+
     search_params = plantings_report_params
 
     # clean up some params for search

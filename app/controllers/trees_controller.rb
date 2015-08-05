@@ -5,6 +5,8 @@ class TreesController < ApplicationController
   # GET /trees
   # GET /trees.json
   def index
+    store_listing_referer
+
     @trees = Tree.all.order( "common_name" )
   end
 
@@ -58,7 +60,7 @@ class TreesController < ApplicationController
   def destroy
     @tree.destroy
     respond_to do |format|
-      format.html { redirect_to trees_url }
+      format.html { redirect_to session[:listing_referer] || trees_url }
       format.json { head :no_content }
     end
 

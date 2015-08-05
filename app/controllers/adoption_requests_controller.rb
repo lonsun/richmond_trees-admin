@@ -8,6 +8,8 @@ class AdoptionRequestsController < ApplicationController
   # GET /adoption_requests
   # GET /adoption_requests.json
   def index
+    store_listing_referer
+
     include_completed = params[:adoption_request][:include_completed] unless params[:adoption_request].nil?
 
     if include_completed == "1"
@@ -69,7 +71,7 @@ class AdoptionRequestsController < ApplicationController
   def destroy
     @adoption_request.destroy
     respond_to do |format|
-      format.html { redirect_to adoption_requests_url }
+      format.html { redirect_to session[:listing_referer] || adoption_requests_path }
       format.json { head :no_content }
     end
   end
