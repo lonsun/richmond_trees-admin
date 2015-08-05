@@ -42,6 +42,6 @@ div class="container-fluid"
                 td
                   ul
                     li = link_to 'Details', planting
-                    li = link_to 'Add Maintenance Record', new_maintenance_record_path( :planting_id => planting.id ), target: "_blank"
-                    li = link_to 'Add Note', new_note_path( :planting_id => planting.id ), target: "_blank"
+                    li = link_to 'Add Maintenance Record', new_maintenance_record_path( :planting_id => planting.id )
+                    li = link_to 'Add Note', new_note_path( :planting_id => planting.id )
   
