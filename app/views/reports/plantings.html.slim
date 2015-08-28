@@ -19,7 +19,17 @@ div class="container-fluid"
         = f.date_field :last_maintenance_from
         = f.date_field :last_maintenance_to
         = f.select :include_nil_maintenance_records, options_for_select( [ [ "Yes", "yes" ], [ "No", "no" ] ] )
-        = f.collection_select :last_status_code, MaintenanceRecord::STATUS_CODES, :first, :last, { prompt: false }, { multiple: true }
+        div class="form-group"
+          label class="control-label col-md-4"
+            Last Status Codes
+          input type="hidden" name="[last_status_codes][]" value=""
+          div class="col-md-8"
+            - MaintenanceRecord::STATUS_CODES.each do |r|
+              div class="checkbox"
+                label for="last_status_codes_#{ r.first }"
+                  / Check all except "F"/"dead" by default.
+                  = check_box_tag '[last_status_codes][]', r.first.to_s, ( r.first.to_s == 'F') ? false : true , { id: "last_status_codes_#{ r.first }" }
+                  = " #{ r.first } - #{ r.last.capitalize }"
         = f.text_field :note
         = f.select :stakes_removed, options_for_select( [ [ "Both", "ignore" ], [ "Yes", "yes" ], [ "No", "no" ] ] )
         div class="form-group"

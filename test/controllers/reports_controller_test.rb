@@ -14,7 +14,7 @@ class ReportsControllerTest < ActionController::TestCase
       "last_maintenance_from" => "",
       "last_maintenance_to" => "",
       "tree_id" => [ 1 ],
-      "last_status_code" => [],
+      "last_status_codes" => [],
       "note" => "",
       "include_nil_maintenance_records" => "yes",
       "house_number_gt" => "",

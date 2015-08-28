@@ -27,7 +27,19 @@ module ReportsHelper
     q = q.where( "adoption_requests.house_number <= ?", p['house_number_lt'].to_i ) unless p['house_number_lt'].empty?
     q = q.where( plantings: { stakes_removed: p['stakes_removed'] } ) unless p['stakes_removed'] == 'ignore'
     q = q.where( plantings: { tree_id: p['tree_id'] } ) unless p['tree_id'].empty?
-    q = q.where( plantings: { last_status_code: p['last_status_code'] } ) unless p['last_status_code'].empty?
+
+    if p['last_status_codes'].empty?
+      last_status_code_clause = '( "plantings"."last_status_code" is null )'
+    else
+      last_status_code_clause = '( "plantings"."last_status_code" in (' + p['last_status_codes'].map { |v| "'#{ v }'" }.join(",") + ') )'
+
+      # A status code is only present if there is at least one maintenance record.
+      if p['include_nil_maintenance_records'] == 'yes'
+        last_status_code_clause += ' OR ( "plantings"."last_status_code" is null )'
+      end
+    end
+    q = q.where( last_status_code_clause )
+
 
     q = q.group( "adoption_requests.house_number, adoption_requests.street_name, plantings.id" )
 

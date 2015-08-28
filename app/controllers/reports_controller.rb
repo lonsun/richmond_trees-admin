@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
     search_params['last_maintenance_from'] = FROM_DATE_DEFAULT if search_params['last_maintenance_from'].empty?
     search_params['last_maintenance_to'] = TO_DATE_DEFAULT if search_params['last_maintenance_to'].empty?
     search_params['tree_id'] = remove_empty_values( search_params['tree_id'] )
-    search_params['last_status_code'] = remove_empty_values( search_params['last_status_code'] )
+    search_params['last_status_codes'] = remove_empty_values( search_params['last_status_codes'] )
     
     # do the search
     @results = search_plantings( search_params )
@@ -36,6 +36,6 @@ class ReportsController < ApplicationController
     def plantings_report_params
       params.permit( :planted_on_from, :planted_on_to, :owner_first_name, :owner_last_name, :street_name, 
         :zip_code, { :tree_id => [] }, :last_maintenance_from, :last_maintenance_to, :include_nil_maintenance_records,
-        { :last_status_code => [] }, :note, :stakes_removed, :house_number_gt, :house_number_lt )
+        { :last_status_codes => [] }, :note, :stakes_removed, :house_number_gt, :house_number_lt )
     end
 end
