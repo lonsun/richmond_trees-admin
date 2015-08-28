@@ -10,4 +10,11 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
+deploy:
+  provider: heroku
+  api_key:
+    secure: gJl5iNRSTAg35G309ejWY/ZnNvv37pWq34ZL6GP7b9mUbmANyF7FrQgFt/tc1rYx8KAukq5D/OsXdSA4mKSmUzD5R8Ev9cZ9FOBSdxIdOmvZpb+94LtB5+BoTA+xcJUIWiyoFgK/dlsBPSiMZvUMl7BBRQ9B/b7HCbFWxhQu6I9wWfAgjAkBcKxu7vrG+1yJhEwA8EWllvY5O8GQxD7Iiwxgvuf0NeJysl9UrBuEf2PucDKewQfhhCZZL1bsanbudBw9zZEc4gST6W/7aWbye0tmREIRjOJvakI2AQR+nSlkAuNxF+g3uioijCCauyBlX3FEg2VPoVtRZ5JDrnLaFhbxYCwZ5jVTM3Tx0oHFEf2G71q3w4e6fBirEYw96lXKDEoBzi9tcVwjX8zsR9f1rLKwOk362NBSu/bmf8Zlgi/Ej7UsckT+XeLXDw2Fws1rCzpUom3myZ52Dy9kyFVWBe2ArREj4+6pWM2+svgE4glc12N1Gwyg6fnd0TU+nupsL32uHYklZVB+rSS+D7Dw0TkkI5Yl8QUGy0NEMplYin00bxbcRAECKStDmwhi2ExK11rnsSEWrSg05/A6HhiU89GmlQevMe6IeS7U1xE6dYBFyPgXQugbyCXCERzR1ALV0X8Yh/jwTASCeR8XXMZOgwzfP6AUEBkc+2PlMIHvnyY=
+  app: shielded-beach-2348
+  on:
+    repo: lonsun/richmond_trees-admin
