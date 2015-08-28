@@ -9,4 +9,8 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-RichmondTreesAdmin::Application.config.secret_key_base = '83bffbdc73c68b68f71aeb8ff08b8ca59d8eceefedbdcc2f4e860da90988aa36b572dd05fb1d7b58c70c566148f5bb57b3280a4dcb7783dcdb8160a0fb1dff0c'
+RichmondTreesAdmin::Application.config.secret_key_base = if Rails.env.development? or Rails.env.test?
+  ('x' * 30) # meets minimum requirement of 30 chars long
+else
+  ENV['SECRET_TOKEN']
+end
