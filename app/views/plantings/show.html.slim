@@ -29,6 +29,11 @@ div class="container-fluid"
       = @planting.event
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right" 
+      strong Zone
+    div class="col-xs-8 col-md-4" 
+      = @planting.parent_adoption_request.zone
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right" 
       strong Address
     div class="col-xs-8 col-md-4" 
       = @planting.parent_adoption_request.full_address

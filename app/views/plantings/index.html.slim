@@ -22,6 +22,7 @@ div class="container-fluid"
           thead
             tr
               th Planted On
+              th Zone
               th House Number
               th Street Name
               th Placement
@@ -35,6 +36,7 @@ div class="container-fluid"
             - @plantings.each do |planting|
               tr
                 td = planting.planted_on
+                td = planting.parent_adoption_request.zone
                 td = planting.parent_adoption_request.house_number
                 td = planting.parent_adoption_request.street_name
                 td = planting.placement
