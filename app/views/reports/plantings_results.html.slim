@@ -46,4 +46,5 @@ div class="container-fluid"
                     li = link_to 'Details', planting
                     li = link_to 'Add Maintenance Record', new_maintenance_record_path( :planting_id => planting.id )
                     li = link_to 'Add Note', new_note_path( :planting_id => planting.id )
+                    li = link_to 'Go To Adoption Request', adoption_request_path( :id => planting.parent_adoption_request.id )
   
