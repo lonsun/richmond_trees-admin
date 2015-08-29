@@ -9,6 +9,7 @@ div class="container-fluid"
       = bootstrap_form_tag url: 'plantings_results', method: :get,  layout: :horizontal, label_col: 'col-md-4', control_col: 'col-md-8' do |f|
         = f.date_field :planted_on_from
         = f.date_field :planted_on_to
+        = f.text_field :zone
         = f.text_field :owner_first_name
         = f.text_field :owner_last_name
         = f.text_field :house_number_gt, label: "House number >="

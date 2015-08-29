@@ -9,6 +9,7 @@ module ReportsHelper
       .where( "adoption_requests.owner_last_name ILIKE ?", wildcard_if_empty( p['owner_last_name'] ) )
       .where( "adoption_requests.street_name ILIKE ?", wildcard_if_empty( p['street_name'] ) )
       .where( "adoption_requests.zip_code ILIKE ?", wildcard_if_empty( p['zip_code'] ) )
+      .where( "adoption_requests.zone ILIKE ?", wildcard_if_empty( p['zone'] ) )
     
     # show all notes if no note search term was provided
     note_clause = "notes.note ILIKE ?"

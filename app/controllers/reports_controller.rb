@@ -36,6 +36,6 @@ class ReportsController < ApplicationController
     def plantings_report_params
       params.permit( :planted_on_from, :planted_on_to, :owner_first_name, :owner_last_name, :street_name, 
         :zip_code, { :tree_id => [] }, :last_maintenance_from, :last_maintenance_to, :include_nil_maintenance_records,
-        { :last_status_codes => [] }, :note, :stakes_removed, :house_number_gt, :house_number_lt )
+        { :last_status_codes => [] }, :note, :stakes_removed, :house_number_gt, :house_number_lt, :zone )
     end
 end
