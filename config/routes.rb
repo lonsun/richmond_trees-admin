@@ -1,4 +1,6 @@
 RichmondTreesAdmin::Application.routes.draw do
+  get 'map', :controller => 'map', :action => 'index'
+
   resources :notes, except: :edit
 
   resources :maintenance_records
