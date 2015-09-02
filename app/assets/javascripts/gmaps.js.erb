@@ -1,0 +1,31 @@
+// markers parameter should hold data appropriate to create a 
+// google marker object.  Include at least lat and lng data.
+function buildMap( markers ) { 
+  var richmond_center = { lat: 37.935759, lng: -122.347532 };
+  var tree_icon = '<%= asset_path "tree_icon_16x16.png" %>';
+  var gmarkers = []; // google marker objects
+
+  var map = new google.maps.Map( document.getElementById( 'map' ), {
+    center: richmond_center,
+    zoom: 14
+  });
+
+  function setMarkers() {
+
+    for( var i = 0; i < markers.length; i++ ) {
+      var marker = markers[i];
+      
+      gmarkers.push( new google.maps.Marker({
+        position: { lat: marker.lat, lng: marker.lng },
+        map: map,
+        icon: tree_icon
+      }));
+    }
+  }
+
+  setMarkers( map );
+}
+
+function initMap() {
+  buildMap( markers );
+}
