@@ -64,6 +64,9 @@ gem 'immigrant'
 # fix bound events problem caused by Turbolinks
 gem 'jquery-turbolinks'
 
+# geocoding utility
+gem 'geocoder'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

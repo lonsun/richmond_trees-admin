@@ -14,4 +14,19 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  # geocoder
+  Geocoder.configure( :lookup => :test )
+  Geocoder::Lookup::Test.set_default_stub(
+    [
+      {
+        'latitude'     => 12.345678,
+        'longitude'    => 98.765432,
+        'address'      => 'Richmond, CA, USA',
+        'state'        => 'California',
+        'state_code'   => 'CA',
+        'country'      => 'United States',
+        'country_code' => 'US'
+      }
+    ]
+  )
 end
