@@ -18,3 +18,4 @@ deploy:
   app: shielded-beach-2348
   on:
     repo: lonsun/richmond_trees-admin
+run: "rake db:migrate"
