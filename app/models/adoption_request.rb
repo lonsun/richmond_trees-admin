@@ -5,6 +5,11 @@ class AdoptionRequest < ActiveRecord::Base
 
   validates :house_number, :street_name, :user_id, :presence => true
 
+  geocoded_by :full_address
+
+  DEFAULT_CITY = "Richmond"
+  DEFAULT_STATE = "CA"
+
   # Use to display the text in select options when choosing an adoption request
   def text_for_html_select_option
     html = self.owner_full_name
