@@ -15,12 +15,17 @@ class AdoptionRequest < ActiveRecord::Base
     html = self.owner_full_name
     html += ' | '
     html += self.full_address
-    html
+    html.gsub( /\s\s/, ' ' )
+  end
+
+  # Get street address
+  def street_address
+    "#{ self.house_number } #{ self.street_name }"
   end
 
   # Get full address
   def full_address
-    "#{self.house_number.to_s} #{self.street_name}, #{self.city}, #{self.state}  #{self.zip_code}".strip
+    [ self.street_address, self.city, self.state, self.zip_code ].compact.join( ', ' )
   end
 
   # Get full name of owner

@@ -8,17 +8,23 @@ class AdoptionRequestTest < ActiveSupport::TestCase
 
   describe "text_for_html_select_option method" do
     it "gets the text part for the option" do
-      @adoption_request.text_for_html_select_option.must_equal "Bob Jones | 123 Happy St., Richmond, CA  94804"
+      @adoption_request.text_for_html_select_option.must_equal "Bob Jones | 123 Happy St., Richmond, CA, 94804"
     end
     
     it "should not fail on all nil values" do
-      @empty_adoption_request.text_for_html_select_option.must_equal " | , ,"
+      @empty_adoption_request.text_for_html_select_option.must_equal " | "
+    end
+  end
+
+  describe "#street_address" do
+    it "gets the full street address" do
+      @adoption_request.street_address.must_equal "123 Happy St."
     end
   end
 
   describe "full_address method" do
     it "gets the full address" do
-      @adoption_request.full_address.must_equal "123 Happy St., Richmond, CA  94804"
+      @adoption_request.full_address.must_equal "123 Happy St., Richmond, CA, 94804"
     end
   end
 
