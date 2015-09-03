@@ -6,7 +6,7 @@ class AdoptionRequest < ActiveRecord::Base
   validates :house_number, :street_name, :user_id, :presence => true
 
   geocoded_by :full_address
-  after_validation :geocode, if: lambda { |obj| !obj.full_address.nil? && obj.changed.any? { |a| a.index( /^(house_number|street_name|city|state|zip)$/ ) } }
+  after_validation :geocode, if: lambda { |obj| !obj.full_address.nil? && obj.changed.any? { |a| a.index( /^(house_number|street_name|city|state|zip_code)$/ ) } }
 
   DEFAULT_CITY = "Richmond"
   DEFAULT_STATE = "CA"

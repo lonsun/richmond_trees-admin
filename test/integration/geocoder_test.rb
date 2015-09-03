@@ -72,10 +72,50 @@ class GeocoderIntegrationTests < ActionController::TestCase
         @adoption_request.latitude.must_be_nil
       end
 
-      it "should lookup the latitude and longitude and save it if the address has changed" do
+      it "should lookup the latitude and longitude and save it if the house number has changed" do
         @adoption_request.latitude.must_be_nil 
 
         @adoption_request.house_number = 999
+        @adoption_request.changed.size.must_equal 1
+        @adoption_request.save
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the street name has changed" do
+        @adoption_request.latitude.must_be_nil 
+
+        @adoption_request.street_name = "Blardy"
+        @adoption_request.changed.size.must_equal 1
+        @adoption_request.save
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the city has changed" do
+        @adoption_request.latitude.must_be_nil 
+
+        @adoption_request.city = "No City"
+        @adoption_request.changed.size.must_equal 1
+        @adoption_request.save
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the state has changed" do
+        @adoption_request.latitude.must_be_nil 
+
+        @adoption_request.state = "No State"
+        @adoption_request.changed.size.must_equal 1
+        @adoption_request.save
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the zip code has changed" do
+        @adoption_request.latitude.must_be_nil 
+
+        @adoption_request.zip_code = 99999
         @adoption_request.changed.size.must_equal 1
         @adoption_request.save
 
@@ -92,13 +132,46 @@ class GeocoderIntegrationTests < ActionController::TestCase
         @adoption_request.latitude.must_equal nil
       end
 
-      it "should lookup the latitude and longitude and save it if the address has changed" do
+      it "should lookup the latitude and longitude and save it if the house number has changed" do
         @adoption_request.latitude.must_be_nil
 
         @adoption_request.update( { "house_number" => 999 } )
 
         @adoption_request.latitude.must_equal 12.345678
       end
+
+      it "should lookup the latitude and longitude and save it if the street name has changed" do
+        @adoption_request.latitude.must_be_nil
+
+        @adoption_request.update( { "street_name" => "Blardy" } )
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the city has changed" do
+        @adoption_request.latitude.must_be_nil
+
+        @adoption_request.update( { "city" => "No City" } )
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the state has changed" do
+        @adoption_request.latitude.must_be_nil
+
+        @adoption_request.update( { "state" => "No State" } )
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
+      it "should lookup the latitude and longitude and save it if the zip code has changed" do
+        @adoption_request.latitude.must_be_nil
+
+        @adoption_request.update( { "zip_code" => 99999 } )
+
+        @adoption_request.latitude.must_equal 12.345678
+      end
+
     end
   end
 end
