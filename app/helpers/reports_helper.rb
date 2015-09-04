@@ -42,9 +42,9 @@ module ReportsHelper
     q = q.where( last_status_code_clause )
 
 
-    q = q.group( "adoption_requests.house_number, adoption_requests.street_name, plantings.id" )
+    q = q.group( "adoption_requests.zone, adoption_requests.house_number, adoption_requests.street_name, plantings.id" )
 
-    q = q.order( "adoption_requests.street_name, adoption_requests.house_number" )
+    q = q.order( "adoption_requests.zone, adoption_requests.street_name, adoption_requests.house_number" )
 
     q
   end
