@@ -1,12 +1,8 @@
-div id="map" style="height: 600px" class="gmap"
+div class="row"
+  div class="col-xs-12"
+    div id="map" style="height: 500px; width: 760px" class="centered-col map-canvas"
 
 javascript:
-  // these are test markers and will be replaced with real data
-  var markers = [
-    { 
-      "lat": 37.947023,
-      "lng": -122.335881
-    }
-  ];
+  var markers = #{ @markers.to_json.html_safe };
 
 = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ ENV['google_maps_api_key'] }&callback=initMap"
