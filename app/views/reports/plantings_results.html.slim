@@ -19,6 +19,7 @@ div class="container-fluid"
         table class="table table-hover results-table"
           thead
             tr
+              th ID
               th Planted On
               th Zone
               th House Number
@@ -34,6 +35,7 @@ div class="container-fluid"
             - @results.each do |planting|
               tr
                 input type="hidden" name="map-coordinates" value="#{ planting.id  }|#{ planting.parent_adoption_request.latitude }|#{ planting.parent_adoption_request.longitude }"
+                td = planting.id
                 td = planting.planted_on
                 td = planting.parent_adoption_request.zone
                 td = planting.parent_adoption_request.house_number
