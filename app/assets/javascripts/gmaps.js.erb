@@ -1,31 +1,31 @@
-// markers parameter should hold data appropriate to create a 
-// google marker object.  Include at least lat and lng data.
-function buildMap( markers ) { 
-  var richmond_center = { lat: 37.935759, lng: -122.347532 };
-  var tree_icon = '<%= asset_path "tree_icon_16x16.png" %>';
-  var gmarkers = []; // google marker objects
+function GoogleMap() { 
+  this.tree_icon = '<%= asset_path "tree_icon_16x16.png" %>';
+  this.markers = [];
 
-  var map = new google.maps.Map( document.getElementById( 'map' ), {
-    center: richmond_center,
+  this.map = new google.maps.Map( document.getElementById( 'map' ), {
+    center: this.richmond_center,
     zoom: 14
   });
 
-  function setMarkers() {
-
-    for( var i = 0; i < markers.length; i++ ) {
-      var marker = markers[i];
-      
-      gmarkers.push( new google.maps.Marker({
-        position: { lat: marker.lat, lng: marker.lng },
-        map: map,
-        icon: tree_icon
-      }));
-    }
+  // markers parameter should hold data appropriate to create a 
+  // google marker object.  Include at least lat and lng data.
+  this.setMarkers = function( markers ) {
+    this.markers = markers;
   }
-
-  setMarkers( map );
 }
 
-function initMap() {
-  buildMap( markers );
+GoogleMap.prototype.richmond_center = { lat: 37.935759, lng: -122.347532 };
+
+GoogleMap.prototype.createMarkersOnMap = function() {
+  var m, gm;
+
+  for( var i = 0; i < this.markers.length; i++ ) {
+    m = this.markers[i];
+
+    gm = new google.maps.Marker({
+      position: { lat: m.lat, lng: m.lng },
+      map: this.map,
+      icon: this.tree_icon
+    });
+  }
 }
