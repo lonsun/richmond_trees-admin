@@ -1,5 +1,57 @@
+// Utility for building a relative path/url for tree icons to use on a map.
+var TreeIconPath = (function() {
+  var tip = {};
+  var asset_path = '/assets/';
+  var file_part_prefix = 'tree_icon_';
+  var file_part_suffix = '16x16.png';
+  var underscore = '_';
+  var max_trees = 10;
+
+  tip.build = function( number_of_trees ) {
+    if( number_of_trees < max_trees && number_of_trees > 0 ) {
+      return asset_path + file_part_prefix + number_of_trees + underscore + file_part_suffix;
+    }
+    else {
+      return asset_path + file_part_prefix + file_part_suffix;
+    }
+  }
+
+  return tip;
+})();
+
+// Utility for grouping a list of map markers and adding a count for each unique marker.
+var MapMarkers = (function() {
+  var mm = {}
+  var grouped_markers = [];
+  var found = false;
+
+  mm.group = function( markers ) {
+    markers.forEach(function( m ) {
+      found = grouped_markers.some(function ( gm ) {
+        if( gm.lat == m.lat && gm.lng == m.lng ) {
+          gm.count++;
+          return true;
+        } 
+      });
+
+      if( ! found ) {
+        grouped_markers.push(
+          {
+            lat: m.lat,
+            lng: m.lng,
+            count: 1
+          }
+        );
+      }
+    });
+
+    return grouped_markers;
+  }
+
+  return mm;
+})();
+
 function GoogleMap( target_element ) { 
-  this.tree_icon = '<%= asset_path "tree_icon_16x16.png" %>';
   this.markers = [];
   this.target_element = document.getElementById( target_element );
 
@@ -21,14 +73,15 @@ GoogleMap.prototype.richmond_center = { lat: 37.935759, lng: -122.347532 };
 
 GoogleMap.prototype.createMarkersOnMap = function() {
   var m, gm;
+  var markers = MapMarkers.group( this.markers );
 
-  for( var i = 0; i < this.markers.length; i++ ) {
-    m = this.markers[i];
+  for( var i = 0; i < markers.length; i++ ) {
+    m = markers[i];
 
     gm = new google.maps.Marker({
       position: { lat: m.lat, lng: m.lng },
       map: this.map,
-      icon: this.tree_icon
+      icon: TreeIconPath.build( m.count )
     });
   }
 }
