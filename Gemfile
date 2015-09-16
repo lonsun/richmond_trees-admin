@@ -67,6 +67,9 @@ gem 'jquery-turbolinks'
 # geocoding utility
 gem 'geocoder'
 
+# need to generate non-digested assets for certain files...
+gem "non-stupid-digest-assets"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

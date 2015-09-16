@@ -80,6 +80,7 @@ GEM
       minitest (~> 4.7)
       rails (>= 3.0, < 4.1)
     multi_json (1.11.0)
+    non-stupid-digest-assets (1.0.5)
     pg (0.18.2)
     polyglot (0.3.5)
     rack (1.5.3)
@@ -167,6 +168,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   minitest-spec-rails (~> 4.7)
+  non-stupid-digest-assets
   pg
   rails (= 4.0.3)
   rails_12factor
