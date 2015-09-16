@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 @initMap = ->
-  gmap = new GoogleMap
+  gmap = new GoogleMap( 'map' )
   gmap.setMarkers markers
   gmap.createMarkersOnMap()
   return

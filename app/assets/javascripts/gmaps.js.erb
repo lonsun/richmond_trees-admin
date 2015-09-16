@@ -1,14 +1,17 @@
-function GoogleMap() { 
+function GoogleMap( target_element ) { 
   this.tree_icon = '<%= asset_path "tree_icon_16x16.png" %>';
   this.markers = [];
+  this.target_element = document.getElementById( target_element );
 
-  this.map = new google.maps.Map( document.getElementById( 'map' ), {
+  this.options = {
     center: this.richmond_center,
     zoom: 14
-  });
+  }
 
-  // markers parameter should hold data appropriate to create a 
-  // google marker object.  Include at least lat and lng data.
+  this.map = new google.maps.Map( this.target_element, this.options );
+
+  // markers parameter should be an array of objects.  Each
+  // object should include at least "lat" and "lng" properties.
   this.setMarkers = function( markers ) {
     this.markers = markers;
   }
