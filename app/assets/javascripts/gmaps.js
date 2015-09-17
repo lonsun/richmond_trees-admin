@@ -22,10 +22,11 @@ var TreeIconPath = (function() {
 // Utility for grouping a list of map markers and adding a count for each unique marker.
 var MapMarkers = (function() {
   var mm = {}
-  var grouped_markers = [];
-  var found = false;
 
   mm.group = function( markers ) {
+    var found;
+    var grouped_markers = [];
+
     markers.forEach(function( m ) {
       found = grouped_markers.some(function ( gm ) {
         if( gm.lat == m.lat && gm.lng == m.lng ) {
