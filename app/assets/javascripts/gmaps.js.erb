@@ -51,25 +51,27 @@ var MapMarkers = (function() {
   return mm;
 })();
 
-function GoogleMap( target_element ) { 
+function GoogleMap( $, target_element, options ) { 
+  var options = options || {};
+
   this.markers = [];
   this.target_element = document.getElementById( target_element );
 
-  this.options = {
-    center: this.richmond_center,
-    zoom: 14
-  }
+  this.options = $.extend( {}, this.default_options, options );
 
   this.map = new google.maps.Map( this.target_element, this.options );
 
-  // markers parameter should be an array of objects.  Each
+  // markers parameter should be an ariray of objects.  Each
   // object should include at least "lat" and "lng" properties.
   this.setMarkers = function( markers ) {
     this.markers = markers;
   }
 }
 
-GoogleMap.prototype.richmond_center = { lat: 37.935759, lng: -122.347532 };
+GoogleMap.prototype.default_options = { 
+  center: { lat: 37.935759, lng: -122.347532 },
+  zoom: 14
+}
 
 GoogleMap.prototype.createMarkersOnMap = function() {
   var m, gm;
