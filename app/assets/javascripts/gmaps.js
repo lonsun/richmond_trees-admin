@@ -23,14 +23,31 @@ var TreeIconPath = (function() {
 var MapMarkers = (function() {
   var mm = {}
 
+  function format_tree_description( marker ) {
+    var tree_description;
+
+    if( marker.hasOwnProperty( "tree" ) ) {
+      var placement = marker.tree_placement || "";
+      tree_description = marker.tree + "(" + marker.tree_placement + ")";
+    } 
+    else {
+      tree_description = "";
+    }
+
+    return tree_description;
+  }
+
   mm.group = function( markers ) {
-    var found;
+    var found, tree_description;
     var grouped_markers = [];
 
     markers.forEach(function( m ) {
+      tree_description = format_tree_description( m );
+
       found = grouped_markers.some(function ( gm ) {
         if( gm.lat == m.lat && gm.lng == m.lng ) {
           gm.count++;
+          gm.trees.push( tree_description );
           return true;
         } 
       });
@@ -40,7 +57,9 @@ var MapMarkers = (function() {
           {
             lat: m.lat,
             lng: m.lng,
-            count: 1
+            count: 1,
+            trees: [ tree_description ],
+            street_address: m.street_address
           }
         );
       }
@@ -50,6 +69,25 @@ var MapMarkers = (function() {
   }
 
   return mm;
+})();
+
+// Utility for formatting the info for each marker's info window
+var InfoWindow = (function() {
+  var iw = {}
+
+  iw.format = function( street_address, trees_array ) {
+    var content = street_address + ":<br /><ul>";
+
+    trees_array.forEach(function( item ) {
+      content += "<li>" + item;
+    });
+
+    content += "</ul>";
+
+    return content;
+  }
+
+  return iw;
 })();
 
 function GoogleMap( $, target_element, options ) { 
@@ -66,7 +104,7 @@ function GoogleMap( $, target_element, options ) {
   // object should include at least "lat" and "lng" properties.
   this.setMarkers = function( markers ) {
     this.markers = markers;
-  }
+  };
 }
 
 GoogleMap.prototype.default_options = { 
@@ -75,16 +113,28 @@ GoogleMap.prototype.default_options = {
 }
 
 GoogleMap.prototype.createMarkersOnMap = function() {
-  var m, gm;
   var markers = MapMarkers.group( this.markers );
 
   for( var i = 0; i < markers.length; i++ ) {
-    m = markers[i];
+    var m = markers[i];
 
-    gm = new google.maps.Marker({
+    var content = InfoWindow.format( m.street_address, m.trees );
+
+    var marker_params = {
       position: { lat: m.lat, lng: m.lng },
       map: this.map,
       icon: TreeIconPath.build( m.count )
-    });
+    }
+    
+    var gm = new google.maps.Marker( marker_params );
+    
+    (function( gm, content ) {
+      var iw = new google.maps.InfoWindow( {} );
+      
+      gm.addListener( 'click', function() {
+        iw.setContent( content );
+        iw.open( gm.getMap(), gm );
+      });
+    })( gm, content );
   }
 }

@@ -34,7 +34,7 @@ div class="container-fluid"
           tbody
             - @results.each do |planting|
               tr
-                input type="hidden" name="map-coordinates" value="#{ planting.id  }|#{ planting.parent_adoption_request.latitude }|#{ planting.parent_adoption_request.longitude }"
+                input type="hidden" name="map-coordinates" value="#{ planting.id  }|#{ planting.parent_adoption_request.latitude }|#{ planting.parent_adoption_request.longitude }|#{ planting.tree_species.common_name }|#{ planting.placement }|#{ planting.house_number } #{ planting.street_name }"
                 td = planting.id
                 td = planting.planted_on
                 td = planting.parent_adoption_request.zone

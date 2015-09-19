@@ -10,12 +10,18 @@ $( document ).on("ready", function() {
       var id = parseInt( data_parts[0] );
       var lat = parseFloat( data_parts[1] );
       var lng = parseFloat(data_parts[2] );
+      var tree = data_parts[3];
+      var placement = data_parts[4];
+      var street_address = data_parts[5];
 
       map_data.push(
         {
           "id": id,
           "lat": lat,
-          "lng": lng
+          "lng": lng,
+          "tree": tree,
+          "tree_placement": placement,
+          "street_address": street_address
         }
       );
     });
