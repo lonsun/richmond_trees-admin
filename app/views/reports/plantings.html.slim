@@ -33,6 +33,7 @@ div class="container-fluid"
                   = " #{ r.first } - #{ r.last.capitalize }"
         = f.text_field :note
         = f.select :stakes_removed, options_for_select( [ [ "Both", "ignore" ], [ "Yes", "yes" ], [ "No", "no" ] ] )
+        = f.select :initial_checks_received, options_for_select( [ [ "Both", "ignore" ], [ "Yes", "yes" ], [ "No", "no" ] ], "no" )
         div class="form-group"
           div class="col-md-4"
           div class="col-md-8"

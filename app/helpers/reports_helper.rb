@@ -27,6 +27,7 @@ module ReportsHelper
     q = q.where( "adoption_requests.house_number >= ?", p['house_number_gt'].to_i ) unless p['house_number_gt'].empty?
     q = q.where( "adoption_requests.house_number <= ?", p['house_number_lt'].to_i ) unless p['house_number_lt'].empty?
     q = q.where( plantings: { stakes_removed: p['stakes_removed'] } ) unless p['stakes_removed'] == 'ignore'
+    q = q.where( plantings: { initial_checks_received: p['initial_checks_received'] } ) unless p['initial_checks_received'] == 'ignore'
     q = q.where( plantings: { tree_id: p['tree_id'] } ) unless p['tree_id'].empty?
 
     if p['last_status_codes'].empty?
