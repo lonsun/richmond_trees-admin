@@ -14,4 +14,5 @@ div class="row"
       = f.text_field :placement
       = f.text_field :plant_space_width
       = f.check_box :stakes_removed
+      = f.check_box :initial_checks_received if action_name == "edit"
       = f.submit

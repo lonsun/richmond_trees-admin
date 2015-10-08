@@ -93,6 +93,7 @@ class PlantingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def planting_params
-      params.require(:planting).permit(:adoption_request_id, :tree_id, :planted_on, :event, :placement, :plant_space_width, :stakes_removed, :user_id)
+      params.require(:planting).permit(:adoption_request_id, :tree_id, :planted_on, :event, :placement,
+                                       :plant_space_width, :stakes_removed, :user_id, :initial_checks_received)
     end
 end
