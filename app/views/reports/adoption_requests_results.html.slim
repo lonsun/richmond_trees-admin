@@ -5,7 +5,7 @@ div class="container-fluid"
         | Adoption Request Report Results
       medium
         | (&nbsp;
-        = @results.count.size
+        = @results.count
         | &nbsp;total&nbsp;)
     div class="col-xs-12 text-right"
       = link_to reports_adoption_requests_results_path( format: :csv, params: request.query_parameters ) do
