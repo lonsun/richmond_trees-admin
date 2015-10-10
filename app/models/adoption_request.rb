@@ -3,7 +3,7 @@ class AdoptionRequest < ActiveRecord::Base
   belongs_to :tree_species, :class_name => "Tree", :foreign_key => "tree_id"
   has_many :plantings, dependent: :destroy
 
-  validates :house_number, :street_name, :user_id, :presence => true
+  validates :received_on, :house_number, :street_name, :user_id, :presence => true
 
   geocoded_by :full_address
   after_validation :geocode, if: lambda { |obj| !obj.full_address.nil? && obj.changed.any? { |a| a.index( /^(house_number|street_name|city|state|zip_code)$/ ) } }

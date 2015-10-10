@@ -24,6 +24,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
   test "should create adoption_request" do
     assert_difference('AdoptionRequest.count') do
       post :create, adoption_request: { 
+        "received_on" => "2015-01-01",
         "owner_first_name" => @adoption_request.owner_first_name, 
         "house_number" => @adoption_request.house_number, 
         "street_name" => @adoption_request.street_name,
@@ -45,6 +46,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
 
   test "should update adoption_request" do
     patch :update, id: @adoption_request, adoption_request: { 
+      "received_on" => "2015-01-01",
       "owner_first_name" => @adoption_request.owner_first_name, 
       "house_number" => @adoption_request.house_number, 
       "street_name" => @adoption_request.street_name,
