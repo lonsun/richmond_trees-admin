@@ -74,11 +74,9 @@ class PlantingTest < ActiveSupport::TestCase
     it "returns the relation in csv format" do
       @plantings = Planting.all
       
-      # simple test
+      # simple test - just count the number of lines
       output = @plantings.to_csv
-      
-      output.must_be_kind_of String
-      output.wont_be_empty
+      output.count("\n").must_equal @plantings.count+1
     end
   end
 end

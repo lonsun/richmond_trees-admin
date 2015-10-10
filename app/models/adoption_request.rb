@@ -33,4 +33,17 @@ class AdoptionRequest < ActiveRecord::Base
   def owner_full_name
     "#{self.owner_first_name} #{self.owner_last_name}".strip
   end
+
+  def self.to_csv
+    attributes = %w[ id received_on house_number street_name zip_code completed ]
+    
+    CSV.generate( headers: true ) do |csv|
+      csv << attributes
+
+      all.each do |ar|
+        csv << attributes.map{ |attr| ar.send( attr ) }
+      end
+    end
+  end
+
 end

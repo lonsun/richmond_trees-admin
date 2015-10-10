@@ -49,4 +49,14 @@ class AdoptionRequestTest < ActiveSupport::TestCase
       @adoption_request.owner_full_name.must_equal ""
     end
   end
+
+  describe ".to_csv" do
+    it "returns the relation in csv format" do
+      @ar = AdoptionRequest.all
+      
+      # simple test - just count the number of lines
+      output = @ar.to_csv
+      output.count("\n").must_equal @ar.count+1
+    end
+  end
 end
