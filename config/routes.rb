@@ -26,6 +26,8 @@ RichmondTreesAdmin::Application.routes.draw do
   # reports
   get 'reports/plantings', :controller => 'reports'
   get 'reports/plantings_results', :controller => 'reports'
+  get 'reports/adoption_requests', :controller => 'reports'
+  get 'reports/adoption_requests_results', :controller => 'reports'
 
   # password resets
   resources :password_resets, :only => [ :new, :create, :edit, :update ]

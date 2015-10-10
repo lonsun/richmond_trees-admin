@@ -49,6 +49,24 @@ module ReportsHelper
 
     q
   end
+  
+  # Plantings report
+  def search_adoption_requests( p )
+    q = AdoptionRequest
+      .where( received_on: Date.parse( p['received_on_from'] )..Date.parse( p['received_on_to'] ) )
+      .where( "street_name ILIKE ?", wildcard_if_empty( p['street_name'] ) )
+      .where( "zip_code ILIKE ?", wildcard_if_empty( p['zip_code'] ) )
+      .where( "zone ILIKE ?", wildcard_if_empty( p['zone'] ) )
+    
+    q = q.where( "house_number >= ?", p['house_number_gt'].to_i ) unless p['house_number_gt'].empty?
+    q = q.where( "house_number <= ?", p['house_number_lt'].to_i ) unless p['house_number_lt'].empty?
+    q = q.where( completed: p['completed'] ) unless p['completed'] == 'ignore'
+
+    q = q.order( "zone, street_name, house_number" )
+
+    q
+  end
+
 
   # empty search terms should not filter results
   def wildcard_if_empty( var )
