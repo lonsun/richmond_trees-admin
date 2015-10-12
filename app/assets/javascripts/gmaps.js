@@ -1,5 +1,5 @@
-// Utility for building a relative path/url for tree icons to use on a map.
-var TreeIconPath = (function() {
+// Get the correct icon asset path for tree icons
+function get_tree_icon_path( number_of_trees ) {
   var tip = {};
   var asset_path = '/assets/';
   var file_part_prefix = 'tree_icon_';
@@ -7,20 +7,16 @@ var TreeIconPath = (function() {
   var underscore = '_';
   var max_trees = 10;
 
-  tip.build = function( number_of_trees ) {
-    if( number_of_trees < max_trees && number_of_trees > 0 ) {
-      return asset_path + file_part_prefix + number_of_trees + underscore + file_part_suffix;
-    }
-    else {
-      return asset_path + file_part_prefix + file_part_suffix;
-    }
+  if( number_of_trees < max_trees && number_of_trees > 0 ) {
+    return asset_path + file_part_prefix + number_of_trees + underscore + file_part_suffix;
   }
-
-  return tip;
-})();
+  else {
+    return asset_path + file_part_prefix + file_part_suffix;
+  }
+}
 
 // Utility for grouping a list of map markers and adding a count for each unique marker.
-var MapMarkers = (function() {
+var PlantingMapMarkers = (function() {
   var mm = {}
 
   function format_tree_description( marker ) {
@@ -71,37 +67,33 @@ var MapMarkers = (function() {
   return mm;
 })();
 
-// Utility for formatting the info for each marker's info window
-var InfoWindow = (function() {
-  var iw = {}
+// Format the content for for each planting marker's info window
+function format_planting_info_content( street_address, trees_array ) {
+  var content = street_address + ":<br /><ul>";
 
-  iw.format = function( street_address, trees_array ) {
-    var content = street_address + ":<br /><ul>";
+  trees_array.forEach(function( item ) {
+    content += "<li>" + item;
+  });
 
-    trees_array.forEach(function( item ) {
-      content += "<li>" + item;
-    });
+  content += "</ul>";
 
-    content += "</ul>";
-
-    return content;
-  }
-
-  return iw;
-})();
+  return content;
+}
 
 function GoogleMap( $, target_element, options ) { 
   var options = options || {};
 
-  this.markers = [];
+  this.markers = []; //raw markers data
   this.target_element = document.getElementById( target_element );
 
   this.options = $.extend( {}, this.default_options, options );
 
   this.map = new google.maps.Map( this.target_element, this.options );
 
-  // markers parameter should be an ariray of objects.  Each
-  // object should include at least "lat" and "lng" properties.
+  // markers parameter should be an array of objects.  The first
+  // item in the array indicates the type of markers that it holds.
+  // Each subsequent object should include at least "lat" and "lng"
+  // properties.
   this.setMarkers = function( markers ) {
     this.markers = markers;
   };
@@ -112,20 +104,39 @@ GoogleMap.prototype.default_options = {
   zoom: 14
 }
 
+// TODO: This function needs to be factored down.
 GoogleMap.prototype.createMarkersOnMap = function() {
-  var markers = MapMarkers.group( this.markers );
+  var markers_data;
 
-  for( var i = 0; i < markers.length; i++ ) {
-    var m = markers[i];
+  // The first item in the list is the map type
+  var map_type = this.markers.shift();
+  
+  if(map_type == "planting") {
+    markers_data = PlantingMapMarkers.group( this.markers );
+  }
+  else {
+    markers_data = this.markers;
+  }
 
-    var content = InfoWindow.format( m.street_address, m.trees );
+  for( var i = 0; i < markers_data.length; i++ ) {
+    var m = markers_data[i];
+
+    if(map_type == "planting") {
+      var content = format_planting_info_content( m.street_address, m.trees );
+    }
+    else {
+      var content =  m.street_address + "<br />Received on: " + m.received_on; 
+    }
 
     var marker_params = {
       position: { lat: m.lat, lng: m.lng },
       map: this.map,
-      icon: TreeIconPath.build( m.count )
     }
-    
+
+    if(map_type == "planting") {
+      marker_params.icon = get_tree_icon_path( m.count );
+    }
+
     var gm = new google.maps.Marker( marker_params );
     
     (function( gm, content ) {
