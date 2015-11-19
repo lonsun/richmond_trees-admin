@@ -64,6 +64,6 @@ class ReportsController < ApplicationController
 
     def adoption_requests_report_params
       params.permit( :received_on_from, :received_on_to, :zone, :house_number_gt, :house_number_lt,
-                    :street_name, :zip_code, :completed )
+                    :street_name, :zip_code, :completed, :include_nil_received_on )
     end
 end

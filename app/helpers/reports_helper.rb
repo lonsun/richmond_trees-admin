@@ -53,10 +53,16 @@ module ReportsHelper
   # Plantings report
   def search_adoption_requests( p )
     q = AdoptionRequest
-      .where( received_on: Date.parse( p['received_on_from'] )..Date.parse( p['received_on_to'] ) )
       .where( "street_name ILIKE ?", wildcard_if_empty( p['street_name'] ) )
       .where( "zip_code ILIKE ?", wildcard_if_empty( p['zip_code'] ) )
       .where( "zone ILIKE ?", wildcard_if_empty( p['zone'] ) )
+
+    # due to legacy data, received on dates can be nil or have a date...
+    received_on_clause = '("adoption_requests"."received_on" BETWEEN \'' + p['received_on_from'] + '\' AND \'' + p['received_on_to'] + '\' )'
+    if p['include_nil_received_on'] == 'yes'     
+      received_on_clause += ' OR ( "adoption_requests"."received_on" is null )'
+    end
+    q = q.where( received_on_clause )
     
     q = q.where( "house_number >= ?", p['house_number_gt'].to_i ) unless p['house_number_gt'].empty?
     q = q.where( "house_number <= ?", p['house_number_lt'].to_i ) unless p['house_number_lt'].empty?
