@@ -13,9 +13,9 @@ class AdoptionRequest < ActiveRecord::Base
 
   # Use to display the text in select options when choosing an adoption request
   def text_for_html_select_option
-    html = self.owner_full_name
+    html = self.full_address
     html += ' | '
-    html += self.full_address
+    html += self.owner_full_name
     html.gsub( /\s\s/, ' ' )
   end
 
@@ -36,7 +36,7 @@ class AdoptionRequest < ActiveRecord::Base
 
   def self.to_csv
     attributes = %w[ id received_on house_number street_name zip_code completed ]
-    
+
     CSV.generate( headers: true ) do |csv|
       csv << attributes
 

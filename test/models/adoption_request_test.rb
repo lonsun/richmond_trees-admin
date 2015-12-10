@@ -8,9 +8,9 @@ class AdoptionRequestTest < ActiveSupport::TestCase
 
   describe "text_for_html_select_option method" do
     it "gets the text part for the option" do
-      @adoption_request.text_for_html_select_option.must_equal "Bob Jones | 123 Happy St., Richmond, CA, 94804"
+      @adoption_request.text_for_html_select_option.must_equal "123 Happy St., Richmond, CA, 94804 | Bob Jones"
     end
-    
+
     it "should not fail on all nil values" do
       @empty_adoption_request.text_for_html_select_option.must_equal " | "
     end
@@ -53,7 +53,7 @@ class AdoptionRequestTest < ActiveSupport::TestCase
   describe ".to_csv" do
     it "returns the relation in csv format" do
       @ar = AdoptionRequest.all
-      
+
       # simple test - just count the number of lines
       output = @ar.to_csv
       output.count("\n").must_equal @ar.count+1
