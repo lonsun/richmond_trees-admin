@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008043531) do
+ActiveRecord::Schema.define(version: 20151219054618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,13 @@ ActiveRecord::Schema.define(version: 20151008043531) do
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", using: :btree
+
+  create_table "zones", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   add_foreign_key "adoption_requests", "trees", name: "adoption_requests_tree_id_fk"
   add_foreign_key "adoption_requests", "users", name: "adoption_requests_user_id_fk"

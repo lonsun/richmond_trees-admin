@@ -1,0 +1,30 @@
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-9"
+      h2 class="header-inline"
+        | Zone Details
+      = render partial: 'shared/back_to_listing'
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        medium
+          | (
+          = link_to 'Edit', edit_zone_path(@zone)
+          | &nbsp;|&nbsp;
+          = link_to 'Delete', @zone, data: {:confirm => 'Are you sure?'}, :method => :delete
+          |  )
+  br
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"
+      strong ID
+    div class="col-xs-8 col-md-4"
+      = @zone.id
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"
+      strong Name
+    div class="col-xs-8 col-md-4"
+      = @zone.name
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"
+      strong Description
+    div class="col-xs-8 col-md-4"
+      = @zone.description
