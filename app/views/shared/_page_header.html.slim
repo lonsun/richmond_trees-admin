@@ -7,7 +7,7 @@ nav class="navbar navbar-default"
         span class="icon-bar"
         span class="icon-bar"
         span class="icon-bar"
-      = link_to image_tag("rt_logo_web_header.png", :alt => "Richmond Trees Logo", height: "50px"), home_path, class: "navbar-brand" 
+      = link_to image_tag("rt_logo_web_header.png", :alt => "Richmond Trees Logo", height: "50px"), home_path, class: "navbar-brand"
     div class="collapse navbar-collapse" id="navlinks"
       ul class="nav navbar-nav navbar-right"
         li class=(controller == 'homepage' ? 'active' : '')
@@ -18,11 +18,13 @@ nav class="navbar navbar-default"
           = link_to "Plantings", plantings_path
         li class=(controller == 'trees' ? 'active' : '')
           = link_to "Trees", trees_path
+        li class=(controller == 'zones' ? 'active' : '')
+          = link_to "Zones", zones_path
         li class=(controller == 'users' ? 'active' : '')
           = link_to "Users", users_path
         li class=(controller == 'reports' ? 'active dropdown reports-nav-link' : 'dropdown reports-nav-link')
           a class="dropdown-toggle" data-toggle="dropdown"
-            | Reports 
+            | Reports
             span class="caret"
           ul class="dropdown-menu"
             li
@@ -30,6 +32,6 @@ nav class="navbar navbar-default"
             li
               = link_to "Adoption Requests Report", reports_adoption_requests_path
         li
-          = link_to(logout_path) do 
+          = link_to(logout_path) do
             span class="glyphicon glyphicon-log-out logout-icon" aria-hidden="true"
 /! page header end
