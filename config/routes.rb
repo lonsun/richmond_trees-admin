@@ -1,4 +1,6 @@
 RichmondTreesAdmin::Application.routes.draw do
+  resources :zones
+
   post 'map', :controller => 'map', :action => 'index'
 
   resources :notes, except: :edit

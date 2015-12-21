@@ -1,0 +1,39 @@
+div class="container-fluid"
+  div class="row"
+    div class="col-xs-8 col-md-9"
+      h2 class="header-inline"
+        | Zones
+      medium
+        | (&nbsp;
+        = @zones.count
+        | &nbsp;total&nbsp;)
+    div class="col-xs-4 col-md-3"
+      div class="text-right"
+        | (&nbsp;
+        = link_to 'Add New Zone', new_zone_path, class: "text-right"
+        | &nbsp;)
+    div class="col-xs-12 text-right"
+      = link_to zones_path( format: :csv ) do
+        button class="btn btn-default" Export to CSV
+  div class="row"
+    div class="col-xs-12"
+      div class="table-responsive"
+        table class="table table-hover"
+          thead
+            tr
+              th Id
+              th Name
+              th Description
+
+          tbody
+            - @zones.each do |zone|
+              tr
+                td = zone.id
+                td = zone.name
+                td = zone.description
+                td
+                  ul
+                    li = link_to 'Details', zone
+                    li = link_to 'Edit', edit_zone_path(zone)
+                    li = link_to 'Delete', zone, data: {:confirm => 'Are you sure?'}, :method => :delete
+
