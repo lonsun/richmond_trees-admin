@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219054618) do
+ActiveRecord::Schema.define(version: 20151221064132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,9 +46,11 @@ ActiveRecord::Schema.define(version: 20151219054618) do
     t.string   "zone",                                         default: "", null: false
     t.decimal  "latitude",            precision: 10, scale: 6
     t.decimal  "longitude",           precision: 10, scale: 6
+    t.integer  "zone_id"
   end
 
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree
+  add_index "adoption_requests", ["zone_id"], name: "index_adoption_requests_on_zone_id", using: :btree
 
   create_table "maintenance_records", force: true do |t|
     t.string   "status_code"
@@ -146,10 +148,14 @@ ActiveRecord::Schema.define(version: 20151219054618) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "zones", ["user_id"], name: "index_zones_on_user_id", using: :btree
 
   add_foreign_key "adoption_requests", "trees", name: "adoption_requests_tree_id_fk"
   add_foreign_key "adoption_requests", "users", name: "adoption_requests_user_id_fk"
+  add_foreign_key "adoption_requests", "zones", name: "adoption_requests_zone_id_fk"
 
   add_foreign_key "maintenance_records", "plantings", name: "maintenance_records_planting_id_fk", dependent: :delete
   add_foreign_key "maintenance_records", "users", name: "maintenance_records_user_id_fk"
@@ -162,5 +168,7 @@ ActiveRecord::Schema.define(version: 20151219054618) do
   add_foreign_key "plantings", "users", name: "plantings_user_id_fk"
 
   add_foreign_key "trees", "users", name: "trees_user_id_fk"
+
+  add_foreign_key "zones", "users", name: "zones_user_id_fk"
 
 end

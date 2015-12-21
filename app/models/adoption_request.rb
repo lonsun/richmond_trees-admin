@@ -1,6 +1,7 @@
 class AdoptionRequest < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => "user_id"
   belongs_to :tree_species, :class_name => "Tree", :foreign_key => "tree_id"
+  belongs_to :zone
   has_many :plantings, dependent: :destroy
 
   validates :received_on, :house_number, :street_name, :user_id, :presence => true
