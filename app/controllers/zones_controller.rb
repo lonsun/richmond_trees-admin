@@ -30,6 +30,8 @@ class ZonesController < ApplicationController
   def create
     @zone = Zone.new(zone_params)
 
+    @zone.user_id = current_user.id
+
     respond_to do |format|
       if @zone.save
         format.html { redirect_to @zone, notice: 'Zone was successfully created.' }
