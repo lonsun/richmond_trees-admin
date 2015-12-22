@@ -13,7 +13,7 @@ div class="row"
       = f.text_field :city, :value => AdoptionRequest::DEFAULT_CITY
       = f.text_field :state, :value => AdoptionRequest::DEFAULT_STATE
       = f.text_field :zip_code
-      = f.select :zone_id, Zone.all.collect { |z| [ z.name, z.id ] }, { label: "Zone" }
+      = f.select :zone_id, Zone.all.collect { |z| [ z.name, z.id ] }, { label: "Zone", include_blank: true }
       = f.text_field :owner_first_name
       = f.text_field :owner_last_name
       = f.email_field :owner_email

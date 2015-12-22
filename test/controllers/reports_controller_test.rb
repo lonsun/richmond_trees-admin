@@ -19,7 +19,8 @@ class ReportsControllerTest < ActionController::TestCase
       "include_nil_maintenance_records" => "yes",
       "house_number_gt" => "",
       "house_number_lt" => "",
-      "stakes_removed" => "ignore"
+      "stakes_removed" => "ignore",
+      "zone_ids" => []
     }
 
     get 'plantings_results', params
@@ -32,4 +33,12 @@ class ReportsControllerTest < ActionController::TestCase
     assert_equal @controller.action_name, 'plantings'
     assert_response :success
   end
+
+  it "should route to adoption requests report" do
+    get 'adoption_requests'
+    assert_equal @controller.controller_name, 'reports'
+    assert_equal @controller.action_name, 'adoption_requests'
+    assert_response :success
+  end
+
 end

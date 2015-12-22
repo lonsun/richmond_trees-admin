@@ -1,6 +1,6 @@
 div class="container-fluid"
   div class="row"
-    div class="col-xs-8 col-md-9" 
+    div class="col-xs-8 col-md-9"
       h2 class="header-inline"
         | Plantings Report Results
       medium
@@ -9,7 +9,7 @@ div class="container-fluid"
         | &nbsp;total&nbsp;)
     div class="col-xs-12 text-right"
       = link_to reports_plantings_results_path( format: :csv, params: request.query_parameters ) do
-          button class="btn btn-default" Export to CSV  
+          button class="btn btn-default" Export to CSV
       | &nbsp;
       = link_to "#", :id => "plantings-results-map-action", :target => "_blank" do
           button class="btn btn-default" Map Results
@@ -37,14 +37,14 @@ div class="container-fluid"
                 input type="hidden" name="map-coordinates" value="#{ planting.id  }|#{ planting.parent_adoption_request.latitude }|#{ planting.parent_adoption_request.longitude }|#{ planting.tree_species.common_name }|#{ planting.placement }|#{ planting.house_number } #{ planting.street_name }"
                 td = planting.id
                 td = planting.planted_on
-                td = planting.parent_adoption_request.zone
+                td = planting.parent_adoption_request.zone.name unless planting.parent_adoption_request.zone.nil?
                 td = planting.parent_adoption_request.house_number
                 td = planting.parent_adoption_request.street_name
                 td = planting.placement
                 td = planting.tree_species.common_name
                 td = planting.last_maintenance_date
                 td = planting.last_status_code
-                td 
+                td
                   = render partial: "shared/note_content", locals: { planting: planting}
                 td
                   ul
@@ -52,4 +52,4 @@ div class="container-fluid"
                     li = link_to 'Add Maintenance Record', new_maintenance_record_path( :planting_id => planting.id )
                     li = link_to 'Add Note', new_note_path( :planting_id => planting.id )
                     li = link_to 'Go To Adoption Request', adoption_request_path( :id => planting.parent_adoption_request.id )
-  
+

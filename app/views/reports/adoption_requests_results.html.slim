@@ -1,6 +1,6 @@
 div class="container-fluid"
   div class="row"
-    div class="col-xs-8 col-md-9" 
+    div class="col-xs-8 col-md-9"
       h2 class="header-inline"
         | Adoption Request Report Results
       medium
@@ -9,7 +9,7 @@ div class="container-fluid"
         | &nbsp;total&nbsp;)
     div class="col-xs-12 text-right"
       = link_to reports_adoption_requests_results_path( format: :csv, params: request.query_parameters ) do
-          button class="btn btn-default" Export to CSV  
+          button class="btn btn-default" Export to CSV
       | &nbsp;
       = link_to "#", :id => "adoption-request-results-map-action", :target => "_blank" do
           button class="btn btn-default" Map Results
@@ -33,7 +33,7 @@ div class="container-fluid"
                 input type="hidden" name="map-coordinates" value="#{ adoption_request.id  }|#{ adoption_request.latitude }|#{ adoption_request.longitude }|#{ adoption_request.house_number } #{ adoption_request.street_name }|#{ adoption_request.received_on }"
                 td = adoption_request.id
                 td = adoption_request.received_on
-                td = adoption_request.zone
+                td = adoption_request.zone.name unless adoption_request.zone.nil?
                 td = adoption_request.house_number
                 td = adoption_request.street_name
                 td = adoption_request.zip_code
@@ -41,4 +41,4 @@ div class="container-fluid"
                 td
                   ul
                     li = link_to 'Details', adoption_request
-  
+
