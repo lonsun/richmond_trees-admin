@@ -45,7 +45,7 @@ class ZonesControllerTest < ActionController::TestCase
 
   test "should destroy zone" do
     assert_difference('Zone.count', -1) do
-      delete :destroy, id: @zone
+      delete :destroy, id: zones(:two)
     end
 
     assert_redirected_to zones_path

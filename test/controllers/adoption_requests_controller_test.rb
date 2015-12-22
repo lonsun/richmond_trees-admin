@@ -5,7 +5,7 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
     # authenticate
     activate_authlogic
     UserSession.create(users(:testuser1))
-    
+
     @adoption_request = adoption_requests(:one)
     @user = users(:testuser1)
   end
@@ -23,10 +23,10 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
 
   test "should create adoption_request" do
     assert_difference('AdoptionRequest.count') do
-      post :create, adoption_request: { 
+      post :create, adoption_request: {
         "received_on" => "2015-01-01",
-        "owner_first_name" => @adoption_request.owner_first_name, 
-        "house_number" => @adoption_request.house_number, 
+        "owner_first_name" => @adoption_request.owner_first_name,
+        "house_number" => @adoption_request.house_number,
         "street_name" => @adoption_request.street_name,
         user_id: @user.id }
     end
@@ -39,16 +39,22 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show adoption_request with nil zone" do
+    get :show, id: adoption_requests(:empty)
+    assert_response :success
+  end
+
+
   test "should get edit" do
     get :edit, id: @adoption_request
     assert_response :success
   end
 
   test "should update adoption_request" do
-    patch :update, id: @adoption_request, adoption_request: { 
+    patch :update, id: @adoption_request, adoption_request: {
       "received_on" => "2015-01-01",
-      "owner_first_name" => @adoption_request.owner_first_name, 
-      "house_number" => @adoption_request.house_number, 
+      "owner_first_name" => @adoption_request.owner_first_name,
+      "house_number" => @adoption_request.house_number,
       "street_name" => @adoption_request.street_name,
       :user_id => @user.id }
     assert_redirected_to adoption_request_path(assigns(:adoption_request))

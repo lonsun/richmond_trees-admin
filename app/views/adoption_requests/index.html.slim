@@ -1,6 +1,6 @@
 div class="container-fluid"
   div class="row"
-    div class="col-xs-8 col-md-9" 
+    div class="col-xs-8 col-md-9"
       h2 class="header-inline"
         | Adoption Requests
       medium
@@ -44,7 +44,7 @@ div class="container-fluid"
                 td = adoption_request.received_on
                 td = adoption_request.house_number
                 td = adoption_request.street_name
-                td = adoption_request.zone
+                td = adoption_request.zone.name unless adoption_request.zone.nil?
                 td = adoption_request.owner_full_name
                 td = adoption_request.owner_phone
                 td = adoption_request.owner_email
@@ -53,5 +53,5 @@ div class="container-fluid"
                 td = adoption_request.form_sent_to_cor_on
                 td = adoption_request.room_for_tree
                 td = adoption_request.note
-                td 
+                td
                   = link_to 'Details', adoption_request

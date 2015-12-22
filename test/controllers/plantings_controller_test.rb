@@ -29,8 +29,8 @@ class PlantingsControllerTest < ActionController::TestCase
 
   test "should create planting" do
     assert_difference('Planting.count') do
-      post :create, planting: { adoption_request_id: @planting.adoption_request_id, 
-        tree_id: @planting.tree_id, 
+      post :create, planting: { adoption_request_id: @planting.adoption_request_id,
+        tree_id: @planting.tree_id,
         plant_space_width: @planting.plant_space_width,
         user_id: @user.id,
         planted_on: @planting.planted_on }
@@ -44,14 +44,19 @@ class PlantingsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show planting with nil zone in adoption request" do
+    get :show, id: plantings(:two)
+    assert_response :success
+  end
+
   test "should get edit" do
     get :edit, id: @planting
     assert_response :success
   end
 
   test "should update planting" do
-    patch :update, id: @planting, planting: { adoption_request_id: @planting.adoption_request_id, 
-      tree_id: @planting.tree_id, 
+    patch :update, id: @planting, planting: { adoption_request_id: @planting.adoption_request_id,
+      tree_id: @planting.tree_id,
       plant_space_width: @planting.plant_space_width,
       user_id: @user.id,
       planted_on: @planting.planted_on }

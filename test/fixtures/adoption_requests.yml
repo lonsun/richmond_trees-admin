@@ -16,16 +16,18 @@ one:
   owner_email: "bob@jones.com"
   owner_phone: "123-123-1234"
   user_id: 1
-  
+  zone_id: 1
+
 empty:
   id: 2
-  house_number: 
-  street_name: 
-  city: 
+  house_number:
+  street_name:
+  city:
   state:
   zip_code:
   owner_first_name:
   owner_last_name:
   owner_email:
   owner_phone:
+  user_id: 1
 #  column: value

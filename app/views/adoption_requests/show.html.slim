@@ -1,130 +1,130 @@
 div class="container-fluid"
   div class="row"
-    div class="col-xs-8 col-md-9" 
-      h2 class="header-inline" 
+    div class="col-xs-8 col-md-9"
+      h2 class="header-inline"
         | Adoption Request Details
       = render partial: 'shared/back_to_listing'
     div class="col-xs-4 col-md-3"
       div class="text-right"
         medium
-          | ( 
+          | (
           = link_to 'Edit', edit_adoption_request_path(@adoption_request)
           | &nbsp;|&nbsp;
           = link_to 'Delete', @adoption_request, data: {:confirm => 'Deleting this record will delete all associated plantings.  Proceed to delete?'}, :method => :delete
           |  )
   br
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong ID
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.id
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Received On
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.received_on
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Address
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.full_address
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Zone
-    div class="col-xs-8 col-md-4" 
-      = @adoption_request.zone
+    div class="col-xs-8 col-md-4"
+      = @adoption_request.zone.name unless @adoption_request.zone.nil?
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Owner Name
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.owner_full_name
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Owner Phone
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.owner_phone
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Owner Email
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.owner_email
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Owner Phone
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.owner_phone
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Concrete Removal?
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.concrete_removal
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Wires?
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.wires
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Spanish Speaker?
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.spanish_speaker
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Source
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.source
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Contacted On
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.contacted_on
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Sent to COR On
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.form_sent_to_cor_on
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Site Assessed On
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.site_assessed_on
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Tree Preference
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.tree_species.common_name unless @adoption_request.tree_species.nil?
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Number of Trees
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.number_of_trees
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Plant Space Width
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.plant_space_width
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Room for Tree?
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.room_for_tree
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Note
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.note
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Completed?
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.completed
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Created By
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = @adoption_request.created_by.full_name
   div class="row edit-row"
-    div class="col-xs-4 col-md-2 text-right" 
+    div class="col-xs-4 col-md-2 text-right"
       strong Created On
-    div class="col-xs-8 col-md-4" 
+    div class="col-xs-8 col-md-4"
       = format_time_in_time_zone( @adoption_request.created_at )

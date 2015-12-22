@@ -84,10 +84,10 @@ class AdoptionRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def adoption_request_params
-      params.require(:adoption_request).permit( :user_id, :tree_id, :owner_first_name, :owner_last_name, 
+      params.require(:adoption_request).permit( :user_id, :tree_id, :owner_first_name, :owner_last_name,
         :owner_email, :owner_phone, :house_number, :street_name, :city, :state, :zip_code, :spanish_speaker,
         :room_for_tree, :concrete_removal, :wires, :source, :received_on, :contacted_on,
         :form_sent_to_cor_on, :site_assessed_on, :number_of_trees, :plant_space_width, :note,
-        :completed, :include_completed, :zone )
+        :completed, :include_completed, :zone_id )
     end
 end
