@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     end
 
     rescue ActiveRecord::InvalidForeignKey
-      flash[:notice] = 'User cannot because it is assigned to at least one associated model in the system.'
+      flash[:notice] = 'User cannot be deleted because it is associated with at least model in the system.'
       redirect_to action: "index"
   end
 
