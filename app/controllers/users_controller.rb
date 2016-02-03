@@ -33,7 +33,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        @user.send_activation_email
+
+        format.html { redirect_to @user, notice:
+                      'User created and activation email sent.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }

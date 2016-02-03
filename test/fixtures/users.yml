@@ -16,6 +16,7 @@ testuser1:
   persistence_token: <%= Authlogic::Random.hex_token %>
   single_access_token: <%= Authlogic::Random.friendly_token %>
   perishable_token: <%= Authlogic::Random.friendly_token %>
+  active: true
 
 no_references:
   id: 99
@@ -29,3 +30,18 @@ no_references:
   persistence_token: <%= Authlogic::Random.hex_token %>
   single_access_token: <%= Authlogic::Random.friendly_token %>
   perishable_token: <%= Authlogic::Random.friendly_token %>
+  active: true
+
+inactive_user:
+  id: 2
+  first_name: "Inactive"
+  last_name: "User"
+  username: "inactive_user"
+  email: "inactive@user.com"
+  phone: "408-999-9999"
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("benrocks" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  single_access_token: <%= Authlogic::Random.friendly_token %>
+  perishable_token: <%= Authlogic::Random.friendly_token %>
+  active: false

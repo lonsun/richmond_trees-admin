@@ -29,4 +29,15 @@ class UserTest < ActiveSupport::TestCase
       @user.full_name.must_equal ""
     end
   end
+
+  describe "#active?" do
+    it "should respond with true if active" do
+      @user.active?.must_equal true
+    end
+
+    it "should respond with false if not active" do
+      inactive = users(:inactive_user)
+      inactive.active?.must_equal false
+    end
+  end
 end

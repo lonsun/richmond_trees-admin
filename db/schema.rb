@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222062715) do
+ActiveRecord::Schema.define(version: 20160203055809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,14 +118,14 @@ ActiveRecord::Schema.define(version: 20151222062715) do
   add_index "trees", ["user_id"], name: "index_trees_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",                        null: false
-    t.string   "email",                           null: false
-    t.string   "crypted_password",                null: false
-    t.string   "password_salt",                   null: false
-    t.string   "persistence_token",               null: false
-    t.string   "single_access_token",             null: false
-    t.string   "perishable_token",                null: false
-    t.integer  "login_count",         default: 0, null: false
+    t.string   "username",                            null: false
+    t.string   "email",                               null: false
+    t.string   "crypted_password",                    null: false
+    t.string   "password_salt",                       null: false
+    t.string   "persistence_token",                   null: false
+    t.string   "single_access_token",                 null: false
+    t.string   "perishable_token",                    null: false
+    t.integer  "login_count",         default: 0,     null: false
     t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "current_login_at"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20151222062715) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
+    t.boolean  "active",              default: false
   end
 
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree

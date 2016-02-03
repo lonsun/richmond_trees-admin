@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :plantings
   has_many :maintenance_records
   has_many :notes
-  
+
   # add authlogic
   acts_as_authentic do |c|
     # perishable tokens expire after 2 hours
@@ -18,8 +18,19 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}".strip
   end
 
+  def send_activation_email
+    reset_perishable_token!
+    Notifier.activate_account( self ).deliver
+  end
+
   def send_password_reset_email
     reset_perishable_token!
     Notifier.password_reset( self ).deliver
+  end
+
+  # This is a "magic" method used by authlogic.  If it is defined and
+  # returns false then the log in will fail.
+  def active?
+    self.active
   end
 end

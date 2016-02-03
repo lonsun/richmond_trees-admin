@@ -23,6 +23,7 @@ class PasswordResetsController < ApplicationController
   def update
     @user.password = params[:password]
     @user.password_confirmation = params[:password_confirmation]
+    @user.active = true
 
     # Use @user.save_without_session_maintenance instead if you
     # don't want the user to be signed in automatically.

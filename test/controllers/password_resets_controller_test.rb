@@ -48,7 +48,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
   describe "on GET to :edit" do
     it "shows the create a password page" do
       get :edit, :id => @user.perishable_token
-        
+
       assigns( :user ).must_be_instance_of User
       assert_response :success
       assert_template 'edit'
@@ -74,6 +74,43 @@ class PasswordResetsControllerTest < ActionController::TestCase
       assigns( :user ).errors.size.must_equal 1
       assert_response :success
       assert_template 'edit'
+    end
+
+    it "updates the active flag to true on success" do
+      @inactive_user = users(:inactive_user)
+
+      @inactive_user.active?.must_equal false
+
+      put :update, { id: @inactive_user.perishable_token,
+                     password: "password",
+                     password_confirmation: "password" }
+
+      @refresh = User::find(@inactive_user.id)
+      @refresh.active?.must_equal true
+    end
+
+    it "does not update the active flag on failure" do
+      # false should stay false...
+      @inactive_user = users(:inactive_user)
+
+      @inactive_user.active?.must_equal false
+
+      put :update, { id: @inactive_user.perishable_token,
+                     password: "black",
+                     password_confirmation: "white" }
+
+      @refresh = User::find(@inactive_user.id)
+      @refresh.active?.must_equal false
+
+      # true should stay true...
+      @user.active?.must_equal true
+
+      put :update, { id: @user.perishable_token,
+                     password: "password",
+                     password_confirmation: "password" }
+
+      @refresh = User::find(@user.id)
+      @refresh.active?.must_equal true
     end
   end
 end
