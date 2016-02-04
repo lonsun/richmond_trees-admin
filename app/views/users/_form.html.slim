@@ -12,6 +12,9 @@ div class="row"
       = f.text_field :username
       = f.email_field :email
       = f.phone_field :phone
-      = f.password_field :password
-      = f.password_field :password_confirmation
       = f.submit
+    br
+    = bootstrap_form_tag url: password_resets_url do |pr|
+      = hidden_field_tag 'username', @user.username
+      = pr.submit 'Reset Password',  { class: 'btn btn-primary',
+        data: { confirm: 'Send password reset email?'} }

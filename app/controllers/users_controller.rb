@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    store_location
   end
 
   # POST /users

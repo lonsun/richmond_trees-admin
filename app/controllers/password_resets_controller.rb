@@ -1,5 +1,4 @@
 class PasswordResetsController < ApplicationController
-  before_filter :require_no_user
   before_filter :load_user_using_perishable_token, :only => [ :edit, :update ]
 
   def new
@@ -9,8 +8,8 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by_smart_case_login_field( params[:username] )
     if @user
       @user.send_password_reset_email
-      flash[:notice] = "Instructions to reset your password have been emailed to you."
-      redirect_to root_path
+      flash[:notice] = "Password reset instructions have been emailed."
+      redirect_back_or_default root_path
     else
       flash.now[:error] = "No user was found with username \"#{ params[:username] }.\""
       render :action => :new
