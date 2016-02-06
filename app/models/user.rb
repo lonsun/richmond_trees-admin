@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   acts_as_authentic do |c|
     # perishable tokens expire after 2 hours
     c.perishable_token_valid_for( 7200 )
+    c.logged_in_timeout = 3.days
   end
 
   validates :first_name, :last_name, :username, :email, presence: true

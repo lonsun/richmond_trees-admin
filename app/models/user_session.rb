@@ -1,6 +1,8 @@
 class UserSession < Authlogic::Session::Base
 	validate :check_required_fields
 
+  logout_on_timeout true
+
 	private
 		def check_required_fields
 			errors.add(:username, "is required") unless username_valid?
