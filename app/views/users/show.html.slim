@@ -15,6 +15,11 @@ div class="container-fluid"
   br
   div class="row edit-row"
     div class="col-xs-4 col-md-2 text-right"
+      strong Active?
+    div class="col-xs-8 col-md-4"
+      = @user.active
+  div class="row edit-row"
+    div class="col-xs-4 col-md-2 text-right"
       strong First Name
     div class="col-xs-8 col-md-4"
       = @user.first_name
