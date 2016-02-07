@@ -32,6 +32,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    # Hack to bypass authlogic password requirements when not requiring
+    # password creation in the UI (since it must be reset on activation)
+    @user.password = SecureRandom.hex
+    @user.password_confirmation = @user.password
+
     respond_to do |format|
       if @user.save
         @user.send_activation_email
