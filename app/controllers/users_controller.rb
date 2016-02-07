@@ -54,8 +54,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    p = user_params
+
+    # invalidate persistence token if user is deactivated
+    deactivated = true if @user.active != p[:active] && p[:active] == "0"
+
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(p)
+        @user.reset_persistence_token! if deactivated
+
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -87,7 +94,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      # params[:user]
-      params.require(:user).permit(:first_name, :last_name, :username, :email, :phone, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :username, :email, :phone, :password, :password_confirmation, :active)
     end
 end
