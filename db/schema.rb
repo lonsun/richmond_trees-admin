@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203055809) do
+ActiveRecord::Schema.define(version: 20160207080732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160203055809) do
     t.decimal  "latitude",            precision: 10, scale: 6
     t.decimal  "longitude",           precision: 10, scale: 6
     t.integer  "zone_id"
+    t.boolean  "ignore"
   end
 
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160203055809) do
     t.datetime "updated_at"
     t.date     "maintenance_date"
     t.integer  "user_id"
+    t.boolean  "ignore"
   end
 
   add_index "maintenance_records", ["planting_id"], name: "index_maintenance_records_on_planting_id", using: :btree
@@ -71,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160203055809) do
     t.integer  "planting_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ignore"
   end
 
   add_index "notes", ["planting_id"], name: "index_notes_on_planting_id", using: :btree
@@ -90,6 +93,7 @@ ActiveRecord::Schema.define(version: 20160203055809) do
     t.date     "last_maintenance_date"
     t.string   "last_status_code"
     t.boolean  "initial_checks_received"
+    t.boolean  "ignore"
   end
 
   add_index "plantings", ["adoption_request_id"], name: "index_plantings_on_adoption_request_id", using: :btree
@@ -137,6 +141,7 @@ ActiveRecord::Schema.define(version: 20160203055809) do
     t.string   "last_name"
     t.string   "phone"
     t.boolean  "active",              default: false
+    t.integer  "failed_login_count"
   end
 
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
