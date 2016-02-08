@@ -63,11 +63,23 @@ class PlantingsControllerTest < ActionController::TestCase
     assert_redirected_to planting_path(assigns(:planting))
   end
 
-  test "should destroy planting" do
-    assert_difference('Planting.count', -1) do
-      delete :destroy, id: @planting
+  describe "when deleting a planting" do
+    it "should be deleted when passed a \"hard_delete\" parameter with the value of \"yes\"" do
+      assert_difference('Planting.count', -1) do
+        delete :destroy, { id: @planting, "hard_delete" => "yes" }
+      end
+
+      assert_redirected_to plantings_path
     end
 
-    assert_redirected_to plantings_path
+    it "should be marked as ignored by default" do
+      assert_difference('Planting.count', 0) do
+        delete :destroy, id: @planting
+      end
+
+      p = Planting.find(@planting.id)
+      assert p.ignore, "planting ignore field should be true"
+      assert_redirected_to plantings_path
+    end
   end
 end
