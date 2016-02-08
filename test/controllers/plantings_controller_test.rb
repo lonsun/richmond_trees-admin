@@ -82,4 +82,11 @@ class PlantingsControllerTest < ActionController::TestCase
       assert_redirected_to plantings_path
     end
   end
+
+  describe "when attempting to access an ignored record" do
+    it "should be treated as if it doesn't exist" do
+      ignored = plantings( :ignored )
+      assert_raises( ActiveRecord::RecordNotFound ) { get :show, id: ignored }
+    end
+  end
 end

@@ -11,6 +11,7 @@ one:
   plant_space_width: "2x4"
   user_id: 1
   planted_on: "2015-01-01"
+  ignore: false
 
 two:
   id: 2
@@ -18,3 +19,12 @@ two:
   tree_id: 1
   plant_space_width: "4'"
   user_id: 1
+  ignore: false
+
+ignored:
+  id: 3
+  adoption_request_id: 2
+  tree_id: 1
+  plant_space_width: "4'"
+  user_id: 1
+  ignore: true
