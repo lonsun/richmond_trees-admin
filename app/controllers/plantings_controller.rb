@@ -84,7 +84,7 @@ class PlantingsController < ApplicationController
       @planting.destroy
     else
       @planting.ignore = true
-      @planting.save
+      @planting.save!
     end
 
     respond_to do |format|
