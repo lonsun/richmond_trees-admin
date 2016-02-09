@@ -4,5 +4,10 @@ one:
   planting_id: 1
   user_id: 1
   note: This is a test note.
+  ignore: false
 
-two: {}
+ignored:
+  planting_id: 1
+  user_id: 1
+  note: This test note should be ignored.
+  ignore: true
