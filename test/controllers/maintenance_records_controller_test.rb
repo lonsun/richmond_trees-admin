@@ -5,7 +5,7 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
     # authenticate
     activate_authlogic
     UserSession.create(users(:testuser1))
-    
+
     @maintenance_record = maintenance_records(:one)
     @user = users(:testuser1)
   end
@@ -54,11 +54,33 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test "should destroy maintenance_record" do
-    assert_difference('MaintenanceRecord.count', -1) do
-      delete :destroy, id: @maintenance_record
+  describe "when deleting an maintenance_record" do
+    it "should be deleted when passed a \"hard_delete\" parameter with the value of \"yes\"" do
+      assert_difference('MaintenanceRecord.count', -1) do
+        delete :destroy, { id: @maintenance_record, "hard_delete" => "yes" }
+      end
+
+      assert_redirected_to controller: "plantings", action: "show",
+        id: @maintenance_record.planting_id
     end
 
-    assert_response :redirect
+    it "should be marked as ignored by default" do
+      assert_difference('MaintenanceRecord.count', 0) do
+        delete :destroy, id: @maintenance_record
+      end
+
+      ar = MaintenanceRecord.find(@maintenance_record.id)
+      assert_equal true, ar.ignore
+      assert_redirected_to controller: "plantings", action: "show",
+        id: @maintenance_record.planting_id
+    end
   end
+
+  describe "when attempting to access an ignored record" do
+    it "should be treated as if it doesn't exist" do
+      ignored = maintenance_records( :ignored )
+      assert_raises( ActiveRecord::RecordNotFound ) { get :show, id: ignored }
+    end
+  end
+
 end

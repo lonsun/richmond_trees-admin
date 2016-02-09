@@ -1,7 +1,8 @@
 class MaintenanceRecordsController < ApplicationController
   before_filter :require_user
-  
+
   before_action :set_maintenance_record, only: [:show, :edit, :update, :destroy]
+  before_action :handle_ignored, only: [:show, :edit, :update, :destroy]
 
   after_action :udpate_stakes_removed_on_planting, only: [ :create, :update ]
 
@@ -31,7 +32,7 @@ class MaintenanceRecordsController < ApplicationController
   def create
     @maintenance_record = MaintenanceRecord.new(maintenance_record_params)
     @maintenance_record.user_id = current_user.id #created by
-    
+
     # This is necessary to populate this field in the form when there is a validation error.
     @planting_id = @maintenance_record.planting_id unless @maintenance_record.nil?
 
@@ -51,7 +52,7 @@ class MaintenanceRecordsController < ApplicationController
   def update
     # this is necessary to update reason codes correctly if none are checked on the frontend
     params[:maintenance_record][:reason_codes] = [] if params[:maintenance_record][:reason_codes].nil?
-    
+
     respond_to do |format|
       if @maintenance_record.update(maintenance_record_params)
         format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @maintenance_record.planting_id, notice: 'Maintenance record was successfully updated.' }
@@ -66,9 +67,17 @@ class MaintenanceRecordsController < ApplicationController
   # DELETE /maintenance_records/1
   # DELETE /maintenance_records/1.json
   def destroy
-    @maintenance_record.destroy
+    # mark the record to be ignored by default
+    if params.has_key?('hard_delete') && params['hard_delete'] == 'yes'
+      @maintenance_record.destroy
+    else
+      @maintenance_record.ignore = true
+      @maintenance_record.save!
+    end
+
     respond_to do |format|
-      format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @maintenance_record.planting_id }
+      format.html { redirect_to :controller => 'plantings', :action => 'show',
+                    :id => @maintenance_record.planting_id }
       format.json { head :no_content }
     end
   end
@@ -79,10 +88,19 @@ class MaintenanceRecordsController < ApplicationController
       @maintenance_record = MaintenanceRecord.find(params[:id])
     end
 
+    # records marked as ignored should be treated as if they don't exist
+    def handle_ignored
+      if @maintenance_record.ignore == true
+        raise ActiveRecord::RecordNotFound
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_record_params
-      params.require(:maintenance_record).permit(:maintenance_date, :status_code, { :reason_codes => [] }, 
-        :diameter_breast_height, :planting_id, :user_id, :mark_stakes_removed)
+      params.require(:maintenance_record)
+        .permit(:maintenance_date, :status_code, { :reason_codes => [] },
+                :diameter_breast_height, :planting_id, :user_id, :mark_stakes_removed,
+                :hard_delete)
     end
 
     # update the stakes removed on associated planting
