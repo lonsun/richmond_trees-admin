@@ -14,10 +14,10 @@ class AdoptionRequestsController < ApplicationController
     include_completed = params[:adoption_request][:include_completed] unless params[:adoption_request].nil?
 
     if include_completed == "1"
-      @adoption_requests = AdoptionRequest.includes( :zone ).load
+      @adoption_requests = AdoptionRequest.includes( :zone ).where.not( ignore: true ).load
       @include_completed_checked = "checked"
     else
-      @adoption_requests = AdoptionRequest.includes( :zone ).where( :completed => false )
+      @adoption_requests = AdoptionRequest.includes( :zone ).where( :completed => false ).where.not( ignore: true )
       @include_completed_checked = ""
     end
   end
