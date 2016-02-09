@@ -11,7 +11,7 @@ class PlantingsController < ApplicationController
   def index
     store_listing_referer
 
-    @plantings = Planting.joins( :parent_adoption_request ).order( "adoption_requests.street_name, adoption_requests.house_number" )
+    @plantings = Planting.includes( { :parent_adoption_request => :zone }, { :notes => :created_by }, :tree_species ).order( "adoption_requests.street_name, adoption_requests.house_number" )
 
     respond_to do |format|
       format.html
