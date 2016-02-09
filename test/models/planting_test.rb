@@ -9,7 +9,7 @@ class PlantingTest < ActiveSupport::TestCase
   end
 
   describe "most_recent_maintenance_record method" do
-    it "returns the most recent maintenance record for a planting" do
+    it "returns the most recent, non-deleted/ignored, maintenance record for a planting" do
       mr = maintenance_records( :two )
       @planting.most_recent_maintenance_record.maintenance_date.must_equal mr.maintenance_date
     end
@@ -73,7 +73,7 @@ class PlantingTest < ActiveSupport::TestCase
   describe ".to_csv" do
     it "returns the relation in csv format" do
       @plantings = Planting.all
-      
+
       # simple test - just count the number of lines
       output = @plantings.to_csv
       output.count("\n").must_equal @plantings.count+1

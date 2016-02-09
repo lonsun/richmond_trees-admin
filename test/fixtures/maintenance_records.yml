@@ -20,7 +20,7 @@ two:
 
 ignored:
   planting_id: 1
-  maintenance_date: 2015-12-01
+  maintenance_date: 2016-02-01
   status_code: U
   reason_codes:
   diameter_breast_height: "4"
