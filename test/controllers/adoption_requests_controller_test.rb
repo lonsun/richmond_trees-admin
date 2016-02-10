@@ -60,11 +60,30 @@ class AdoptionRequestsControllerTest < ActionController::TestCase
     assert_redirected_to adoption_request_path(assigns(:adoption_request))
   end
 
-  test "should destroy adoption_request" do
-    assert_difference('AdoptionRequest.count', -1) do
-      delete :destroy, id: @adoption_request
+  describe "when deleting an adoption_request" do
+    it "should be deleted when passed a \"hard_delete\" parameter with the value of \"yes\"" do
+      assert_difference('AdoptionRequest.count', -1) do
+        delete :destroy, { id: @adoption_request, "hard_delete" => "yes" }
+      end
+
+      assert_redirected_to adoption_requests_path
     end
 
-    assert_redirected_to adoption_requests_path
+    it "should be marked as ignored by default" do
+      assert_difference('AdoptionRequest.count', 0) do
+        delete :destroy, id: @adoption_request
+      end
+
+      ar = AdoptionRequest.find(@adoption_request.id)
+      assert_equal true, ar.ignore
+      assert_redirected_to adoption_requests_path
+    end
+  end
+
+  describe "when attempting to access an ignored record" do
+    it "should be treated as if it doesn't exist" do
+      ignored = adoption_requests( :ignored )
+      assert_raises( ActiveRecord::RecordNotFound ) { get :show, id: ignored }
+    end
   end
 end

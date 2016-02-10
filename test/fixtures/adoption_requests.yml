@@ -17,6 +17,8 @@ one:
   owner_phone: "123-123-1234"
   user_id: 1
   zone_id: 1
+  received_on: '2015-01-01'
+  ignore: false
 
 empty:
   id: 2
@@ -30,4 +32,20 @@ empty:
   owner_email:
   owner_phone:
   user_id: 1
-#  column: value
+  received_on: '2015-01-01'
+  ignore: false
+
+ignored:
+  id: 3
+  house_number: 2350
+  street_name: "Kerner Blvd"
+  city: "San Rafael"
+  state: "CA"
+  zip_code: 94901
+  owner_first_name: "Gerry"
+  owner_last_name: "Mander"
+  owner_email: "gerry@mander.com"
+  owner_phone:
+  user_id: 1
+  received_on: '2016-12-25'
+  ignore: true

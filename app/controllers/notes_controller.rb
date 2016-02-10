@@ -2,6 +2,7 @@ class NotesController < ApplicationController
   before_filter :require_user
 
   before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :handle_ignored, only: [:show, :edit, :update, :destroy]
 
   # GET /notes
   # GET /notes.json
@@ -61,9 +62,17 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.json
   def destroy
-    @note.destroy
+    # mark the record to be ignored by default
+    if params.has_key?('hard_delete') && params['hard_delete'] == 'yes'
+      @note.destroy
+    else
+      @note.ignore = true
+      @note.save!
+    end
+
     respond_to do |format|
-      format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @note.planting_id }
+      format.html { redirect_to :controller => 'plantings', :action => 'show',
+                    :id => @note.planting_id }
       format.json { head :no_content }
     end
   end
@@ -74,8 +83,15 @@ class NotesController < ApplicationController
       @note = Note.find(params[:id])
     end
 
+    # records marked as ignored should be treated as if they don't exist
+    def handle_ignored
+      if @note.ignore == true
+        raise ActiveRecord::RecordNotFound
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:planting_id, :user_id, :note)
+      params.require(:note).permit(:planting_id, :user_id, :note, :hard_delete)
     end
 end

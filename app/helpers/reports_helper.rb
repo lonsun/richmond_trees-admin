@@ -4,6 +4,7 @@ module ReportsHelper
   def search_plantings( p )
     q = Planting.joins( :parent_adoption_request, :tree_species )
       .joins( 'LEFT JOIN "notes" ON "notes"."planting_id" = "plantings"."id"' )
+      .where.not( ignore: true )
       .where( plantings: { planted_on: Date.parse( p['planted_on_from'] )..Date.parse( p['planted_on_to'] ) } )
       .where( "adoption_requests.owner_first_name ILIKE ?", wildcard_if_empty( p['owner_first_name'] ) )
       .where( "adoption_requests.owner_last_name ILIKE ?", wildcard_if_empty( p['owner_last_name'] ) )
@@ -18,6 +19,8 @@ module ReportsHelper
       note_clause += " OR notes.note is null"
     end
     q = q.where( note_clause, wildcard_if_empty( p['note'] ) )
+
+    q = q.where.not( notes: { ignore: true } )
 
     last_maintenance_date_clause = '( "plantings"."last_maintenance_date" BETWEEN \'' + p['last_maintenance_from'] + '\' AND \'' + p['last_maintenance_to'] + '\' )'
     if p['include_nil_maintenance_records'] == 'yes'
@@ -54,6 +57,7 @@ module ReportsHelper
   # Plantings report
   def search_adoption_requests( p )
     q = AdoptionRequest
+      .where.not( ignore: true )
       .where( "street_name ILIKE ?", wildcard_if_empty( p['street_name'] ) )
       .where( "zip_code ILIKE ?", wildcard_if_empty( p['zip_code'] ) )
 

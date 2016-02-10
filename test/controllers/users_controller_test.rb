@@ -52,7 +52,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should not destroy user with foreign key references" do
-    assert_no_difference('User.count', -1) do
+    assert_no_difference('User.count') do
       delete :destroy, id: @user
     end
 

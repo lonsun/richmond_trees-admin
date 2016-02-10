@@ -9,9 +9,11 @@ class Planting < ActiveRecord::Base
 
   # get the most recent maintenance record or nil if there are none
   def most_recent_maintenance_record
-  	nil if self.id.nil? 
+  	nil if self.id.nil?
 
-    mr = MaintenanceRecord.where( planting_id: self.id ).order( :maintenance_date ).reverse_order.limit( 1 )
+    mr = MaintenanceRecord.where( planting_id: self.id )
+    mr = mr.where.not( ignore: true )
+    mr = mr.order( :maintenance_date ).reverse_order.limit( 1 )
     mr[ 0 ]
   end
 
@@ -50,7 +52,7 @@ class Planting < ActiveRecord::Base
 
   def self.to_csv
     attributes = %w[ id planted_on house_number street_name placement tree_common_name last_maintenance_date last_status_code last_note ]
-    
+
     CSV.generate( headers: true ) do |csv|
       csv << attributes
 
