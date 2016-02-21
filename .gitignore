@@ -43,3 +43,6 @@ build/
 # Ignore vim backup/temp files
 *.swp
 *~
+
+# internal vagrant stuff
+.vagrant/*
