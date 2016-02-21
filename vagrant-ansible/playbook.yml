@@ -1,0 +1,84 @@
+---
+- hosts: all
+  tasks:
+    - name: Install software-properties-common (prerequisite for Ruby 2.0 install)
+      apt:
+        name: software-properties-common
+
+    - name: Add Brightbox APT repository (prerequisite for Ruby 2.0 install)
+      apt_repository:
+        repo: ppa:brightbox/ruby-ng
+        state: present
+
+    - name: Add PGDG APT repository (prerequisite for Postgres 9.4)
+      shell: sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+    - name: Add PGDG APT key (prerequisite for Postgres 9.4)
+      apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
+
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Install Ruby 2.0
+      apt:
+        name: ruby2.0
+
+    - name: Set Ruby 2.0 as the system default
+      file:
+        src: /usr/bin/ruby2.0
+        dest: /usr/bin/ruby
+        state: link
+
+    - name: Make sure Ruby gem command is using Ruby 2.0
+      file:
+        src: /usr/bin/gem2.0
+        dest: /usr/bin/gem
+        state: link
+
+    - name: Install Ruby 2.0 dev package (required for some application dependencies like ffi)
+      apt:
+        name: ruby2.0-dev
+
+    - name: Install Postgres 9.4
+      apt:
+        name: postgresql-9.4
+
+    - name: Install Postgres 9.4 server development package
+      apt:
+        name: postgresql-server-dev-9.4
+
+    - name: Install Rails 4
+      apt:
+        name: ruby-railties-4.0
+
+    - name: Install Ruby Bundler
+      shell: sudo gem install bundler
+
+    - name: Install app-specific gems using Bundler
+      shell: bundle install
+      args:
+        chdir: /vagrant
+
+    - name: Install NodeJS (javascript runtime for use by Rails)
+      apt:
+        name: nodejs
+
+    - name: Set up database for dev and test environments
+      command: /bin/bash db_setup.sh
+      args:
+        chdir: /vagrant/vagrant-ansible/scripts/
+      notify:
+      - Restart Postgres
+
+    - name: Install Heroku Toolbelt
+      command: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+  handlers:
+    - name: Restart Postgres
+      service:
+        name: postgresql
+        state: restarted
+
