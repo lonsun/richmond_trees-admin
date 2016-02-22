@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.8'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.14'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -51,7 +51,7 @@ gem 'bootstrap_form'
 
 group :test do
   # use MiniTest::Spec::DSL
-  gem 'minitest-spec-rails', '~> 4.7'
+  gem 'minitest-spec-rails'
 end
 
 # help configure the app for Heroku
