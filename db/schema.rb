@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20160209201304) do
     t.integer  "user_id"
     t.date     "last_maintenance_date"
     t.string   "last_status_code"
-    t.boolean  "initial_checks_received"
+    t.boolean  "initial_checks_received", default: false
     t.boolean  "ignore",                  default: false
   end
 
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20160209201304) do
 
   add_index "zones", ["user_id"], name: "index_zones_on_user_id", using: :btree
 
+  Foreigner.load
   add_foreign_key "adoption_requests", "trees", name: "adoption_requests_tree_id_fk"
   add_foreign_key "adoption_requests", "users", name: "adoption_requests_user_id_fk"
   add_foreign_key "adoption_requests", "zones", name: "adoption_requests_zone_id_fk"

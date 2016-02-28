@@ -14,13 +14,11 @@ module ReportsHelper
     q = q.where( adoption_requests: { zone_id: p['zone_ids'] } ) unless p['zone_ids'].empty?
 
     # show all notes if no note search term was provided
-    note_clause = "notes.note ILIKE ?"
+    note_clause = "( notes.note ILIKE ? AND notes.ignore != 't' )"
     if p['note'].empty?
       note_clause += " OR notes.note is null"
     end
     q = q.where( note_clause, wildcard_if_empty( p['note'] ) )
-
-    q = q.where.not( notes: { ignore: true } )
 
     last_maintenance_date_clause = '( "plantings"."last_maintenance_date" BETWEEN \'' + p['last_maintenance_from'] + '\' AND \'' + p['last_maintenance_to'] + '\' )'
     if p['include_nil_maintenance_records'] == 'yes'
