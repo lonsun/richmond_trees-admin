@@ -33,7 +33,7 @@ class PlantingsController < ApplicationController
     end
 
     # get associated notes
-    Note.where(planting_id: @planting.id).order( :created_at ).reverse_order.find_each do |n|
+    Note.where(planting_id: @planting.id).where(ignore: false).order( :created_at ).reverse_order.find_each do |n|
       @notes.push( n )
     end
   end
