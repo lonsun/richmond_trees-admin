@@ -1,11 +1,11 @@
 ---
 - hosts: all
   tasks:
-    - name: Install software-properties-common (prerequisite for Ruby 2.0 install)
+    - name: Install software-properties-common (prerequisite for Ruby install)
       apt:
         name: software-properties-common
 
-    - name: Add Brightbox APT repository (prerequisite for Ruby 2.0 install)
+    - name: Add Brightbox APT repository (prerequisite for Ruby install)
       apt_repository:
         repo: ppa:brightbox/ruby-ng
         state: present
@@ -22,25 +22,25 @@
       apt:
         update_cache: yes
 
-    - name: Install Ruby 2.0
+    - name: Install Ruby 2.1
       apt:
-        name: ruby2.0
+        name: ruby2.1
 
-    - name: Set Ruby 2.0 as the system default
+    - name: Set Ruby 2.1 as the system default
       file:
-        src: /usr/bin/ruby2.0
+        src: /usr/bin/ruby2.1
         dest: /usr/bin/ruby
         state: link
 
-    - name: Make sure Ruby gem command is using Ruby 2.0
+    - name: Make sure Ruby gem command is using Ruby 2.1
       file:
-        src: /usr/bin/gem2.0
+        src: /usr/bin/gem2.1
         dest: /usr/bin/gem
         state: link
 
-    - name: Install Ruby 2.0 dev package (required for some application dependencies like ffi)
+    - name: Install Ruby 2.1 dev package (required for some application dependencies like ffi)
       apt:
-        name: ruby2.0-dev
+        name: ruby2.1-dev
 
     - name: Install Postgres 9.4
       apt:
@@ -74,7 +74,7 @@
       - Restart Postgres
 
     - name: Install Heroku Toolbelt
-      command: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+      shell: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
   handlers:
     - name: Restart Postgres
