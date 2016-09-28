@@ -57,8 +57,8 @@ $state-danger-text: $danger-text-color;
     cursor: pointer;
   }
 
-  .navbar-nav > .active > a, 
-  .navbar-nav > .active > a:hover, 
+  .navbar-nav > .active > a,
+  .navbar-nav > .active > a:hover,
   .navbar-nav > .active {
     background-color: $navbar-secondary;
     color: $navbar-primary;
@@ -102,4 +102,9 @@ hr.section-separator {
   margin-top: 10px;
   margin-bottom: 10px;
   border-color: #C8D7FF;
+}
+
+.login-header {
+  margin-top: 7px;
+  min-width: 240px;
 }
