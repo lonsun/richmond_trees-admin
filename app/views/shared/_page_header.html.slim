@@ -23,7 +23,7 @@ nav class="navbar navbar-default"
         li class=(controller == 'users' ? 'active' : '')
           = link_to "Users", users_path
         li class=(controller == 'reports' ? 'active dropdown reports-nav-link' : 'dropdown reports-nav-link')
-          a class="dropdown-toggle" data-toggle="dropdown"
+          a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
             | Reports
             span class="caret"
           ul class="dropdown-menu"

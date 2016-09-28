@@ -42,14 +42,13 @@ $state-danger-text: $danger-text-color;
 }
 
 .navbar-default {
-  background-color: #5f7341;
+  background-color: $navbar-primary;
 
   .navbar-nav > li > a {
     padding-top: 34px;
     padding-bottom: 32px;
     font-size: 18px;
     margin-top: 1px;
-    background-color: $navbar-primary;
     color: $navbar-secondary;
   }
 
@@ -62,6 +61,10 @@ $state-danger-text: $danger-text-color;
   .navbar-nav > .active {
     background-color: $navbar-secondary;
     color: $navbar-primary;
+  }
+
+  .dropdown-menu {
+    background-color: $navbar-secondary !important;
   }
 
   .logout-icon {
