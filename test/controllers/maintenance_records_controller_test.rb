@@ -22,17 +22,45 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create maintenance_record" do
-    assert_difference('MaintenanceRecord.count') do
-      post :create, maintenance_record: { planting_id: @maintenance_record.planting_id,
-        status_code: @maintenance_record.status_code,
-        reason_codes: "a,b,c",
-        diameter_breast_height: "2",
-        maintenance_date: @maintenance_record.maintenance_date,
-        user_id: @user.id }
+  describe "when creating a maintenance_record" do
+    it "creates one" do
+      assert_difference('MaintenanceRecord.count') do
+        post :create,
+          maintenance_record: {
+            planting_id: @maintenance_record.planting_id,
+            status_code: @maintenance_record.status_code,
+            reason_codes: "a,b,c",
+            diameter_breast_height: "2",
+            maintenance_date: @maintenance_record.maintenance_date,
+            user_id: @user.id
+          },
+          mark_stakes_removed: false
+      end
+
+      assert_not @maintenance_record.planting.stakes_removed
+
+      assert_response :redirect
     end
 
-    assert_response :redirect
+   it "updates stakes_removed flag on the associated planting " do
+      assert_difference('MaintenanceRecord.count') do
+        post :create,
+          maintenance_record: {
+            planting_id: @maintenance_record.planting_id,
+            status_code: @maintenance_record.status_code,
+            reason_codes: ["a,b,c"],
+            diameter_breast_height: "2",
+            maintenance_date: @maintenance_record.maintenance_date,
+            user_id: @user.id
+          },
+          mark_stakes_removed: "1"
+      end
+
+      assert @maintenance_record.planting.stakes_removed
+
+      assert_response :redirect
+    end
+
   end
 
   test "should show maintenance_record" do
@@ -46,11 +74,12 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
   end
 
   test "should update maintenance_record" do
-    patch :update, id: @maintenance_record, maintenance_record: { planting_id: @maintenance_record.planting_id,
-        status_code: @maintenance_record.status_code,
-        reason_codes: "a,b,c",
-        diameter_breast_height: "2",
-        user_id: @user.id }
+    patch :update, id: @maintenance_record, maintenance_record: {
+      planting_id: @maintenance_record.planting_id,
+      status_code: @maintenance_record.status_code,
+      reason_codes: ["a,b,c"],
+      diameter_breast_height: "2",
+      user_id: @user.id }
     assert_response :redirect
   end
 

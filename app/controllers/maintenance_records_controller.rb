@@ -4,8 +4,6 @@ class MaintenanceRecordsController < ApplicationController
   before_action :set_maintenance_record, only: [:show, :edit, :update, :destroy]
   before_action :handle_ignored, only: [:show, :edit, :update, :destroy]
 
-  after_action :udpate_stakes_removed_on_planting, only: [ :create, :update ]
-
   # GET /maintenance_records
   # GET /maintenance_records.json
   def index
@@ -38,6 +36,9 @@ class MaintenanceRecordsController < ApplicationController
 
     respond_to do |format|
       if @maintenance_record.save
+        @maintenance_record.planting.stakes_removed = params[:mark_stakes_removed]
+        @maintenance_record.planting.save
+
         format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @planting_id, notice: 'Maintenance record was successfully created.' }
         format.json { render action: 'show', status: :created, location: @maintenance_record }
       else
@@ -55,6 +56,9 @@ class MaintenanceRecordsController < ApplicationController
 
     respond_to do |format|
       if @maintenance_record.update(maintenance_record_params)
+        @maintenance_record.planting.stakes_removed = params[:mark_stakes_removed]
+        @maintenance_record.planting.save
+
         format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @maintenance_record.planting_id, notice: 'Maintenance record was successfully updated.' }
         format.json { head :no_content }
       else
@@ -101,16 +105,5 @@ class MaintenanceRecordsController < ApplicationController
         .permit(:maintenance_date, :status_code, { :reason_codes => [] },
                 :diameter_breast_height, :planting_id, :user_id, :mark_stakes_removed,
                 :hard_delete)
-    end
-
-    # update the stakes removed on associated planting
-    def udpate_stakes_removed_on_planting
-      if params[:mark_stakes_removed] == "1"
-        @maintenance_record.planting.stakes_removed = true
-      else
-        @maintenance_record.planting.stakes_removed = false
-      end
-
-      @maintenance_record.planting.save
     end
 end

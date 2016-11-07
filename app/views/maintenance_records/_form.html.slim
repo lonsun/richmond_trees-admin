@@ -9,18 +9,24 @@ div class="row"
                 li = message
         - if @planting_id
           = f.hidden_field :planting_id, :value => @planting_id
-        - else  
+        - else
           = f.hidden_field :planting_id
         = f.date_field :maintenance_date
         = f.select :status_code, MaintenanceRecord::STATUS_CODES.map { |s| [ s.first.to_s + " - " + s.last, s.first ] }
         - MaintenanceRecord::REASON_CODES.each do |r|
           div class="checkbox"
             label for="maintenance_record_reason_codes_#{ r.first }"
-              = check_box_tag 'maintenance_record[reason_codes][]', r.first.to_s, ( @maintenance_record.reason_codes.nil? ) ? false : @maintenance_record.reason_codes.include?( r.first.to_s ), { id: "maintenance_record_reason_codes_#{ r.first }" }
+              = check_box_tag 'maintenance_record[reason_codes][]',
+                r.first.to_s,
+                ( @maintenance_record.reason_codes.nil? ) ? false : @maintenance_record.reason_codes.include?( r.first.to_s ),
+                { id: "maintenance_record_reason_codes_#{ r.first }" }
               = " #{ r.first } - #{ r.last.capitalize }"
         = f.text_field :diameter_breast_height
         div class="checkbox"
           label for="mark_stakes_removed"
-            = check_box_tag 'mark_stakes_removed', "1", ( @maintenance_record.planting.nil? ) ? Planting.find( @planting_id ).stakes_removed : @maintenance_record.planting.stakes_removed
+            = check_box_tag 'mark_stakes_removed',
+              "1",
+              ( @maintenance_record.planting.nil? ) ? Planting.find( @planting_id ).stakes_removed : @maintenance_record.planting.stakes_removed
             | Stakes removed (on associated planting)
+        div
         = f.submit
