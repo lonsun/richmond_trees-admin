@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209201304) do
+ActiveRecord::Schema.define(version: 20161107031326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 20160209201304) do
     t.integer  "house_number"
     t.string   "street_name"
     t.boolean  "completed"
-    t.decimal  "latitude",            precision: 10, scale: 6
-    t.decimal  "longitude",           precision: 10, scale: 6
+    t.decimal  "latitude",             precision: 10, scale: 6
+    t.decimal  "longitude",            precision: 10, scale: 6
     t.integer  "zone_id"
-    t.boolean  "ignore",                                       default: false
+    t.boolean  "ignore",                                        default: false
+    t.date     "site_pre_assessed_on"
   end
 
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree

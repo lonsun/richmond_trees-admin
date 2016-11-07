@@ -11,13 +11,19 @@ class AdoptionRequestsController < ApplicationController
   def index
     store_listing_referer
 
-    include_completed = params[:adoption_request][:include_completed] unless params[:adoption_request].nil?
+    if ! params[:adoption_request].nil?
+      include_completed = params[:adoption_request][:include_completed]
+    end
 
     if include_completed == "1"
-      @adoption_requests = AdoptionRequest.includes( :zone ).where.not( ignore: true ).load
+      @adoption_requests = AdoptionRequest.includes( :zone )
+        .where.not( ignore: true )
+        .load
       @include_completed_checked = "checked"
     else
-      @adoption_requests = AdoptionRequest.includes( :zone ).where( :completed => false ).where.not( ignore: true )
+      @adoption_requests = AdoptionRequest.includes( :zone )
+        .where( :completed => false )
+        .where.not( ignore: true )
       @include_completed_checked = ""
     end
   end
@@ -44,11 +50,14 @@ class AdoptionRequestsController < ApplicationController
 
     respond_to do |format|
       if @adoption_request.save
-        format.html { redirect_to @adoption_request, notice: 'Adoption request was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @adoption_request }
+        format.html { redirect_to @adoption_request,
+                      notice: 'Adoption request was successfully created.' }
+        format.json { render action: 'show', status: :created,
+                      location: @adoption_request }
       else
         format.html { render action: 'new' }
-        format.json { render json: @adoption_request.errors, status: :unprocessable_entity }
+        format.json { render json: @adoption_request.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -58,11 +67,13 @@ class AdoptionRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @adoption_request.update(adoption_request_params)
-        format.html { redirect_to @adoption_request, notice: 'Adoption request was successfully updated.' }
+        format.html { redirect_to @adoption_request,
+                      notice: 'Adoption request was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @adoption_request.errors, status: :unprocessable_entity }
+        format.json { render json: @adoption_request.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -79,7 +90,8 @@ class AdoptionRequestsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to session[:listing_referer] || adoption_requests_path }
+      format.html {
+        redirect_to session[:listing_referer] || adoption_requests_path }
       format.json { head :no_content }
     end
   end
@@ -97,12 +109,16 @@ class AdoptionRequestsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white list
+    # through.
     def adoption_request_params
-      params.require(:adoption_request).permit( :user_id, :tree_id, :owner_first_name, :owner_last_name,
-        :owner_email, :owner_phone, :house_number, :street_name, :city, :state, :zip_code, :spanish_speaker,
-        :room_for_tree, :concrete_removal, :wires, :source, :received_on, :contacted_on,
-        :form_sent_to_cor_on, :site_assessed_on, :number_of_trees, :plant_space_width, :note,
-        :completed, :include_completed, :zone_id, :hard_delete )
+      params.require(:adoption_request).permit( :user_id, :tree_id,
+        :owner_first_name, :owner_last_name, :owner_email, :owner_phone,
+        :house_number, :street_name, :city, :state, :zip_code,
+        :spanish_speaker, :room_for_tree, :concrete_removal, :wires,
+        :source, :received_on, :contacted_on, :form_sent_to_cor_on,
+        :site_pre_assessed_on, :site_assessed_on, :number_of_trees,
+        :plant_space_width, :note, :completed, :include_completed,
+        :zone_id, :hard_delete )
     end
 end

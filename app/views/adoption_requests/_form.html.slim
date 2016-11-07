@@ -24,6 +24,7 @@ div class="row"
       = f.text_field :source
       = f.date_field :contacted_on
       = f.date_field :form_sent_to_cor_on, { label: "Form sent to COR on" }
+      = f.date_field :site_pre_assessed_on, { label: "Site pre-assessed (by RT) on" }
       = f.date_field :site_assessed_on
       = f.collection_select :tree_id, Tree.all.order( :common_name ), :id, :text_for_html_select_option, { label: "Tree Preference", prompt: true }
       = f.text_field :number_of_trees
