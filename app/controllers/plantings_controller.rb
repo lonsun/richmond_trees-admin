@@ -11,7 +11,8 @@ class PlantingsController < ApplicationController
   def index
     store_listing_referer
 
-    @plantings = Planting.includes( { :parent_adoption_request => :zone }, { :notes => :created_by }, :tree_species )
+    @plantings = Planting.includes({ :parent_adoption_request => :zone },
+                                   { :notes => :created_by }, :tree_species)
       .where.not( ignore: true )
       .order( "adoption_requests.street_name, adoption_requests.house_number" )
 
@@ -28,12 +29,21 @@ class PlantingsController < ApplicationController
     @notes = []
 
     # get associated maintenance records
-    MaintenanceRecord.where( planting_id: @planting.id ).order( :maintenance_date ).reverse_order.find_each do |r|
+    MaintenanceRecord
+      .where( planting_id: @planting.id )
+      .order( :maintenance_date )
+      .reverse_order
+      .find_each do |r|
       @maintenance_records.push( r )
     end
 
     # get associated notes
-    Note.where(planting_id: @planting.id).where(ignore: false).order( :created_at ).reverse_order.find_each do |n|
+    Note
+      .where(planting_id: @planting.id)
+      .where(ignore: false)
+      .order( :created_at )
+      .reverse_order
+      .find_each do |n|
       @notes.push( n )
     end
   end
@@ -55,11 +65,14 @@ class PlantingsController < ApplicationController
 
     respond_to do |format|
       if @planting.save
-        format.html { redirect_to @planting, notice: 'Planting was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @planting }
+        format.html { redirect_to @planting,
+                      notice: 'Planting was successfully created.' }
+        format.json { render action: 'show', status: :created,
+                      location: @planting }
       else
         format.html { render action: 'new' }
-        format.json { render json: @planting.errors, status: :unprocessable_entity }
+        format.json { render json: @planting.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -69,11 +82,13 @@ class PlantingsController < ApplicationController
   def update
     respond_to do |format|
       if @planting.update(planting_params)
-        format.html { redirect_to @planting, notice: 'Planting was successfully updated.' }
+        format.html { redirect_to @planting,
+                      notice: 'Planting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @planting.errors, status: :unprocessable_entity }
+        format.json { render json: @planting.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -110,8 +125,10 @@ class PlantingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def planting_params
-      params.require(:planting).permit(:adoption_request_id, :tree_id, :planted_on, :event, :placement,
-                                       :plant_space_width, :stakes_removed, :user_id, :initial_checks_received,
+      params.require(:planting).permit(:adoption_request_id, :tree_id,
+                                       :planted_on, :event, :placement,
+                                       :plant_space_width, :stakes_removed,
+                                       :user_id, :initial_checks_received,
                                        :hard_delete)
     end
 end
