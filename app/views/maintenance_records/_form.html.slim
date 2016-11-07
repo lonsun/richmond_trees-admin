@@ -22,11 +22,15 @@ div class="row"
                 { id: "maintenance_record_reason_codes_#{ r.first }" }
               = " #{ r.first } - #{ r.last.capitalize }"
         = f.text_field :diameter_breast_height
+        - if action_name == 'new'
+          div class="form-group"
+            label for="planting_note"
+              | Note
+            = text_field_tag "planting_note", nil, class: "form-control"
         div class="checkbox"
           label for="mark_stakes_removed"
-            = check_box_tag 'mark_stakes_removed',
+            = check_box_tag "mark_stakes_removed",
               "1",
               ( @maintenance_record.planting.nil? ) ? Planting.find( @planting_id ).stakes_removed : @maintenance_record.planting.stakes_removed
             | Stakes removed (on associated planting)
-        div
         = f.submit

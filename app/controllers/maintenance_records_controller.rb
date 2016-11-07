@@ -39,6 +39,16 @@ class MaintenanceRecordsController < ApplicationController
         @maintenance_record.planting.stakes_removed = params[:mark_stakes_removed]
         @maintenance_record.planting.save
 
+        if ! params[:planting_note].empty?
+          note = Note.new({
+            planting_id: @planting_id,
+            user_id: current_user.id,
+            note: params[:planting_note]
+          })
+
+          note.save
+        end
+
         format.html { redirect_to :controller => 'plantings', :action => 'show', :id => @planting_id, notice: 'Maintenance record was successfully created.' }
         format.json { render action: 'show', status: :created, location: @maintenance_record }
       else
@@ -104,6 +114,6 @@ class MaintenanceRecordsController < ApplicationController
       params.require(:maintenance_record)
         .permit(:maintenance_date, :status_code, { :reason_codes => [] },
                 :diameter_breast_height, :planting_id, :user_id, :mark_stakes_removed,
-                :hard_delete)
+                :hard_delete, :planting_note)
     end
 end

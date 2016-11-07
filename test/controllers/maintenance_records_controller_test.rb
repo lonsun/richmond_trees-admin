@@ -34,7 +34,8 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
             maintenance_date: @maintenance_record.maintenance_date,
             user_id: @user.id
           },
-          mark_stakes_removed: false
+          mark_stakes_removed: false,
+          planting_note: ""
       end
 
       assert_not @maintenance_record.planting.stakes_removed
@@ -42,7 +43,7 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
       assert_response :redirect
     end
 
-   it "updates stakes_removed flag on the associated planting " do
+    it "updates stakes_removed flag on the associated planting " do
       assert_difference('MaintenanceRecord.count') do
         post :create,
           maintenance_record: {
@@ -53,10 +54,33 @@ class MaintenanceRecordsControllerTest < ActionController::TestCase
             maintenance_date: @maintenance_record.maintenance_date,
             user_id: @user.id
           },
-          mark_stakes_removed: "1"
+          mark_stakes_removed: "1",
+          planting_note: ""
       end
 
       assert @maintenance_record.planting.stakes_removed
+
+      assert_response :redirect
+    end
+
+    it "allows to to also add a note on the associated planting " do
+      the_note = Time.now.getutc
+
+      assert_difference('MaintenanceRecord.count') do
+        post :create,
+          maintenance_record: {
+            planting_id: @maintenance_record.planting_id,
+            status_code: @maintenance_record.status_code,
+            reason_codes: ["a,b,c"],
+            diameter_breast_height: "2",
+            maintenance_date: @maintenance_record.maintenance_date,
+            user_id: @user.id
+          },
+          mark_stakes_removed: false,
+          planting_note: the_note
+      end
+
+      assert Note.where(note: the_note)
 
       assert_response :redirect
     end
