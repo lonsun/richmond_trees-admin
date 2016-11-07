@@ -31,6 +31,7 @@ class PlantingsController < ApplicationController
     # get associated maintenance records
     MaintenanceRecord
       .where( planting_id: @planting.id )
+      .where( ignore: false )
       .order( :maintenance_date )
       .reverse_order
       .find_each do |r|
