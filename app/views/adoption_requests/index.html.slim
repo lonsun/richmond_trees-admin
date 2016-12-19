@@ -27,31 +27,22 @@ div class="container-fluid"
               th Received On
               th House Number
               th Street Name
-              th Zone
               th Owner
               th Phone
               th Email
-              th Spanish Speaker?
-              th Contacted On
-              th Sent to COR On
-              th Room for Tree?
-              th Note
+              th Tree Preference
+              th Wires?
 
           tbody
-            - @adoption_requests.each do |adoption_request|
+            - @adoption_requests.each do |ar|
               tr
-                td = adoption_request.id
-                td = adoption_request.received_on
-                td = adoption_request.house_number
-                td = adoption_request.street_name
-                td = adoption_request.zone.name unless adoption_request.zone.nil?
-                td = adoption_request.owner_full_name
-                td = adoption_request.owner_phone
-                td = adoption_request.owner_email
-                td = adoption_request.spanish_speaker
-                td = adoption_request.contacted_on
-                td = adoption_request.form_sent_to_cor_on
-                td = adoption_request.room_for_tree
-                td = adoption_request.note
-                td
-                  = link_to 'Details', adoption_request
+                td = ar.id
+                td = ar.received_on
+                td = ar.house_number
+                td = ar.street_name
+                td = ar.owner_full_name
+                td = ar.owner_phone
+                td = ar.owner_email
+                td = ar.tree_species.common_name if ! ar.tree_species.nil?
+                td = ar.wires
+                  = link_to 'Details', ar

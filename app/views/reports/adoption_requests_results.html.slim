@@ -21,24 +21,29 @@ div class="container-fluid"
             tr
               th ID
               th Received On
-              th Zone
               th House Number
               th Street Name
-              th Zip Code
-              th Completed
+              th Owner
+              th Phone
+              th Email
+              th Tree Preference
+              th Wires?
+
               th Actions
           tbody
-            - @results.each do |adoption_request|
+            - @results.each do |ar|
               tr
-                input type="hidden" name="map-coordinates" value="#{ adoption_request.id  }|#{ adoption_request.latitude }|#{ adoption_request.longitude }|#{ adoption_request.house_number } #{ adoption_request.street_name }|#{ adoption_request.received_on }"
-                td = adoption_request.id
-                td = adoption_request.received_on
-                td = adoption_request.zone.name unless adoption_request.zone.nil?
-                td = adoption_request.house_number
-                td = adoption_request.street_name
-                td = adoption_request.zip_code
-                td = adoption_request.completed
+                input type="hidden" name="map-coordinates" value="#{ ar.id  }|#{ ar.latitude }|#{ ar.longitude }|#{ ar.house_number } #{ ar.street_name }|#{ ar.received_on }"
+                td = ar.id
+                td = ar.received_on
+                td = ar.house_number
+                td = ar.street_name
+                td = ar.owner_full_name
+                td = ar.owner_phone
+                td = ar.owner_email
+                td = ar.tree_species.common_name if ! ar.tree_species.nil?
+                td = ar.wires
                 td
                   ul
-                    li = link_to 'Details', adoption_request
+                    li = link_to 'Details', ar
 
