@@ -11,7 +11,7 @@ var MapLib = (function( $ ) {
   }
 
   m.send = function() {
-    var map_form = $("<form>", 
+    var map_form = $("<form>",
       {
         "action": "/map",
         "method": "post",
@@ -19,7 +19,7 @@ var MapLib = (function( $ ) {
       }
     );
 
-    var csrf_input = $("<input>", 
+    var csrf_input = $("<input>",
       {
         "name": "authenticity_token",
         "value": $( 'meta[name="csrf-token"]' ).attr( "content" ),
@@ -27,7 +27,7 @@ var MapLib = (function( $ ) {
       }
     );
 
-    var markers_input = $("<input>", 
+    var markers_input = $("<input>",
       {
         "name": "markers",
         "value": JSON.stringify( markers ),
@@ -35,6 +35,7 @@ var MapLib = (function( $ ) {
       }
     );
 
+    $(document.body).append(map_form);
     map_form.append( csrf_input );
     map_form.append( markers_input );
     map_form.submit();
