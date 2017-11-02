@@ -11,8 +11,7 @@ div class="container-fluid"
       = link_to reports_plantings_results_path( format: :csv, params: request.query_parameters ) do
           button class="btn btn-default" Export to CSV
       | &nbsp;
-      = link_to "#", :id => "plantings-results-map-action", :target => "_blank" do
-          button class="btn btn-default" Map Results
+      button class="btn btn-default" id="plantings-results-map-action" Map Results
   div class="row"
     div class="col-xs-12"
       div class="table-responsive"

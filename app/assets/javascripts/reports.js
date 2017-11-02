@@ -1,5 +1,5 @@
 $( document ).on("ready", function() {
-  // base class 
+  // base class
   function MarkersData( jquery_source_selector ) {
     this.markers_data = [];
     this.source_selector = jquery_source_selector;
@@ -9,7 +9,7 @@ $( document ).on("ready", function() {
     return this.markers_data;
   }
 
-  // inherets from MarkersData
+  // inherits from MarkersData
   function PlantingMarkersData( jquery_source_selector ) {
     MarkersData.apply( this, arguments );
 
@@ -21,8 +21,8 @@ $( document ).on("ready", function() {
     this.gather = function() {
       $( this.source_selector ).each( function() {
         var data = $( this ).val();
-        
-        var data_parts = data.split( "|" ); 
+
+        var data_parts = data.split( "|" );
         var id = parseInt( data_parts[0] );
         var lat = parseFloat( data_parts[1] );
         var lng = parseFloat(data_parts[2] );
@@ -46,7 +46,7 @@ $( document ).on("ready", function() {
 
   PlantingMarkersData.prototype = Object.create( MarkersData.prototype );
   PlantingMarkersData.prototype.constructor = PlantingMarkersData;
- 
+
   // inherets from MarkersData
   function AdoptionRequestMarkersData( jquery_source_selector ) {
     MarkersData.apply( this, arguments );
@@ -59,8 +59,8 @@ $( document ).on("ready", function() {
     this.gather = function() {
       $( this.source_selector ).each( function() {
         var data = $( this ).val();
-        
-        var data_parts = data.split( "|" ); 
+
+        var data_parts = data.split( "|" );
         var id = parseInt( data_parts[0] );
         var lat = parseFloat( data_parts[1] );
         var lng = parseFloat(data_parts[2] );
