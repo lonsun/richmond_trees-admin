@@ -29,6 +29,7 @@ div class="container-fluid"
               th Last Status Code
               th class="note-column"
                 | Last Note
+              th GPS Coordinates
               th Actions
           tbody
             - @results.each do |planting|
@@ -45,6 +46,7 @@ div class="container-fluid"
                 td = planting.last_status_code
                 td
                   = render partial: "shared/note_content", locals: { planting: planting}
+                td = "#{ planting.parent_adoption_request.latitude }, #{ planting.parent_adoption_request.longitude }"
                 td
                   ul
                     li = link_to 'Details', planting
