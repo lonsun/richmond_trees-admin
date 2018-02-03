@@ -38,6 +38,14 @@ class Planting < ActiveRecord::Base
     self.parent_adoption_request.attributes.values_at( "street_name" )[0]
   end
 
+  def latitude
+    self.parent_adoption_request.attributes.values_at( "latitude" )[0]
+  end
+
+  def longitude
+    self.parent_adoption_request.attributes.values_at( "longitude" )[0]
+  end
+
   def tree_common_name
     self.tree_species.attributes.values_at( "common_name" )[0]
   end
@@ -51,7 +59,7 @@ class Planting < ActiveRecord::Base
   end
 
   def self.to_csv
-    attributes = %w[ id planted_on house_number street_name placement tree_common_name last_maintenance_date last_status_code last_note ]
+    attributes = %w[ id planted_on house_number street_name latitude longitude placement tree_common_name last_maintenance_date last_status_code last_note ]
 
     CSV.generate( headers: true ) do |csv|
       csv << attributes
