@@ -19,6 +19,8 @@ class MaintenanceRecordsController < ApplicationController
   def new
     @maintenance_record = MaintenanceRecord.new
     @planting_id = params[:planting_id] || ""
+    @stakes_removed = (@planting_id == "") ? false : Planting.find(@planting_id).stakes_removed
+    @note = ""
   end
 
   # GET /maintenance_records/1/edit
@@ -33,6 +35,8 @@ class MaintenanceRecordsController < ApplicationController
 
     # This is necessary to populate this field in the form when there is a validation error.
     @planting_id = @maintenance_record.planting_id unless @maintenance_record.nil?
+    @stakes_removed = params[:mark_stakes_removed]
+    @note = params[:planting_note]
 
     respond_to do |format|
       if @maintenance_record.save
