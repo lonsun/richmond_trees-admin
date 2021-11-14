@@ -31,7 +31,9 @@ div class="container-fluid"
               th Phone
               th Email
               th Tree Preference
+              th Concrete?
               th Wires?
+              th Action
 
           tbody
             - @adoption_requests.each do |ar|
@@ -44,5 +46,6 @@ div class="container-fluid"
                 td = ar.owner_phone
                 td = ar.owner_email
                 td = ar.tree_species.common_name if ! ar.tree_species.nil?
+                td = ar.concrete_removal
                 td = ar.wires
-                  = link_to 'Details', ar
+                td = link_to 'Details', ar
