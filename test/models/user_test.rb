@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  logger = Rails.logger
+
   setup do
     @user = users(:testuser1);
   end
@@ -37,6 +36,7 @@ class UserTest < ActiveSupport::TestCase
 
     it "should respond with false if not active" do
       inactive = users(:inactive_user)
+      logger.warn inactive.attributes
       inactive.active?.must_equal false
     end
   end

@@ -39,10 +39,10 @@ class AdoptionRequest < ActiveRecord::Base
     attributes = %w[ id received_on house_number street_name zip_code completed ]
 
     CSV.generate( headers: true ) do |csv|
-      csv << attributes
+      csv << self.attribute_names
 
       all.each do |ar|
-        csv << attributes.map{ |attr| ar.send( attr ) }
+        csv << ar.attributes.values
       end
     end
   end
