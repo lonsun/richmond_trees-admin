@@ -1,0 +1,6 @@
+{
+    "name": "Richmond Trees Database",
+    "description": "Adoption Request and Tree Tracking web app for Richmond Trees",
+    "stack": "heroku-20",
+}
+
