@@ -70,8 +70,7 @@ class PasswordResetsControllerTest < ActionController::TestCase
       put :update, { id: @user.perishable_token,
                      password: "password",
                      password_confirmation: "123456" }
-
-      assigns( :user ).errors.size.must_equal 1
+      assigns( :user ).errors.size.must_equal 2
       assert_response :success
       assert_template 'edit'
     end
