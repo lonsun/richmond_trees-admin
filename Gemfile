@@ -1,21 +1,24 @@
 source 'https://rubygems.org'
 
-ruby '2.1.9'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.14'
+gem 'rails', '4.2.11.3'
 
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.18'
+
+# there is a bug in sprockets rails 2.0 (https://github.com/rails/sprockets-rails/issues/131)
+gem 'sprockets-rails', '~> 2.1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '>= 1.3'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -51,14 +54,13 @@ gem 'bootstrap_form'
 
 group :test do
   # use MiniTest::Spec::DSL
-  gem 'minitest-spec-rails'
+  gem 'minitest-spec-rails', '~> 5.1.0'
 end
 
 # help configure the app for Heroku
 gem 'rails_12factor', group: :production
 
-# ensure referential integrity in postgres
-gem 'foreigner'
+# foreign key migrations
 gem 'immigrant'
 
 # fix bound events problem caused by Turbolinks

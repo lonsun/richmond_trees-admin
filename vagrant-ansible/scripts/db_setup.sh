@@ -15,4 +15,4 @@ sudo -u postgres bash -c "psql -c 'alter role rt_pg_test_user with superuser'"
 sudo -u postgres bash -c "createdb -Ort_pg_test_user rt_test"
 
 # tell postgres to use password authentication
-sudo sed -i 's/\(^local.*all.*all.*\)peer$/\1md5/' /etc/postgresql/9.4/main/pg_hba.conf
+sudo sed -i 's/\(^local.*all.*all.*\)peer$/\1md5/' /etc/postgresql/9.6/main/pg_hba.conf
