@@ -39,7 +39,6 @@ class MaintenanceRecord < ActiveRecord::Base
 
     # reason codes always come in as a printed array (String) - eg "[\"a\", \"b\"]"
     def clean_reason_codes!
-      Rails::logger.debug "BLAR #{self.reason_codes.class} #{self.reason_codes}"
       unless self.reason_codes.nil?
         begin
           reason_codes_arr = JSON.parse(self.reason_codes)

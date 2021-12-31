@@ -8,7 +8,6 @@ class UserSessionsController < ApplicationController
 
   # log in the user or send them back to login page.
   def create
-    logger.info(user_session_params.to_h)
     @user_session = UserSession.new(user_session_params.to_h)
     if @user_session.save
       redirect_to home_path
