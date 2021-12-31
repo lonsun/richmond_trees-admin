@@ -1,20 +1,10 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   helper :all
   helper_method :current_user_session, :current_user
-
-  protected
-
-  def handle_unverified_request
-    logger.info 'Triggering unverified (CSRF) request protocol.'
-    if current_user_session
-      current_user_session.destroy
-    end
-    redirect_to root_url
-  end
 
   private
     def current_user_session
