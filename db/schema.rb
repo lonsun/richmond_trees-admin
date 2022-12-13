@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "adoption_requests", force: true do |t|
+  create_table "adoption_requests", force: :cascade do |t|
     t.integer  "tree_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   add_index "adoption_requests", ["user_id"], name: "index_adoption_requests_on_user_id", using: :btree
   add_index "adoption_requests", ["zone_id"], name: "index_adoption_requests_on_zone_id", using: :btree
 
-  create_table "maintenance_records", force: true do |t|
+  create_table "maintenance_records", force: :cascade do |t|
     t.string   "status_code"
     t.string   "reason_codes"
     t.string   "diameter_breast_height"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   add_index "maintenance_records", ["planting_id"], name: "index_maintenance_records_on_planting_id", using: :btree
   add_index "maintenance_records", ["user_id"], name: "index_maintenance_records_on_user_id", using: :btree
 
-  create_table "notes", force: true do |t|
+  create_table "notes", force: :cascade do |t|
     t.text     "note"
     t.integer  "user_id"
     t.integer  "planting_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   add_index "notes", ["planting_id"], name: "index_notes_on_planting_id", using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
-  create_table "plantings", force: true do |t|
+  create_table "plantings", force: :cascade do |t|
     t.integer  "adoption_request_id"
     t.integer  "tree_id"
     t.datetime "created_at"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   add_index "plantings", ["tree_id"], name: "index_plantings_on_tree_id", using: :btree
   add_index "plantings", ["user_id"], name: "index_plantings_on_user_id", using: :btree
 
-  create_table "sessions", force: true do |t|
+  create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
     t.datetime "created_at"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "trees", force: true do |t|
+  create_table "trees", force: :cascade do |t|
     t.string   "common_name"
     t.string   "scientific_name"
     t.string   "family_name"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
 
   add_index "trees", ["user_id"], name: "index_trees_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username",                            null: false
     t.string   "email",                               null: false
     t.string   "crypted_password",                    null: false
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
-  create_table "zones", force: true do |t|
+  create_table "zones", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"
@@ -158,24 +158,3 @@ ActiveRecord::Schema.define(version: 20161107031326) do
   end
 
   add_index "zones", ["user_id"], name: "index_zones_on_user_id", using: :btree
-
-  Foreigner.load
-  add_foreign_key "adoption_requests", "trees", name: "adoption_requests_tree_id_fk"
-  add_foreign_key "adoption_requests", "users", name: "adoption_requests_user_id_fk"
-  add_foreign_key "adoption_requests", "zones", name: "adoption_requests_zone_id_fk"
-
-  add_foreign_key "maintenance_records", "plantings", name: "maintenance_records_planting_id_fk", dependent: :delete
-  add_foreign_key "maintenance_records", "users", name: "maintenance_records_user_id_fk"
-
-  add_foreign_key "notes", "plantings", name: "notes_planting_id_fk", dependent: :delete
-  add_foreign_key "notes", "users", name: "notes_user_id_fk"
-
-  add_foreign_key "plantings", "adoption_requests", name: "plantings_adoption_request_id_fk", dependent: :delete
-  add_foreign_key "plantings", "trees", name: "plantings_tree_id_fk"
-  add_foreign_key "plantings", "users", name: "plantings_user_id_fk"
-
-  add_foreign_key "trees", "users", name: "trees_user_id_fk"
-
-  add_foreign_key "zones", "users", name: "zones_user_id_fk"
-
-end

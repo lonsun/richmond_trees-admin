@@ -88,4 +88,8 @@ RichmondTreesAdmin::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # tell rails to use an env var for secret_token and secret_key_base
+  config.secret_token = ENV["SECRET_TOKEN"]
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 end

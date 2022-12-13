@@ -1,8 +1,10 @@
+require "json"
+
 class MaintenanceRecord < ActiveRecord::Base
   belongs_to :planting
   belongs_to :created_by, :class_name => "User", :foreign_key => "user_id"
 
-  before_save :reason_codes_to_s!
+  before_save :clean_reason_codes!
 
   after_commit :update_most_recent_fields_in_planting
 
@@ -35,11 +37,16 @@ class MaintenanceRecord < ActiveRecord::Base
     :q => "root crown buried after planting",
     :r => "leaf chlorosis" }
 
-    # convert reason codes to string if it is an array.  Do nothing otherwise.
-    def reason_codes_to_s!
-      if self.reason_codes.is_a? Array
-        t = self.reason_codes.reject { |r| r.strip.empty? }
-        self.reason_codes = t.join(',')
+    # reason codes always come in as a printed array (String) - eg "[\"a\", \"b\"]"
+    def clean_reason_codes!
+      unless self.reason_codes.nil?
+        begin
+          reason_codes_arr = JSON.parse(self.reason_codes)
+          reason_codes_arr = reason_codes_arr.reject { |r| r.strip.empty? }
+          self.reason_codes = reason_codes_arr.join(',')
+        rescue JSON::ParserError => e
+          # do nothing
+        end
       end
     end
 

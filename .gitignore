@@ -37,7 +37,7 @@ build/
 # no logs
 /log/*
 
-# Ignore application configuration
+# Ignore application secrets (figaro)
 /config/application.yml
 
 # Ignore vim backup/temp files

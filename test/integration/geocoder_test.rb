@@ -38,10 +38,12 @@ class GeocoderIntegrationTests < ActionController::TestCase
         )
 
         a.latitude.must_be_nil 
+        a.longitude.must_be_nil 
 
         a.save
 
-        a.latitude.must_equal 40.7143528
+        _(a.latitude).must_equal 0.40714353e2
+        _(a.longitude).must_equal -0.74005973e2
       end
 
       it "should not lookup the latitude and longitude if the address does not exist" do

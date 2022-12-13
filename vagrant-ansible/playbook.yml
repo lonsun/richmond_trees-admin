@@ -10,10 +10,10 @@
         repo: ppa:brightbox/ruby-ng
         state: present
 
-    - name: Add PGDG APT repository (prerequisite for Postgres 9.4)
+    - name: Add PGDG APT repository (prerequisite for Postgres 9.6)
       shell: sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
-    - name: Add PGDG APT key (prerequisite for Postgres 9.4)
+    - name: Add PGDG APT key (prerequisite for Postgres 9.6)
       apt_key:
         url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
         state: present
@@ -22,43 +22,53 @@
       apt:
         update_cache: yes
 
-    - name: Install Ruby 2.1
+    - name: Install Ruby 2.6
       apt:
-        name: ruby2.1
+        name: ruby2.6
 
-    - name: Set Ruby 2.1 as the system default
+    - name: Set Ruby 2.6 as the system default
       file:
-        src: /usr/bin/ruby2.1
+        src: /usr/bin/ruby2.6
         dest: /usr/bin/ruby
         state: link
 
-    - name: Make sure Ruby gem command is using Ruby 2.1
+    - name: Make sure Ruby gem command is using Ruby 2.6
       file:
-        src: /usr/bin/gem2.1
+        src: /usr/bin/gem2.6
         dest: /usr/bin/gem
         state: link
 
-    - name: Install Ruby 2.1 dev package (required for some application dependencies like ffi)
+    - name: Install Ruby 2.6 dev package (required for some application dependencies like ffi)
       apt:
-        name: ruby2.1-dev
+        name: ruby2.6-dev
 
-    - name: Install Postgres 9.4
+    - name: Install Postgres 9.6
       apt:
-        name: postgresql-9.4
+        name: postgresql-9.6
 
-    - name: Install Postgres 9.4 server development package
+    - name: Install Postgres 9.6 server development package
       apt:
-        name: postgresql-server-dev-9.4
+        name: postgresql-server-dev-9.6
 
-    - name: Install Rails 4
+    - name: Install gcc (required by make)
       apt:
-        name: ruby-railties-4.0
+        name: gcc
 
+    - name: Install make (required by bundler)
+      apt:
+        name: make
+ 
     - name: Install Ruby Bundler
-      shell: sudo gem install bundler
+      shell: sudo gem install bundler -v 1.17.3
 
-    - name: Install app-specific gems using Bundler
-      shell: bundle install
+    - name: Install app-specific gems using Bundler v1.17.3
+      shell: bundle _1.17.3_ update
+      args:
+        chdir: /vagrant
+
+    # for some reason bundler is not installing rails in a way that is usable...
+    - name: Install rails 4.2.11.3
+      shell: sudo gem install rails -v 4.2.11.3
       args:
         chdir: /vagrant
 

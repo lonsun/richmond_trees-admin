@@ -5,21 +5,21 @@ class MaintenanceRecordTest < ActiveSupport::TestCase
     @maintenance_record = maintenance_records(:one)
   end
 
-  describe "reason_codes_to_s method" do
-    it "reason_codes is not altered if it is not an array" do
-      @maintenance_record.reason_codes = "a"
-      @maintenance_record.reason_codes_to_s!
-      @maintenance_record.reason_codes.must_equal "a"
+  describe "clean_reason_codes method" do
+    it "works with a nil value" do
+      @maintenance_record.reason_codes = nil
+      @maintenance_record.clean_reason_codes!
+      @maintenance_record.reason_codes.must_equal nil
     end
 
     it "returns a string of array values separated by commas" do
       @maintenance_record.reason_codes = ["a", "b", "c"]
-      @maintenance_record.reason_codes_to_s!.must_equal "a,b,c"
+      @maintenance_record.clean_reason_codes!.must_equal "a,b,c"
     end
 
     it "omits empty array values" do
       @maintenance_record.reason_codes = ["a", "b", "", " "]
-      @maintenance_record.reason_codes_to_s!.must_equal "a,b"
+      @maintenance_record.clean_reason_codes!.must_equal "a,b"
     end
   end
 
