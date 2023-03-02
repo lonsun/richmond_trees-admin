@@ -62,7 +62,7 @@ RichmondTreesAdmin::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Action Mailer config
-  config.action_mailer.default_url_options = { :host => 'shielded-beach-2348.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'richmond-trees-heroku-20.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
