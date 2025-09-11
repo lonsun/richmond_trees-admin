@@ -1,18 +1,17 @@
 source 'https://rubygems.org'
 
-ruby '2.6.6'
+ruby '2.7.8'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11.3'
+gem 'rails', '5.0.7.2'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg', '>= 1.2.3'
 
-# there is a bug in sprockets rails 2.0 (https://github.com/rails/sprockets-rails/issues/131)
-gem 'sprockets-rails', '~> 2.1.0'
+gem 'sprockets-rails', '~> 3.0'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3'
@@ -54,7 +53,7 @@ gem 'bootstrap_form'
 
 group :test do
   # use MiniTest::Spec::DSL
-  gem 'minitest-spec-rails', '~> 5.1.0'
+  gem 'minitest-spec-rails'
 end
 
 # help configure the app for Heroku
